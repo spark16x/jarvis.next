@@ -1,13 +1,11 @@
+"use client";
+
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 
 export default function Home() {
-  useEffect(() => {
-    AOS.init({ duration: 800, once: true });
-  }, []);
+ 
   
   useEffect(() => {
     const banner = document.getElementById("consent-banner");
