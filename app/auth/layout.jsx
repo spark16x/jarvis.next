@@ -19,7 +19,7 @@ const LoginPage = ({ children}) => {
       <body className="bg-gray-900 text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
         <div className="stars"></div>
         <div className="auth-container bg-gray-800 bg-opacity-95 p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in transition-all duration-300 hover:shadow-xl hover:scale-101 max-w-md w-full">
-          <img src="/imgs/logo.png" alt="Jarvis Logo" className="logo w-16 mb-4 animate-pulse" onError={(e) => (e.currentTarget.style.display = 'none')} />
+          <img src="/imgs/logo.png" alt="Jarvis Logo" className="logo w-16 mb-4 animate-pulse"  />
           <h2 className="text-blue-400 text-2xl font-bold mb-4 shadow-sm">{children} to Jarvis</h2>
 
           <div className="mt-4 space-y-3">
