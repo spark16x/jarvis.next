@@ -8,11 +8,11 @@ import Toast from '../components/Toast'
 
 export default async function Home() {
   
-console.log(await fetch('https://jarvis-rose-zeta.vercel.app/'))  
+  console.log()
   return (
     <>
       <Head>
-        <title>J.A.R.V.I.S</title>
+        <title>J.A.R.V.I.S {await fetch('https://jarvis-rose-zeta.vercel.app/')}</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
       </Head>
       <IframeContainer />
