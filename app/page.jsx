@@ -6,7 +6,9 @@ import IframeContainer from '../components/IframeContainer'
 import MusicPlayerContainer from '../components/MusicPlayerContainer'
 import Toast from '../components/Toast'
 
-export default function Home() {
+export default async function Home() {
+  
+console.log(await fetch('https://jarvis-rose-zeta.vercel.app/'))  
   return (
     <>
       <Head>
