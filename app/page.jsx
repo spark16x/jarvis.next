@@ -1,6 +1,4 @@
-export default async function Home() {
-  
-  console.log()
+export default function Home() {
   return (
     <>
       <div> Jarvis</div>
