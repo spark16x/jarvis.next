@@ -1,12 +1,26 @@
 import React from 'react';
 
-const LoadingPage = () => {
+const ChromeLoading = () => {
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500"></div>
-      <p className="mt-4 text-lg text-gray-600">Loading...</p>
-    </div>
+    <div className="flex justify-center items-center h-screen bg-white">
+  <div className="relative w-16 h-16">
+  <div className="absolute top-0 left-0 w-full h-full rounded-full animate-spin">
+  <div className="absolute top-0 left-0 w-1/2 h-full overflow-hidden">
+  <div className="absolute top-0 left-0 w-full h-full bg-blue-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
+  </div>
+  <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden">
+  <div className="absolute top-0 right-0 w-full h-full bg-red-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
+  </div>
+  <div className="absolute bottom-0 left-0 w-1/2 h-full overflow-hidden">
+  <div className="absolute bottom-0 left-0 w-full h-full bg-yellow-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
+  </div>
+  <div className="absolute bottom-0 right-0 w-1/2 h-full overflow-hidden">
+  <div className="absolute bottom-0 right-0 w-full h-full bg-green-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
+  </div>
+  </div>
+  </div>
+  </div>
   );
 };
 
-export default LoadingPage;
+export default ChromeLoading;
