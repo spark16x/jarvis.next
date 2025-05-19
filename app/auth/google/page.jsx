@@ -1,7 +1,7 @@
 'use server'
 
 import { redirect } from 'next/navigation'
-import client from './components/google_client.js';
+import client from '@/components/google_client.js';
 
 export async  function google() {
   let url = client.generateAuthUrl({
