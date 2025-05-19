@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation'
 import client from '../components/google_client.js';
 
-export  function google() {
+export async  function google() {
   let url = client.generateAuthUrl({
   access_type: "offline",
   scope: [
@@ -14,5 +14,4 @@ export  function google() {
   ],
 });
 redirect(url);
-return 'redrict'
 }

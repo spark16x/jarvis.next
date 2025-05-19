@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 
-const LoginPage = ({ children }) => {
+const LoginPage = () => {
   return (
     <>
       <Head>
