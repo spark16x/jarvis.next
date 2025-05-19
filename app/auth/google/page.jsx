@@ -14,4 +14,5 @@ export  function google() {
   ],
 });
 redirect(url);
+return 'redrict'
 }
