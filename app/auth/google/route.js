@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { OAuth2Client } from 'google-auth-library';
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 dotenv.config();
 
 const client = new OAuth2Client(
