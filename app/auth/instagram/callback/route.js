@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function GET(req,res) {
+export async function handler(req,res) {
   
   let code = req.query.code;
   res.write('hi');
