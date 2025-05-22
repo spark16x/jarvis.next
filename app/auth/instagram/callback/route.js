@@ -1,11 +1,9 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function handler(req,res) {
+export async function GET(req) {
   
-  let code = req.query.code;
-  res.write('hi');
-  res.redirect('/');
+return req
   // try {
     
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
