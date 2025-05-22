@@ -1,14 +1,15 @@
 'use client'
 
 import { useParams } from 'next/navigation'
-import { NextResponse,NextRequest } from 'next/server'
+
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function GET() {
+export async function callback() {
   
-return NextResponse.json( useParams) 
-  // try {
+return (<p>useParams</p>)
+
+//try {
     
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
   //   let data = await supabase.from('id').select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Instagarm', user.id).single();
