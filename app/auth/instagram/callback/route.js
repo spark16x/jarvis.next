@@ -1,10 +1,10 @@
-import { NextResponse } from 'next/server'
+import { NextResponse,NextRequest } from 'next/server'
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function GET(req) {
+export async function GET() {
   
-return NextResponse.json(req) 
+return NextResponse.json(NextRequest) 
   // try {
     
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
