@@ -3,7 +3,7 @@ dotenv.config();
 
 export async function GET(req) {
   
-return req
+return Response.send(req) 
   // try {
     
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
