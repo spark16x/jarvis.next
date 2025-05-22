@@ -1,10 +1,13 @@
+'use client'
+
+import { useParams } from 'next/navigation'
 import { NextResponse,NextRequest } from 'next/server'
 import dotenv from "dotenv";
 dotenv.config();
 
 export async function GET() {
   
-return NextResponse.json(NextRequest.query) 
+return NextResponse.json(await useParams) 
   // try {
     
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
