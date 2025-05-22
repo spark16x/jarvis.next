@@ -1,9 +1,10 @@
+import { NextResponse } from 'next/server'
 import dotenv from "dotenv";
 dotenv.config();
 
 export async function GET(req) {
   
-return Response.send(req) 
+return NextResponse.send(req) 
   // try {
     
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
