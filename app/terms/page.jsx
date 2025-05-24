@@ -154,5 +154,7 @@ const TermsAndConditionsPage = () => {
     </>
   );
 };
-
+export const metadata = {
+  title: "J.A.R.V.I.S | Terms",
+};
 export default TermsAndConditionsPage;
