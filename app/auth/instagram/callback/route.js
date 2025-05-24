@@ -1,13 +1,12 @@
-'use client'
 
-import { useParams } from 'next/navigation'
+import { NextResponse } from 'next/server';
 
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function callback() {
+export async function GET({params}) {
   
-return (<p>useParams</p>)
+return NextResponse.json(params)
 
 //try {
     
