@@ -14,11 +14,16 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "J.A.R.V.I.S",
-    description: "Jarvis is a ai aegant Developed by Pratham vig",openGraph: {
-    title: 'J.A.R.V.I.S',
-    description: 'Jarvis is a ai aegant Developed by Pratham vig',
-    url: 'https://jarvisnext.vercel.app',
-    siteName: 'J.A.R.V.I.S',
-    }
+  description: "Jarvis is a ai aegant Developed by Pratham vig"
+}
 
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+        <Analytics/>
+      </body>
+    </html>
+  );
 }
