@@ -26,7 +26,7 @@ export default function Email() {
       {user ? (
         <p>Welcome, {user.name}</p> // Adjust according to decoded token structure
       ) : (
-        <p>Loading...</p>
+        <p>{user}</p>
       )}
     </div>
   );
