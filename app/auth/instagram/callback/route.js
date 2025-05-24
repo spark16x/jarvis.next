@@ -11,7 +11,7 @@ export async function GET(request) {
   
    try {
   
-    let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
+    let user = await ig_auth(code, 'https://jarvisnext.vercel.app/auth/instagram/callback');
     let data = await supabase.from('id').select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Instagarm', user.id).single();
   
     let sbuser = data.data;
