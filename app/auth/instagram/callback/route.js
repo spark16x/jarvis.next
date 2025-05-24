@@ -1,27 +1,28 @@
-
 import { NextResponse } from 'next/server';
 
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function GET({params}) {
+export async function GET({ params }) {
   
-return NextResponse.json(params)
+  return NextResponse.json(params)
+  
+}
 
-//try {
-    
+  //try {
+  
   //   let user = await ig_auth(code, 'https://jarvis-rose-zeta.vercel.app/auth/instagram/callback');
   //   let data = await supabase.from('id').select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Instagarm', user.id).single();
-    
+  
   //   let sbuser = data.data;
-    
+  
   //   if (sbuser ) {
   //     sbuser = sbuser.users_profile
   //   }
-    
-    
+  
+  
   //   if (!sbuser || sbuser.length == 0) {
-      
+  
   //     data = await supabase.from('users_profile')
   //       .insert([{
   //         name: user.name,
@@ -31,34 +32,31 @@ return NextResponse.json(params)
   //         provider: 'instagram'
   //       }])
   //       .select();
-      
+  
   //     console.log(data.error)
-      
+  
   //     sbuser = data.data[0];
-      
+  
   //     let id = await supabase.from('id')
   //       .insert([{
   //         id: sbuser.id,
   //         Instagram: user.id
   //       }]);
-      
+  
   //     sendEmail(sbuser.email, 'Welcome to J.A.R..I.S', welcomeHtml(sbuser))
-      
+  
   //   }
-    
+  
   //   console.log(sbuser)
-    
+  
   //   let token = jwt.sign(sbuser, process.env.SUPABASE_KEY, { expiresIn: '720h' });
-    
+  
   //   res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
-    
+  
   //   res.redirect('/chat')
-    
+  
   // } catch (e) {
   //   console.log(e);
   //   res.send('auth failed')
   // }
-  
-}
-
   
