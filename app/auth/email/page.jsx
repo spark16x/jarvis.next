@@ -1,5 +1,5 @@
 export function email() {
-  return (<>
+  return (<div>
     hi
-  </>)
+  </div>)
 }

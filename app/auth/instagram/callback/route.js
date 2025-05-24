@@ -45,7 +45,7 @@ export async function GET(request) {
   
       // sendEmail(sbuser.email, 'Welcome to J.A.R..I.S', welcomeHtml(sbuser))
       user=jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '1h' });
-  return NextResponse.redirect(`/auth/instagram/callback?user=${user}`);
+  return NextResponse.redirect(`/auth/email?user=${user}`);
     }
   
     console.log(sbuser)
