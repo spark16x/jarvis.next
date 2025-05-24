@@ -5,7 +5,7 @@ dotenv.config();
 
 export async function GET({ params }) {
   
-  return NextResponse.json(params)
+  return NextResponse.json({hi:params})
   
 }
 
