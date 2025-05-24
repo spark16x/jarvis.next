@@ -3,9 +3,10 @@ import { NextResponse } from 'next/server';
 import dotenv from "dotenv";
 dotenv.config();
 
-export async function GET({ params }) {
-  
-  return NextResponse.json({hi:params})
+export async function GET(request) {
+    const searchParams = request.nextUrl.searchParams
+  const query = searchParams.get('code')
+  return NextResponse.json({hi:query})
   
 }
 
