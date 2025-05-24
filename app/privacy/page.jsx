@@ -77,5 +77,7 @@ const PrivacyPolicyPage = () => {
     </>
   );
 };
-
+export const metadata = {
+  title: "J.A.R.V.I.S | Privacy",
+};
 export default PrivacyPolicyPage;

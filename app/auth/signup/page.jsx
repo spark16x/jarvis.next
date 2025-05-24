@@ -52,5 +52,7 @@ const signupPage = () => {
     </>
   );
 };
-
+export const metadata = {
+  title: "J.A.R.V.I.S | Sign up",
+};
 export default signupPage;

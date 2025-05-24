@@ -52,5 +52,7 @@ const LoginPage = () => {
     </>
   );
 };
-
+export const metadata = {
+  title: "J.A.R.V.I.S | LoginPage",
+};
 export default LoginPage;

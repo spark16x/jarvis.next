@@ -83,5 +83,7 @@ const CookiePolicyPage = () => {
     </>
   );
 };
-
+export const metadata = {
+  title: "J.A.R.V.I.S | Cookies",
+};
 export default CookiePolicyPage;
