@@ -7,6 +7,6 @@ dotenv.config();
 
 export default function Email() {
   let params =useSearchParams();
-  let user=jwt.verify(params.get('user'), process.env.SUPABASE_KEY)
-  return (<div>name {user.name}</div>)
+  // let user=jwt.verify(params.get('user'), process.env.SUPABASE_KEY)
+  return (<div>name </div>)
 }
