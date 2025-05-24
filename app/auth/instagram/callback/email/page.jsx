@@ -1,6 +1,7 @@
 'use client'
 
-import { useSearchParams } from 'next/navigation'
+import { useSearchParams } from 'next/navigation';
+import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 dotenv.config();
 
