@@ -10,7 +10,7 @@ export default function Email() {
   const [user, setUser] = useState(null);
   let params = useSearchParams();
   
-  useEffect(() => {
+
     const token = params.get('user');
     if (token) {
       try {
@@ -21,7 +21,7 @@ export default function Email() {
         console.error('Invalid token', error);
       }
     }
-  }, [params]);
+ 
 
   return (
     <div>
