@@ -44,7 +44,9 @@ export async function GET(request) {
       //   }]);
   
       // sendEmail(sbuser.email, 'Welcome to J.A.R..I.S', welcomeHtml(sbuser))
-      
+     
+ 
+ request.cookies.set("user", user, { httpOnly: true, secure: true, maxAge:  60 * 60 * 1000 });
   return NextResponse.redirect(`${process.env.BASE_URI}/auth/instagram/callback/email?user=${user}`);
     }
   
