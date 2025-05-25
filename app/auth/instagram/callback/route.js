@@ -47,7 +47,7 @@ export async function GET(request) {
      
  
  request.cookies.set("user", user, { httpOnly: true, secure: true, maxAge:  60 * 60 * 1000 });
-  return NextResponse.redirect(`${process.env.BASE_URI}/auth/instagram/callback/email?user=${user}`);
+  return NextResponse.redirect(`${process.env.BASE_URI}/auth/instagram/callback/email?name=${user.name}`);
     }
   
     console.log(sbuser)
