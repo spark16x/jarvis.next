@@ -7,28 +7,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export default function Email() {
-  const [user, setUser] = useState(null);
   let params = useSearchParams();
-  
-  function j() {
-   const token = params.get('user');
-  
-  // Decoding token or verifying the token could be better done server-side
-  const decodedUser = jwt.verify(token, process.env.SUPABASE_KEY)
-  setUser(decodedUser);
-  alert(decodedUser)
-  
-  }
-  
- 
-  
-  
+
+   const user = params.get('user');
+
   return (
     <div>
       {user ? (
         <p>Welcome, {user.name}</p> // Adjust according to decoded token structure
       ) : (
-        <p onClick={j}>Loading... {token}</p>
+        <p >Loading... </p>
       )}
     </div>
   );
