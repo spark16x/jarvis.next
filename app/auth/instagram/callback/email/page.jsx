@@ -10,25 +10,17 @@ export default function Email() {
   const [user, setUser] = useState(null);
   let params = useSearchParams();
   
-  
-  const token = params.get('user');
+  function j() {
+   const token = params.get('user');
   
   // Decoding token or verifying the token could be better done server-side
   const decodedUser = jwt.verify(token, process.env.SUPABASE_KEY)
   setUser(decodedUser);
+  alert(decodedUser)
   
-  useEffect(() => { var script = document.createElement('script');
-    script.src = "//cdn.jsdelivr.net/npm/eruda";
-    document.body.appendChild(script);
-    script.onload = function() { eruda.init() }() }, [])
-    useEffect(() => { var script = document.createElement('script');
-    script.src = "//cdn.jsdelivr.net/npm/eruda";
-    document.body.appendChild(script);
-    script.onload = function() { eruda.init() }() }, [])
-    useEffect(() => { var script = document.createElement('script');
-    script.src = "//cdn.jsdelivr.net/npm/eruda";
-    document.body.appendChild(script);
-    script.onload = function() { eruda.init() }() }, [])
+  }
+  
+ 
   
   
   return (
@@ -36,7 +28,7 @@ export default function Email() {
       {user ? (
         <p>Welcome, {user.name}</p> // Adjust according to decoded token structure
       ) : (
-        <p>Loading... {token}</p>
+        <p onClick={j}>Loading... {token}</p>
       )}
     </div>
   );
