@@ -12,15 +12,12 @@ export default function Email() {
   
 
     const token = params.get('user');
-    if (token) {
-      try {
+   
         // Decoding token or verifying the token could be better done server-side
         const decodedUser =  jwt.verify(token, process.env.SUPABASE_KEY) 
         setUser(decodedUser);
-      } catch (error) {
-        console.error('Invalid token', error);
-      }
-    }
+     
+    
  
 
   return (
