@@ -47,7 +47,7 @@ const LoginPage = () => {
             </Link>
             
             <div className="border-t border-gray-700 my-4"></div>
-            <p className=" -translate-y-[16px] text-gray-400 mb-2">Or continue with</p>
+            <p className=" -translate-y-[17px] text-gray-400 mb-2">Or continue with</p>
           </div>
         </div>
       </body>
