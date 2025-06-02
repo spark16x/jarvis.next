@@ -73,7 +73,7 @@ export default function Home() {
                 </button>
               </Link>
               <Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
-                <img src="/svgs/bmc-button.svg" alt="Jarvis AI" className="rounded-2xl shadow-lg w-full max-w-md" />
+                <img src="/svgs/bmc-button.svg" alt="buy me a coffee" className="w-[100px] " />
               </Link>
             </div>
           </div>
