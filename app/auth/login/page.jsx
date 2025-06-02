@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
-import bg_desktop from '@/public/imgs/bg-desktop.jpg';
 
 const LoginPage = () => {
     const [name, setName] = useState('');
@@ -29,7 +28,7 @@ const LoginPage = () => {
     <>
 
 
-      <body className="bg-[url(/imgs/bg-mobile.jpg)] md:bg-[url({bg_desktop})] bg-cover bg-center bg-no-repeat text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
+      <body className="bg-[url(/imgs/bg-mobile.jpg)] md:bg-[url(/imgs/bg-desktop.jpg)] bg-cover bg-center bg-no-repeat text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
         <div className="auth-container border-1 border-gray-700 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in transition-all duration-300 hover:shadow-xl hover:scale-101 max-w-md w-full">
           <h2 className="text-white text-2xl font-bold mb-4 ">Login to Jarvis</h2>
 

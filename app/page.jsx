@@ -85,7 +85,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-10">Powerful Features</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <video src="/imgs/voice-contol.png" className="mx-auto mb-4 rounded" alt="Voice Control" autoplay />
+              <video src="/imgs/voice-contol.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoplay />
               <h3 className="text-2xl font-semibold mb-2">Voice Control</h3>
               <p className="text-gray-400">Control your system using natural language in real-time.</p>
             </div>
