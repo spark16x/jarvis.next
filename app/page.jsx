@@ -5,8 +5,14 @@ import Link from 'next/link';
 import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faXTwitter, faGithub, faThreads, faCoffee } from '@fortawesome/free-brands-svg-icons';
+import { useState } from 'react';
+
 
 export default function Home() {
+  const [voiceHover, setVoiceHover] = useState(false);
+  
+  
+  
   useEffect(() => {
     const banner = document.getElementById("consent-banner");
     const acceptBtn = document.getElementById("accept-consent");
@@ -85,7 +91,12 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-10">Powerful Features</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <video src="/imgs/voice-contol.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoplay />
+              <div onMouseEnter="{()=>{setVoiceHover(true)}}">
+                 voiceHover ?
+                 <video src="/videos/voice-contol.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoplay />:
+                 <img src="/imgs/voice-contol.png" className="mx-auto mb-4 rounded" alt="Integrated Services" />
+                 </div>
+
               <h3 className="text-2xl font-semibold mb-2">Voice Control</h3>
               <p className="text-gray-400">Control your system using natural language in real-time.</p>
             </div>

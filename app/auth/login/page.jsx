@@ -3,8 +3,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
-import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faFacebookF, faInstagram ,faGoogle} from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 
 const LoginPage = () => {
