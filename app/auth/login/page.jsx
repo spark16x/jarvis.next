@@ -77,7 +77,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 id="email"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
                 placeholder="Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
