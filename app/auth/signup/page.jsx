@@ -38,62 +38,10 @@ const signupPage = () => {
           <img src="/imgs/logo.png" alt="Jarvis Logo" className="logo w-16 mb-4 animate-pulse" />
           <h2 className="text-blue-400 text-2xl font-bold mb-4 shadow-sm">Sign up to Jarvis</h2>
 
-          <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-            <div>
-              <input
-                type="text"
-                id="name"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                id="email"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
-                placeholder="Your Email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                id="password"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="password"
-                id="confirm-password"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full py-2 px-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-colors"
-            >
-              Sign Up
-            </button>
-          </form>
+          
 
           <div className="mt-4 space-y-3">
-            <div className="border-t border-gray-700 my-4"></div>
-            <p className="text-gray-400 mb-2">Or continue with</p>
+           
             {/* Google OAuth */}
             <Link href="/auth/google" className="block btn oauth-btn google-btn w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md border border-gray-700 font-semibold text-gray-800 bg-white hover:bg-gray-100 transition-colors">
               <FontAwesomeIcon icon={faGoogle} className="w-5 h-5" />
@@ -118,6 +66,62 @@ const signupPage = () => {
               Continue with Instagram
             </Link>
           </div>
+            <div className="border-t border-gray-700 my-4"></div>
+            <p className=" -translate-y-[28px] text-gray-400 mb-2">Or continue with</p>
+            
+            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+            <div>
+              <input
+                type="text"
+                id="name"
+                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                id="email"
+                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                id="password"
+                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                id="confirm-password"
+                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                placeholder="Confirm Password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full py-2 px-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-colors"
+            >
+              Sign Up
+            </button>
+          </form>
+          
           <p className="mt-4 text-sm text-gray-500">
             Already have an account? <Link href="/login" className="text-blue-400 hover:underline">Log in</Link>
           </p>
