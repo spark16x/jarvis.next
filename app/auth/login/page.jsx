@@ -61,23 +61,12 @@ const LoginPage = () => {
             <div className="border-t border-gray-700 my-4"></div>
             <p className=" -translate-y-[28px] text-gray-400 mb-2">Or continue with</p>
             
-            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
-            <div>
-              <input
-                type="text"
-                id="name"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-sm border-gray-700 rounded-md bg-gray-700 text-white"
-                placeholder="Your Name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-            </div>
+            <form  className="mt-4 space-y-3">
             <div>
               <input
                 type="email"
                 id="email"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
                 placeholder="Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -88,29 +77,19 @@ const LoginPage = () => {
               <input
                 type="password"
                 id="password"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
             </div>
-            <div>
-              <input
-                type="password"
-                id="confirm-password"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
-            </div>
+           
             <button
               type="submit"
               className="w-full py-2 px-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-colors"
             >
-              Sign Up
+              Login
             </button>
           </form>
             
