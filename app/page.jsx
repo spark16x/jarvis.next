@@ -3,10 +3,10 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faInstagram, faXTwitter, faGithub, faThreads, faCoffee } from '@fortawesome/free-brands-svg-icons';
 
 export default function Home() {
- 
-  
   useEffect(() => {
     const banner = document.getElementById("consent-banner");
     const acceptBtn = document.getElementById("accept-consent");
@@ -25,13 +25,15 @@ export default function Home() {
   return (
     <>
       <Head>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Jarvis - Your AI Assistant</title>
         {/* Tailwind CSS is typically configured in globals.css in Next.js */}
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
         {/* Google AdSense script - consider Next.js specific solutions for this */}
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8250729221233027" crossOrigin="anonymous"></script>
+        {/* Font Awesome for icons */}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
       </Head>
       <body className="bg-gray-900 text-white font-sans">
         {/* Navbar */}
@@ -64,11 +66,17 @@ export default function Home() {
               <li>AI-Powered Scheduling, Email & Social Media</li>
               <li>Smart Home & IoT Integration</li>
             </ul>
-            <Link href="/auth/signup">
-              <button className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl text-lg transition">
-                Get Started Free
-              </button>
-            </Link>
+            <div className="flex items-center space-x-4 mb-6">
+              <Link href="/auth/signup">
+                <button className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl text-lg transition">
+                  Get Started Free
+                </button>
+              </Link>
+              <Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
+                <FontAwesomeIcon icon={faCoffee} className="mr-2" />
+                Buy me a coffee
+              </Link>
+            </div>
           </div>
           <img src="/imgs/jarvsi.png" alt="Jarvis AI" className="rounded-2xl shadow-lg w-full max-w-md" />
         </section>
@@ -132,11 +140,22 @@ export default function Home() {
         {/* Footer */}
         <footer className="bg-gray-950 text-center text-sm text-gray-500 py-6 border-t border-gray-800">
           <p>&copy; 2025 Jarvis AI. All rights reserved.</p>
-          <div className="mt-2 space-x-4">
+          <div className="mt-2 space-x-4 flex justify-center items-center">
             <Link href="/terms" className="hover:underline text-gray-400">Terms of Service</Link>
             <Link href="/privacy" className="hover:underline text-gray-400">Privacy Policy</Link>
             <Link href="/cookies" className="hover:underline text-gray-400">Cookie Policy</Link>
-            <Link href="https://github.com/spark16x" className="hover:underline text-gray-400" target="_blank" rel="noopener noreferrer">GitHub</Link>
+            <a href="https://www.instagram.com/your_instagram_handle" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <FontAwesomeIcon icon={faInstagram} size="lg" />
+            </a>
+            <a href="https://twitter.com/your_twitter_handle" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <FontAwesomeIcon icon={faXTwitter} size="lg" />
+            </a>
+            <a href="https://www.threads.net/@your_threads_handle" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <FontAwesomeIcon icon={faThreads} size="lg" />
+            </a>
+            <a href="https://github.com/spark16x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+              <FontAwesomeIcon icon={faGithub} size="lg" />
+            </a>
           </div>
         </footer>
 
