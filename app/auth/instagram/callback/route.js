@@ -45,7 +45,7 @@ export async function GET(request) {
       //   }]);
       
       // sendEmail(sbuser.email, 'Welcome to J.A.R..I.S', welcomeHtml(sbuser))
-      cookie.set("user", user, { httpOnly: true, secure: true, maxAge: 60 * 60 * 1000 });
+      // cookie.set("user", user, { httpOnly: true, secure: true, maxAge: 60 * 60 * 1000 });
       return NextResponse.redirect(`${process.env.BASE_URI}/auth/instagram/callback/email?name=${user.name}`);
     }
     
@@ -54,7 +54,7 @@ export async function GET(request) {
     
     let token = jwt.sign(sbuser, process.env.SUPABASE_KEY, { expiresIn: '720h' });
     
-    request.cookies.set("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
+    cookie.set("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
     
     return NextResponse.redirect('/chat');
     
