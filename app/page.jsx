@@ -73,7 +73,7 @@ export default function Home() {
                 </button>
               </Link>
               <Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
-                <img src="/svgs/bmc-button.svg" alt="buy me a coffee" className="w-[100px] " />
+                <img src="/svgs/bmc-button.svg" alt="buy me a coffee" className="w-[200px] " />
               </Link>
             </div>
           </div>
@@ -85,7 +85,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-10">Powerful Features</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <img src="https://cdn.pixabay.com/photo/2021/05/14/12/40/voice-control-6252788_960_720.jpg" className="mx-auto mb-4 rounded" alt="Voice Control" />
+              <video src="/imgs/voice-contol.png" className="mx-auto mb-4 rounded" alt="Voice Control" autoplay />
               <h3 className="text-2xl font-semibold mb-2">Voice Control</h3>
               <p className="text-gray-400">Control your system using natural language in real-time.</p>
             </div>
