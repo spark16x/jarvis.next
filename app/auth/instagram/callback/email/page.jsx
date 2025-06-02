@@ -1,14 +1,14 @@
 'use client'
 
 import { useSearchParams } from 'next/navigation';
-import { cookies } from 'next/headers'
+import { useCookies } from 'next-client-cookies';
 import { useEffect, useState } from 'react';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 dotenv.config();
 
 export default async function Email() {
-  let params =await cookies();
+  let params = useCookies();
 
    const user = params.get('user');
 
