@@ -18,9 +18,8 @@ const LoginPage = () => {
       </Head>
 
       <body className="bg-[url(/imgs/bg-mobile.jpg)] md:bg-[url(/imgs/bg-desktop.jpg)] bg-cover bg-center bg-no-repeat text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
-        <div className="stars"></div>
         <div className="auth-container border-1 border-gray-700 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in transition-all duration-300 hover:shadow-xl hover:scale-101 max-w-md w-full">
-          <h2 className="text-white text-2xl font-bold mb-4 shadow-sm">Login to Jarvis</h2>
+          <h2 className="text-white text-2xl font-bold mb-4 ">Login to Jarvis</h2>
 
           <div className="mt-4 space-y-3">
             {/* Google OAuth */}
@@ -46,6 +45,8 @@ const LoginPage = () => {
               <FontAwesomeIcon icon={faInstagram} className="w-5 h-5" />
               Continue with Instagram
             </Link>
+            
+            <h3 className="text-gray-700">or</h3>
           </div>
         </div>
       </body>
