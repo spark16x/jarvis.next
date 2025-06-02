@@ -46,7 +46,8 @@ const LoginPage = () => {
               Continue with Instagram
             </Link>
             
-            <h3 className="text-gray-700">or</h3>
+            <div className="border-t border-gray-700 my-4"></div>
+            <p className="text-gray-400 mb-2">Or continue with</p>
           </div>
         </div>
       </body>
