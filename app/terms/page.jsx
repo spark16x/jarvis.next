@@ -4,11 +4,7 @@ import Link from 'next/link';
 const TermsAndConditionsPage = () => {
   return (
     <>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Terms and Conditions - Jarvis AI</title>
-      </Head>
+      
       <div className="bg-gray-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8 flex">
         {/* Sidebar */}
         <aside className="w-full md:w-1/3 lg:w-1/4 pr-8 mb-8 md:mb-0">

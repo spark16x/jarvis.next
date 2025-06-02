@@ -3,11 +3,6 @@ import Head from 'next/head';
 const CookiePolicyPage = () => {
   return (
     <>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Cookie Policy | Jarvis AI</title>
-      </Head>
       <body className="bg-gray-900 text-white font-sans px-6 py-10">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-bold mb-6 text-blue-500">🍪 Cookie Policy</h1>

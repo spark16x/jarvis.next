@@ -4,11 +4,7 @@ import Link from 'next/link';
 const PrivacyPolicyPage = () => {
   return (
     <>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Privacy Policy – JARVIS AI</title>
-      </Head>
+      
       <div className="bg-gray-900 min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto bg-gray-800 rounded-lg shadow-xl overflow-hidden">
           <div className="bg-gray-700 py-6 px-4 sm:px-6">
