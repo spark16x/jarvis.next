@@ -17,7 +17,7 @@ const LoginPage = () => {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
       </Head>
 
-      <body style="background:url(/imgs/bg-desktop.jpg) " className=" bg-[url(/imgs/bg-desktop.jpg)] text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
+      <body className=" bg-[green] text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
         <div className="stars"></div>
         <div className="auth-container bg-gray-800 bg-opacity-95 p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in transition-all duration-300 hover:shadow-xl hover:scale-101 max-w-md w-full">
           <img src="/imgs/logo.png" alt="Jarvis Logo" className="logo w-16 mb-4 animate-pulse"  />
