@@ -8,12 +8,12 @@ dotenv.config();
 
 export default function Email() {
 let params= useSearchParams();
-let user=params.get('user')
+let id=params.get('id')
 
   return (
     <div>
       {user ? (
-        <p>Welcome, {user}</p> // Adjust according to decoded token structure
+        <p>Welcome, {id}</p> // Adjust according to decoded token structure
       ) : (
         <p >Loading... </p>
       )}

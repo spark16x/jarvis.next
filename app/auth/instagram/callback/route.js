@@ -24,29 +24,27 @@ export async function GET(request) {
     
     if (!sbuser || sbuser.length == 0) {
       
-      // data = await supabase.from('users_profile')
-      //   .insert([{
-      //     name: user.name,
-      //     email: req.query.email,
-      //     verfied_email: 0,
-      //     profile_pic: user.profile_picture_url,
-      //     provider: 'instagram'
-      //   }])
-      //   .select();
+      data = await supabase.from('users_profile')
+        .insert([{
+          name: user.name,
+          verfied_email: 0,
+          profile_pic: user.profile_picture_url,
+          provider: 'instagram'
+        }])
+        .select();
       
-      // console.log(data.error)
+      console.log(data.error)
       
-      // sbuser = data.data[0];
+      sbuser = data.data[0];
       
-      // let id = await supabase.from('id')
-      //   .insert([{
-      //     id: sbuser.id,
-      //     Instagram: user.id
-      //   }]);
+      let id = await supabase.from('id')
+        .insert([{
+          id: sbuser.id,
+          Instagram: user.id
+        }]);
       
-      // sendEmail(sbuser.email, 'Welcome to J.A.R..I.S', welcomeHtml(sbuser))
-      // cookie.set("user", user, { httpOnly: true, secure: true, maxAge: 60 * 60 * 1000 });
-      return NextResponse.redirect(`${process.env.BASE_URI}/auth/instagram/callback/email?name=${user.name}`);
+      cookie.set("id", sbuser.id, { httpOnly: true, secure: true, maxAge: 60 * 60 * 1000 });
+      return NextResponse.redirect(`${process.env.BASE_URI}/auth/instagram/callback/email?id=${sbuser.id}`);
     }
     
     
