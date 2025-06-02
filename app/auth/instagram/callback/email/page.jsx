@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 dotenv.config();
 
-export default async function Email() {
+export default function Email() {
   let params = useCookies();
 
    const user = params.get('user');
