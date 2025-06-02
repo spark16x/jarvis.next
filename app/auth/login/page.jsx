@@ -64,7 +64,7 @@ const LoginPage = () => {
               <input
                 type="text"
                 id="name"
-                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-sm border-gray-700 rounded-md bg-gray-700 text-gray-200"
+                className="shadow-sm focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-sm border-gray-700 rounded-md bg-gray-700 text-white"
                 placeholder="Your Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
