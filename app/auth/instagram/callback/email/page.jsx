@@ -12,7 +12,7 @@ let id=params.get('id')
 
   return (
     <div>
-      {user ? (
+      {id ? (
         <p>Welcome, {id}</p> // Adjust according to decoded token structure
       ) : (
         <p >Loading... </p>
