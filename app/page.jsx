@@ -11,7 +11,13 @@ import { useState } from 'react';
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
   
-  
+   const handleMouseEnter = () => {
+   setVoiceHover(true);
+ };
+ 
+ const handleMouseLeave = () => {
+   setVoiceHover(false);
+ };
   
   useEffect(() => {
     const banner = document.getElementById("consent-banner");
@@ -91,7 +97,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-10">Powerful Features</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div onMouseEnter="{()=>{setVoiceHover(true)}}" onMouseLeave="{()=>{setVoiceHover(false)}}">
+              <div onMouseEnter="{handleMouseEnter}" onMouseLeave="{handleMouseLeave}">
                  {voiceHover ?
                  <video src="/videos/voice-contol.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoPlay loop />:
                  <img src="/imgs/voice-contol.png" className="mx-auto mb-4 rounded" alt="Integrated Services" />}
