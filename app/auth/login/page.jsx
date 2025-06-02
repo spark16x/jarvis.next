@@ -15,7 +15,7 @@ const LoginPage = () => {
         
         {/* Font Awesome (Consider using a component library for icons in React) */}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-      </Head>+
+      </Head>
 
       <body className=" bg-[url(/imgs/bg-desktop.jpg)] text-gray-200 font-sans flex justify-center items-center h-screen text-center overflow-hidden">
         <div className="stars"></div>
