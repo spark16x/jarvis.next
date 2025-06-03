@@ -160,13 +160,13 @@ export default function Home() {
             <Link href="/terms" className="hover:underline text-gray-400">Terms of Service</Link>
             <Link href="/privacy" className="hover:underline text-gray-400">Privacy Policy</Link>
             <Link href="/cookies" className="hover:underline text-gray-400">Cookie Policy</Link>
-            <a href="https://www.instagram.com/your_instagram_handle" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+            <a href="https://www.instagram.com/spark16.x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
               <FontAwesomeIcon icon={faInstagram} size="lg" />
             </a>
-            <a href="https://twitter.com/your_twitter_handle" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+            <a href="https://twitter.com/spark2009" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
               <FontAwesomeIcon icon={faXTwitter} size="lg" />
             </a>
-            <a href="https://www.threads.net/@your_threads_handle" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
+            <a href="https://www.threads.net/@spark16.x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
               <FontAwesomeIcon icon={faThreads} size="lg" />
             </a>
             <a href="https://github.com/spark16x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
