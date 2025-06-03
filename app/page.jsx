@@ -99,15 +99,15 @@ export default function Home() {
             <div>
               <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
                  {voiceHover ?
-                 <video src="/videos/voice-contol.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoPlay loop />:
-                 <img src="/imgs/voice-contol.png" className="mx-auto mb-4 rounded" alt="Integrated Services" />}
+                 <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoPlay loop />:
+                 <img src="/imgs/voice-control.png" className="mx-auto mb-4 rounded" alt="voice control" />}
                  </div>
 
               <h3 className="text-2xl font-semibold mb-2">Voice Control</h3>
               <p className="text-gray-400">Control your system using natural language in real-time.</p>
             </div>
             <div>
-              <img src="https://cdn.pixabay.com/photo/2020/04/28/11/32/technology-5100484_960_720.jpg" className="mx-auto mb-4 rounded" alt="Integrated Services" />
+              <img src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" />
               <h3 className="text-2xl font-semibold mb-2">Integrated Services</h3>
               <p className="text-gray-400">Email, Weather, News, Translate, Maps, Calendar, Drive, and more!</p>
             </div>
