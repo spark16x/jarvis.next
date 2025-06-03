@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
+import supabase from '@/components/supabase_client.js';
 
 const signupPage = () => {
   const [name, setName] = useState('');
@@ -21,8 +22,19 @@ const signupPage = () => {
     if (password !== confirmPassword) {
       alert("Passwords don't match!");
       return;
+    }else{
+    supabase.from('users_profile')
+      .insert([{
+        name: name,
+        email:email,
+        verfied_email: 0,
+        password:password,
+        provider: 'user'
+      }])
+      .select().catch(e => console.log(e))
+      
+      
     }
-    // ... your signup API call ...
   };
   
   return (
@@ -124,7 +136,7 @@ const signupPage = () => {
           </form>
           
           <p className="mt-4 text-sm text-gray-500">
-            Already have an account? <Link href="/login" className="text-blue-400 hover:underline">Log in</Link>
+            Already have an account? <Link href="/auth/login" className="text-blue-400 hover:underline">Log in</Link>
           </p>
         </div>
       </body>
