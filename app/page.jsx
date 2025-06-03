@@ -10,14 +10,22 @@ import { useState } from 'react';
 
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
+  const [integratedservices, setintegratedservices] = useState(false);
   
-   const handleMouseEnter = () => {
-   setVoiceHover(true);
- };
- 
- const handleMouseLeave = () => {
-   setVoiceHover(false);
- };
+  const handleMouseEnterv = () => {
+    setVoiceHover(true);
+  };
+  
+  const handleMouseLeavev = () => {
+    setVoiceHover(false);
+  };
+  const handleMouseEnteri = () => {
+    setintegratedservices(true);
+  };
+  
+  const handleMouseLeavei = () => {
+    setintegratedservices(false);
+  };
   
   useEffect(() => {
     const banner = document.getElementById("consent-banner");
@@ -97,9 +105,9 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-center mb-10">Powerful Features</h2>
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div>
-              <div onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >
+              <div onMouseEnter={handleMouseEnterv} onMouseLeave={handleMouseLeavev} >
                  {voiceHover ?
-                 <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" autoPlay loop />:
+                 <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
                  <img src="/imgs/voice-control.png" className="mx-auto mb-4 rounded" alt="voice control" />}
                  </div>
 
@@ -107,7 +115,13 @@ export default function Home() {
               <p className="text-gray-400">Control your system using natural language in real-time.</p>
             </div>
             <div>
-              <img src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" />
+              <div onMouseEnter={handleMouseEnteri} onMouseLeave={handleMouseLeavei} >
+               { setintegratedservices ?
+               <video src="/videos/integrated-servicel.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
+              <img src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" /> 
+                 
+               }
+              </div>
               <h3 className="text-2xl font-semibold mb-2">Integrated Services</h3>
               <p className="text-gray-400">Email, Weather, News, Translate, Maps, Calendar, Drive, and more!</p>
             </div>
