@@ -85,7 +85,7 @@ export default function Home() {
                 </button>
               </Link>
               <Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
-                <img src="/svgs/bmc-button.svg" alt="buy me a coffee" className="w-[200px] " />
+                <a href="https://www.buymeacoffee.com/spark16x"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me  coffee&emoji=☕&slug=spark16x&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
               </Link>
             </div>
           </div>
