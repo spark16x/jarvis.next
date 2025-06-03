@@ -116,7 +116,7 @@ export default function Home() {
             </div>
             <div>
               <div onMouseEnter={handleMouseEnteri} onMouseLeave={handleMouseLeavei} >
-               { setintegratedservices ?
+               { integratedservices ?
                <video src="/videos/integrated-servicel.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
               <img src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" /> 
                  
