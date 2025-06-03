@@ -63,7 +63,7 @@ const signupPage = () => {
             <div className="border-t border-gray-700 my-4"></div>
             <p className=" -translate-y-[28px] text-gray-400 mb-2">Or continue with</p>
             
-            <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+            <form action="/api/register" className="mt-4 space-y-3">
             <div>
               <input
                 type="text"
