@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ChromeLoading = () => {
+const Loading = () => {
   return (
     <div className="flex justify-center items-center h-screen bg-white">
   <div className="relative w-16 h-16">
@@ -23,4 +23,4 @@ const ChromeLoading = () => {
   );
 };
 
-export default ChromeLoading;
+export default Loading;
