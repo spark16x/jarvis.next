@@ -66,7 +66,7 @@ const LoginPage = () => {
               <input
                 type="email"
                 id="email"
-                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
                 placeholder="Your Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -77,7 +77,7 @@ const LoginPage = () => {
               <input
                 type="password"
                 id="password"
-                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] sm:text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
+                className="shadow-sm p-[5px] focus:ring-blue-500 focus:border-blue-500 block w-full h-[50px] text-base border-gray-700 rounded-md bg-[#0000005e] text-white"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -89,7 +89,7 @@ const LoginPage = () => {
               type="submit"
               className="w-full py-2 px-4 rounded-md bg-blue-500 text-white font-semibold hover:bg-blue-600 focus:ring-2 focus:ring-blue-400 focus:outline-none transition-colors"
             >
-              Login p-[5px]
+              Login 
             </button>
           </form>
             
