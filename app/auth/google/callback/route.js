@@ -1,15 +1,17 @@
 import { NextResponse } from 'next/server';
+import client from '@/app/lib/google_client.js';
 
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams
   const code = searchParams.get('code');
   
   
-  // try {
-  //   let { tokens } = await oauth2Client.getToken({
-  //     code,
-  //     redirect_uri: process.env.REDIRECT_URI
-  //   });
+  try {
+    let { tokens } = await client.getToken({
+      code,
+      redirect_uri: process.env.REDIRECT_URI
+    });
+    return  NextResponse.json({code,tokens})
     
   //   oauth2Client.setCredentials(tokens);
     
@@ -59,16 +61,16 @@ export async function GET(request) {
     
   //   res.redirect("/chat");
     
-  // } catch (error) {
+  } catch (error) {
     
-  //   console.error("Error retrieving access token:", error.message);
+    console.error("Error retrieving access token:", error.message);
     
-  //   res.status(500).send('Authentication is failed');
+    res.status(500).send('Authentication is failed');
     
-  // }
+  }
   
 
   
-return  NextResponse.json({code})
+
   
 }
