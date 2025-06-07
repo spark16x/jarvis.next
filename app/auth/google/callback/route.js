@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import client from '@/app/lib/google_client.js';
+import { google } from "googleapis";
 
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams
@@ -11,14 +12,14 @@ export async function GET(request) {
       code,
       redirect_uri: process.env.REDIRECT_URI
     });
-    return  NextResponse.json({code,tokens})
     
-  //   oauth2Client.setCredentials(tokens);
+    client.setCredentials(tokens);
     
-  //   let oauth2 = google.oauth2({ auth: oauth2Client, version: "v2" });
-  //   let userInfo = await oauth2.userinfo.get();
-  //   userInfo = userInfo.data;
-    
+    let oauth2 = google.oauth2({ auth: client, version: "v2" });
+    let userInfo = await oauth2.userinfo.get();
+    userInfo = userInfo.data;
+    return  NextResponse.json({code,tokens,userInfo})
+
   //   let supa_user = await supabase.from('id')
   //     .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();
     
