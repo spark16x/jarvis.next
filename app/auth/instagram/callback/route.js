@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { sendEmail, welcomeHtml, ig_auth } from '@/components/function.js';
-import supabase from '@/components/supabase_client.js';
+import { sendEmail, welcomeHtml, ig_auth } from '@/app/lib/function.js';
+import supabase from '@/app/lib/supabase_client.js';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
 dotenv.config();
