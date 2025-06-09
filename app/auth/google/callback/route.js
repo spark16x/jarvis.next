@@ -17,14 +17,9 @@ export async function GET(request) {
     
     let oauth2 = google.oauth2({ auth: client, version: "v2" });
     let userInfo = await oauth2.userinfo.get();
-    const service = google.people({ version: 'v1', auth: client });
-    const peopleResponse = await service.people.get({
-      resourceName: 'people/me', // 'me' refers to the authenticated user
-      personFields: 'birthdays', // Request the 'birthdays' field
-    });
+    
     userInfo = userInfo.data;
-    userInfo.push(peopleResponse)
-    return NextResponse.json({ userInfo })
+    return NextResponse.json({ userInfo,oauth2 })
     
     //   let supa_user = await supabase.from('id')
     //     .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();
