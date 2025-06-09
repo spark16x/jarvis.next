@@ -1,6 +1,6 @@
 export default function LoginPage() {
   let url;
-  fetch('/api/google')
+  fetch('https://jarvisnext.vercel.app/api/google')
     .then((v) => {
       
       console.log(v)
