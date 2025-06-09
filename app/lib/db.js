@@ -15,15 +15,17 @@ const pool = new Pool({
     require: true,
   },
 });
+let db;
 
-async function getPgVersion() {
-  const client = await pool.connect();
+ function getPgVersion() {
+  const db = await pool.connect();
   try {
-    const result = await client.query('SELECT version()');
+    const result = await db.query('SELECT version()');
     console.log(result.rows[0]);
   } finally {
     client.release();
   }
 }
-
 getPgVersion();
+
+export default db;

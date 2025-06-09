@@ -13,6 +13,6 @@ export async function GET() {
       "https://www.googleapis.com/auth/userinfo.email"
     ]
   });
-
+  
   return NextResponse.redirect(url);
 }
