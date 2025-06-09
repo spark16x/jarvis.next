@@ -1,6 +1,6 @@
 {
   "name": "Jarvis",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "private": false,
   "type":"module",
   "scripts": {
@@ -40,7 +40,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "resend": "^4.5.0",
     "form-data": "^4.0.0",
-    "@neondatabase/serverless":"^1.0.0"
+    "pg":"^8.6.0"
   },
   "devDependencies": {
     "typescript": "^5",
