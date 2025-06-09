@@ -17,7 +17,7 @@ const pool = new Pool({
 });
 let db;
 
- function getPgVersion() {
+ async function getPgVersion() {
   const db = await pool.connect();
   try {
     const result = await db.query('SELECT version()');
