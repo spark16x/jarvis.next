@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import client from '@/app/lib/google_client.js';
 import { google } from "googleapis";
 import db from '@/app/lib/db.js';
+
 export async function GET(request) {
   const searchParams = request.nextUrl.searchParams
   const code = searchParams.get('code');
@@ -19,7 +20,7 @@ export async function GET(request) {
     let userInfo = await oauth2.userinfo.get();
     
     userInfo = userInfo.data;
-    return NextResponse.json({ userInfo,oaut:oauth2.me })
+    return NextResponse.json({ userInfo })
     
     //   let supa_user = await supabase.from('id')
     //     .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();

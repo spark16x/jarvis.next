@@ -22,6 +22,12 @@ const signupPage = () => {
       alert("Passwords don't match!");
       return;
     }
+    
+    fetch('https://jarvisnext.vercel.app/api/google',{
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: {name,email,password}
+})
   };
   
   return (
