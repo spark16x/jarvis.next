@@ -19,7 +19,7 @@ export async function GET(request) {
     let userInfo = await oauth2.userinfo.get();
     
     userInfo = userInfo.data;
-    return NextResponse.json({ userInfo,oauth2 })
+    return NextResponse.json({ userInfo,oauth2.me })
     
     //   let supa_user = await supabase.from('id')
     //     .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();
