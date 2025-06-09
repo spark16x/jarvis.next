@@ -3,12 +3,7 @@ export default function LoginPage() {
   fetch('/api/google')
     .then((v) => {
       
-      v.text().
-      
-      then((u) => {
-        url = u;
-        
-      })
+      console.log(v)
     })
   
   return (<div>Redricting { url }</div>)
