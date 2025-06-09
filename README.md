@@ -12,6 +12,11 @@
   <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/spark16x/jarvis.next/output/github-contribution-grid-snake.svg">
 </picture>
 
+## Badges
+
+[![Visits Badge](https://badges.pufler.dev/visits/spark16x/jarvis.next)](https://badges.pufler.dev)  [![Years Badge](https://badges.pufler.dev/years/spark16x)](https://badges.pufler.dev)    [![Created Badge](https://badges.pufler.dev/created/spark16x/jarvis.next)](https://badges.pufler.dev)    [![Updated Badge](https://badges.pufler.dev/updated/spark16x/jarvis.next)](https://badges.pufler.dev)   
+
+
 ## Overview
 
 Jarvis.next is a modern take on the personal assistant concept, leveraging the power of Next.js to create a responsive and user-friendly web interface. This project aims to provide intelligent assistance for various tasks, accessible directly through your web browser. It is currently under active development and exploring the capabilities of server-side rendering and API routes offered by Next.js.
