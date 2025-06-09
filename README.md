@@ -1,6 +1,16 @@
-# Jarvis.next
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=Jarvis&animation=fadeIn" alt="Magic"></img>
+</p>
 
-A personal assistant project by Pratham Vig, built with Next.js.
+<p align="center">
+  <img src="https://readme-typing-svg.herokuapp.com?font=Playwrite+AU+SA&pause=1000&center=true&width=435&lines=A+personal+assistant+project;by+Pratham+Vig;built+with+Next.js" alt="Magic"></img>
+</p>
+
+<picture align="center">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/spark16x/jarvis.next/output/github-contribution-grid-snake-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/spark16x/jarvis.next/output/github-contribution-grid-snake.svg">
+  <img alt="github contribution grid snake animation" src="https://raw.githubusercontent.com/spark16x/jarvis.next/output/github-contribution-grid-snake.svg">
+</picture>
 
 ## Overview
 
