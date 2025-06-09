@@ -17,50 +17,56 @@ export async function GET(request) {
     
     let oauth2 = google.oauth2({ auth: client, version: "v2" });
     let userInfo = await oauth2.userinfo.get();
+    const service = google.people({ version: 'v1', auth: client });
+    const peopleResponse = await service.people.get({
+      resourceName: 'people/me', // 'me' refers to the authenticated user
+      personFields: 'birthdays', // Request the 'birthdays' field
+    });
     userInfo = userInfo.data;
-    return  NextResponse.json({userInfo})
-
-  //   let supa_user = await supabase.from('id')
-  //     .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();
+    userInfo.push(peopleResponse)
+    return NextResponse.json({ userInfo })
     
-  //   supa_user = supa_user.data;
+    //   let supa_user = await supabase.from('id')
+    //     .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();
     
-  //   if (supa_user || !supa_user.length == 0) {
-  //     supa_user = supa_user.users_profile
-  //   }
+    //   supa_user = supa_user.data;
     
-  //   console.log(!supa_user || supa_user.length == 0)
+    //   if (supa_user || !supa_user.length == 0) {
+    //     supa_user = supa_user.users_profile
+    //   }
     
-  //   if (!supa_user || supa_user.length == 0) {
-      
-  //     supa_user = await supabase.from('users_profile')
-  //       .insert([{
-  //         name: userInfo.given_name + ' ' + userInfo.family_name,
-  //         email: userInfo.email,
-  //         verfied_email: 1,
-  //         profile_pic: userInfo.picture,
-  //         provider: 'google'
-  //       }])
-  //       .select();
-      
-  //     supa_user = supa_user.data[0];
-      
-  //     let id = await supabase.from('id')
-  //       .insert([{
-  //         id: supa_user.id,
-  //         Google: userInfo.id
-  //       }]);
-      
-  //     console.log(supa_user)
-      
-  //     sendEmail(userInfo.email, 'Welcome to J.A.R..I.S', welcomeHtml(supa_user))
-  //   }
+    //   console.log(!supa_user || supa_user.length == 0)
     
-  //   let token = jwt.sign(supa_user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
+    //   if (!supa_user || supa_user.length == 0) {
     
-  //   res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
+    //     supa_user = await supabase.from('users_profile')
+    //       .insert([{
+    //         name: userInfo.given_name + ' ' + userInfo.family_name,
+    //         email: userInfo.email,
+    //         verfied_email: 1,
+    //         profile_pic: userInfo.picture,
+    //         provider: 'google'
+    //       }])
+    //       .select();
     
-  //   res.redirect("/chat");
+    //     supa_user = supa_user.data[0];
+    
+    //     let id = await supabase.from('id')
+    //       .insert([{
+    //         id: supa_user.id,
+    //         Google: userInfo.id
+    //       }]);
+    
+    //     console.log(supa_user)
+    
+    //     sendEmail(userInfo.email, 'Welcome to J.A.R..I.S', welcomeHtml(supa_user))
+    //   }
+    
+    //   let token = jwt.sign(supa_user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
+    
+    //   res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
+    
+    //   res.redirect("/chat");
     
   } catch (error) {
     
@@ -70,8 +76,8 @@ export async function GET(request) {
     
   }
   
-
   
-
+  
+  
   
 }
