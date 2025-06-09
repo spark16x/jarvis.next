@@ -14,7 +14,7 @@
 
 ## Badges
 
-[![Visits Badge](https://badges.pufler.dev/visits/spark16x/jarvis.next)](https://badges.pufler.dev)  [![Years Badge](https://badges.pufler.dev/years/spark16x)](https://badges.pufler.dev)    [![Created Badge](https://badges.pufler.dev/created/spark16x/jarvis.next)](https://badges.pufler.dev)    [![Updated Badge](https://badges.pufler.dev/updated/spark16x/jarvis.next)](https://badges.pufler.dev)   ![GitHub Release](https://img.shields.io/github/v/release/spark16x/jarvis.next)    ![GitHub Release Date](https://img.shields.io/github/release-date/spark16x/jarvis.next)
+[![Visits Badge](https://badges.pufler.dev/visits/spark16x/jarvis.next)](https://badges.pufler.dev)      [![Created Badge](https://badges.pufler.dev/created/spark16x/jarvis.next)](https://badges.pufler.dev)    [![Updated Badge](https://badges.pufler.dev/updated/spark16x/jarvis.next)](https://badges.pufler.dev)   ![GitHub Release](https://img.shields.io/github/v/release/spark16x/jarvis.next)    ![GitHub Release Date](https://img.shields.io/github/release-date/spark16x/jarvis.next)
      ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/spark16x/jarvis.next)
 
 
