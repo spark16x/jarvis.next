@@ -6,5 +6,5 @@ export default function LoginPage() {
       console.log(v)
     })
   
-  return (<div>Redricting { url }</div>)
+  return (<div>Redricting { v }</div>)
 }
