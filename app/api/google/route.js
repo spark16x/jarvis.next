@@ -14,6 +14,6 @@ export async function GET() {
       "https://www.googleapis.com/auth/user.birthday.read"
     ]
   });
-  
+  console.log(url)
   return NextResponse.json(url);
 }
