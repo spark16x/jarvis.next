@@ -1,5 +1,8 @@
 import { NextResponse } from 'next/server';
 
-export default function handler(req, res) {
-  res.status(200).json({ message: 'Hello from Next.js!' })
+export async function POST(request) {
+  const formData = await request.formData()
+  const name = formData.get('name')
+  const email = formData.get('email')
+  return NextResponse.json({ name, email })
 }
