@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
+import { redirect } from 'next/navigation';
 
 const signupPage = () => {
   const [name, setName] = useState('');
@@ -25,7 +26,10 @@ const signupPage = () => {
     fetch('https://jarvisnext.vercel.app/api/auth/signup',{
   method: "POST",
   headers: { "Content-Type": "application/json",name,email,password,provider:'manual' }
-}).then((v)=>{console.log(v)})
+}).then((v)=>{ 
+  console.log(v) ;
+  redirect('/auth/login')
+})
   };
   
   return (
