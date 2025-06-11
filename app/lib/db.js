@@ -15,12 +15,6 @@ const pool = new Pool({
     require: true,
   },
 });
-let db;
 
- async function getPgVersion() {
-  const db = await pool.connect();
-  
-}
-getPgVersion();
 
-export default db;
+export default pool;
