@@ -27,7 +27,7 @@ const signupPage = () => {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: {name,email,password}
-})
+}).then((v)=>{console.log(v)})
   };
   
   return (
