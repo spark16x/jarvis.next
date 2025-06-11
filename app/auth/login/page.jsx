@@ -3,28 +3,21 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub, faFacebookF, faInstagram ,faGoogle} from '@fortawesome/free-brands-svg-icons';
+import { faGithub, faFacebookF, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
+import pool from '@/app/lib/db.js';
 
 const LoginPage = () => {
     const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  
-    const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle your signup logic here, e.g., sending data to an API
-    console.log('Sign up data:', { name, email, password, confirmPassword });
-    // You would typically add validation and error handling here
-    if (password !== confirmPassword) {
-      alert("Passwords don't match!");
-      return;
-    }
-    // ... your signup API call ...
-  };
-  return (
-    <>
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    
+    const handleSubmit =async () => {
+      let user = await pool.query(`SELECT * FROM auth.users WHERE email = '${email}' AND password = '${password}' `)
+      console.log(user.rows[0])
+      };
+      return (
+        <>
 
 
       <body className="bg-[url(/imgs/bg-mobile.jpg)] md:bg-[url(/imgs/bg-desktop.jpg)] bg-cover bg-center bg-no-repeat text-gray-200 font-sans flex justify-center items-center h-screen text-center ">
@@ -61,7 +54,7 @@ const LoginPage = () => {
             <div className="border-t border-gray-700 my-4"></div>
             <p className=" -translate-y-[28px] text-gray-400 mb-2">Or continue with</p>
             
-            <form  className="mt-4 space-y-3">
+            <form actio={handleSubmit}  className="mt-4 space-y-3">
             <div>
               <input
                 type="email"
@@ -97,7 +90,7 @@ const LoginPage = () => {
         </div>
       </body>
     </>
-  );
-};
-
-export default LoginPage;
+      );
+    };
+    
+    export default LoginPage;
