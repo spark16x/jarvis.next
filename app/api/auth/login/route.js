@@ -1,5 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
+import pool from '@/app/lib/db.js';
+
 dotenv.config();
 
 export async function POST(request) {
