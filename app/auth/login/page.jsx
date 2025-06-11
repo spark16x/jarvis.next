@@ -19,8 +19,8 @@ const LoginPage = () => {
       body: JSON.stringify({email,password})
     }).then((v) => {
       v.json().then((token)=>{
-        console.log(token)
-        // redirect(`/api/cookie?token=${token}`)
+        console.log(token.token)
+        redirect(`/api/cookie?token=${token.token}`)
       })
     })
   };
