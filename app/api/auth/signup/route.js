@@ -16,5 +16,5 @@ RETURNING *`
    
  )
 
-  return Response.json(user)
+  return Response.json({user})
 }
