@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
-import pool from '@/app/lib/db.js';
 
 
 const LoginPage = () => {
