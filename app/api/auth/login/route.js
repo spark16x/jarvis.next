@@ -8,5 +8,5 @@ export async function POST(request) {
  // user = user.rows[0]
  // console.log(user)
  console.log(body)
- if (user) {} else {}
+return Response.json({body })
 }
