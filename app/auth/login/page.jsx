@@ -11,7 +11,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  const handleSubmit = async () => {
+  const handleSubmit =  () => {
     fetch('https://jarvisnext.vercel.app/api/auth/signup', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -58,7 +58,7 @@ const LoginPage = () => {
             <div className="border-t border-gray-700 my-4"></div>
             <p className=" -translate-y-[28px] text-gray-400 mb-2">Or continue with</p>
             
-            <form actio={handleSubmit}  className="mt-4 space-y-3">
+            <form action={handleSubmit}  className="mt-4 space-y-3">
             <div>
               <input
                 type="email"
