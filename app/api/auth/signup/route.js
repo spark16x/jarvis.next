@@ -14,8 +14,15 @@ export async function POST(request) {
  INSERT INTO auth.users(id, name, email, password, avatar,provider)
 VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${provider}')
 RETURNING *`
-    
   )
   user = user.rows[0];
+  if (provider == 'manula') {
+    let providers = await pool.query(`
+ INSERT INTO auth.peoviders(id)
+VALUES(${user.id})`
+  )
+  } else {
+    
+  }
   return Response.json({ message: `registration is sussfull of the ${user.name}` })
 }
