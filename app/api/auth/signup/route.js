@@ -10,7 +10,7 @@ export async function POST(request) {
  let eamil= body.get('eamil')
  let password= body.get('password')
  
- let user=await client.query(`
+ let user=await pool.query(`
  INSERT INTO auth.users(id, name, email, password, avatar)
 VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', 'null')
 RETURNING *`
