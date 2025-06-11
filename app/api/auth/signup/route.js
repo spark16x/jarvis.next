@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 
-export async function POST(request) {
-  console.log(request.body)
-  return NextResponse.json({body:request.body})
+export default function handler(req, res) {
+  res.status(200).json({ message: 'Hello from Next.js!' })
 }
