@@ -6,18 +6,30 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 import pool from '@/app/lib/db.js';
+import { redirect } from 'next/navigation';
+import jwt from 'jsonwebtoken';
+import dotenv from "dotenv";
+dotenv.config();
 
 const LoginPage = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
+  const handleSubmit = async () => {
+    let user = await pool.query(`SELECT * FROM auth.users WHERE email = '${email}' AND password = '${password}' `)
+    user = user.rows[0]
+    console.log(user)
     
-    const handleSubmit =async () => {
-      let user = await pool.query(`SELECT * FROM auth.users WHERE email = '${email}' AND password = '${password}' `)
-      console.log(user.rows[0])
-      };
-      return (
-        <>
+    if (user) {
+      let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
+      redirect(`/api/cookie?token=${token}`)
+    } else {
+      alert('email and password is incrrect');
+    }
+  };
+  return (
+    <>
 
 
       <body className="bg-[url(/imgs/bg-mobile.jpg)] md:bg-[url(/imgs/bg-desktop.jpg)] bg-cover bg-center bg-no-repeat text-gray-200 font-sans flex justify-center items-center h-screen text-center ">
@@ -90,7 +102,7 @@ const LoginPage = () => {
         </div>
       </body>
     </>
-      );
-    };
-    
-    export default LoginPage;
+  );
+};
+
+export default LoginPage;
