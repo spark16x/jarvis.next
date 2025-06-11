@@ -16,6 +16,7 @@ VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', 'null')
 RETURNING *`
    
  )
-
-  return Response.json({user,pool,client})
+ console.log(user)
+user=user.rows[0]
+  return Response.json({user})
 }
