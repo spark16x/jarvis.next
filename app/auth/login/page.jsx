@@ -6,26 +6,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 import pool from '@/app/lib/db.js';
-import { redirect } from 'next/navigation';
-import jwt from 'jsonwebtoken';
-import dotenv from "dotenv";
-dotenv.config();
+
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
   const handleSubmit = async () => {
-    let user = await pool.query(`SELECT * FROM auth.users WHERE email = '${email}' AND password = '${password}' `)
-    user = user.rows[0]
-    console.log(user)
-    
-    if (user) {
-      let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
-      redirect(`/api/cookie?token=${token}`)
-    } else {
-      alert('email and password is incrrect');
-    }
+    fetch('https://jarvisnext.vercel.app/api/auth/signup', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({name,email})
+    }).then((v) => {
+      console.log(v);
+    })
   };
   return (
     <>
