@@ -19,12 +19,7 @@ let db;
 
  async function getPgVersion() {
   const db = await pool.connect();
-  try {
-    const result = await db.query('SELECT version()');
-    console.log(result.rows[0]);
-  } finally {
-    client.release();
-  }
+  
 }
 getPgVersion();
 
