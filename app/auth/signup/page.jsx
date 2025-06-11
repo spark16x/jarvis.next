@@ -25,7 +25,8 @@ const signupPage = () => {
     
     fetch('https://jarvisnext.vercel.app/api/auth/signup',{
   method: "POST",
-  headers: { "Content-Type": "application/json",name,email,password,provider:'manual' }
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({name,email,password,provider:'manual'})
 }).then((v)=>{ 
   console.log(v) ;
   redirect('/auth/login')

@@ -5,13 +5,9 @@ import pool from '@/app/lib/db.js';
 
 export async function POST(request) {
   let client = await pool.connect();
-  const body = await headers();
+  const {name ,email,password,avatar,provider} = await request.json();
   
-  let name = body.get('name')
-  let email = body.get('email')
-  let password = body.get('password')
-  let provider = body.get('provider')
-  let avatar = body.get('avatar')
+ 
   
   
   let user = await pool.query(`
