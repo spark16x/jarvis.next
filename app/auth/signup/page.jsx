@@ -23,7 +23,7 @@ const signupPage = () => {
       return;
     }
     
-    fetch('https://jarvisnext.vercel.app/api/google',{
+    fetch('https://jarvisnext.vercel.app/api/auth/signup',{
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: {name,email,password}
