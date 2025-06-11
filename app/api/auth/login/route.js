@@ -9,10 +9,11 @@ export async function POST(request) {
  let user = await pool.query(`SELECT * FROM auth.users WHERE email = '${email}' AND password = '${password}' `)
  user = user.rows[0];
  if (user) {
-  return Response.json({user })
+  let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
+
+  return Response.json({token })
  } else {
   return Response.json({message :'user is not found',error:500 })
  }
- // let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
 
 }
