@@ -24,8 +24,7 @@ const signupPage = () => {
     
     fetch('https://jarvisnext.vercel.app/api/auth/signup',{
   method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: {name,email,password}
+  headers: { "Content-Type": "application/json",name,email,password }
 }).then((v)=>{console.log(v)})
   };
   
