@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 
 
 export async function POST(request) {
-  const res = await headers();
-  return Response.json({ res })
+  const body = await headers();
+ let name= body.get('name')
+  return Response.json({ name })
 }
