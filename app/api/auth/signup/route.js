@@ -7,7 +7,7 @@ export async function POST(request) {
   let client=await pool.connect();
   const body = await headers();
  let name= body.get('name')
- let eamil= body.get('eamil')
+ let email= body.get('email')
  let password= body.get('password')
  
  let user=await pool.query(`
