@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faFacebookF, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
+import { redirect } from 'next/navigation';
 
 
 const LoginPage = () => {
@@ -17,7 +18,9 @@ const LoginPage = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({email,password})
     }).then((v) => {
-      console.log(v);
+      v.json().then((token)=>{
+        redirect(`/api/cookie?token=${token}`)
+      })
     })
   };
   return (

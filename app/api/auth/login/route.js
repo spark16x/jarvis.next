@@ -11,7 +11,7 @@ export async function POST(request) {
  if (user) {
   return Response.json({user })
  } else {
-  return Response.json({message :'user is not found' })
+  return Response.json({message :'user is not found',error:500 })
  }
  // let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
 
