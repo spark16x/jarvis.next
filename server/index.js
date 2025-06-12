@@ -94,27 +94,8 @@ async function isAuth(req, res, next) {
 }
 
 
-// Home Page
-app.get("/", (req, res) => {
-  
-  res.render("index");
-  
-});
 
-// Terms page
-app.get('/terms', (req, res) => {
-  res.render('terms')
-})
 
-// privacy page
-app.get('/privacy', (req, res) => {
-  res.render('privacy')
-})
-
-// privacy page
-app.get('/cookies', (req, res) => {
-  res.render('cookies')
-})
 
 // Chat frontend
 app.get('/chat', isAuth, async (req, res) => {
@@ -254,20 +235,7 @@ app.post("/chat", isAuth, async (req, res) => {
 });
 
 
-// login page
-app.get('/auth/login', (req, res) => {
-  res.render('login')
-})
 
-// sign up page
-app.get('/auth/signup', (req, res) => {
-  res.render('signup')
-})
-
-// profile page
-app.get('/profile', isAuth, (req, res) => {
-  res.render('profile', { user: req.user })
-})
 
 // Google OAuth Login
 app.get("/auth/google", async (req, res) => {
