@@ -1,3 +1,3 @@
 export default function Chat() {
-  return (<div>chat tab</div>)
+  return (<div className="bg-gray-700" >chat tab</div>)
 }
