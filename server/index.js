@@ -112,13 +112,27 @@ async function isAuth(req, res, next) {
 
 
 
-app.get('/auth/signup',(req,res)=>{
+app.get('/auth/signup', (req, res) => {
   res.json(pool)
 })
 
-app.post('/auth/signup',(req,res)=>{
+app.post('/auth/signup',async (req, res) => {
+  const { name, email, password, avatar, provider } = req.body;
   
-  res.json(req.body)
+  let user = await pool.query(`
+ INSERT INTO auth.users(id, name, email, password, avatar,provider)
+VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${provider}')
+RETURNING *`)
+
+  user = user.rows[0];
+  if (provider == 'manual') {
+    let providers = await pool.query(`
+ INSERT INTO auth.peoviders(id)
+VALUES(${user.id})`)
+  } else {
+    
+  }
+  res.send(`registation is sussfull of ${user.name}`)
 })
 
 // Google OAuth Login
@@ -388,8 +402,8 @@ app.get("/auth/instagram", async (req, res) => {
 // Instagram OAuth Callback
 app.get('/auth/instagram/callback', (req, res, next) => {
   if (!req.query.email) {
-   return res.render('get-email',{code:req.query.code})
-
+    return res.render('get-email', { code: req.query.code })
+    
   } else {
     return next();
   }
@@ -404,7 +418,7 @@ app.get('/auth/instagram/callback', (req, res, next) => {
     
     let sbuser = data.data;
     
-    if (sbuser ) {
+    if (sbuser) {
       sbuser = sbuser.users_profile
     }
     
