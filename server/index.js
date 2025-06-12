@@ -18,6 +18,10 @@ import jwt from 'jsonwebtoken';
 import qs from 'qs';
 import FormData from 'form-data';
 import cors from 'cors';
+import { Pool } from 'pg'
+
+
+
 // config dotenv
 dotenv.config();
 
@@ -32,10 +36,18 @@ let oauth2Client = new OAuth2Client(
   process.env.REDIRECT_URI
 );
 
-let supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_KEY
-);
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const pool = new Pool({
+  host: PGHOST,
+  database: PGDATABASE,
+  username: PGUSER,
+  password: PGPASSWORD,
+  port: 5432,
+  ssl: {
+    require: true,
+  },
+});
 
 let generativeconfig = {
   temperature: 0.7,
@@ -100,7 +112,9 @@ async function isAuth(req, res, next) {
 
 
 
-
+app.get('/auth/signup',(req,res)=>{
+  res.json(pool)
+})
 
 app.post('/auth/signup',(req,res)=>{
   
