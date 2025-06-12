@@ -102,7 +102,7 @@ async function isAuth(req, res, next) {
 
 
 
-app.get('/auth/signup',(req,res)=>{
+app.post('/auth/signup',(req,res)=>{
   
   res.json(req.body)
 })
