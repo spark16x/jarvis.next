@@ -17,6 +17,7 @@ import systemInstruction from './systemInstruction.js';
 import jwt from 'jsonwebtoken';
 import qs from 'qs';
 import FormData from 'form-data';
+import cors from 'cors';
 // config dotenv
 dotenv.config();
 
@@ -59,6 +60,7 @@ app.set("views", path.join(__dirname, 'views'));
 
 // middalwaers
 app.set("view engine", "ejs");
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -97,145 +99,13 @@ async function isAuth(req, res, next) {
 
 
 
-// Chat frontend
-app.get('/chat', isAuth, async (req, res) => {
+
+
+
+app.get('/auth/signup',(req,res)=>{
   
-  // if user is login 
-  if (req.user) {
-    let userInfo = req.user
-    
-    // get history from supabase
-    let { data, error } = await supabase
-      .from("chat_history")
-      .select("role, parts")
-      .eq("user_id", userInfo.id)
-      .order("created_at", { ascending: true });
-    
-    // if history is exsit so send history on frontend ,else send user profile with ematy  history
-    if (!data.length == 0) {
-      chat = model.startChat({ history: data });
-      res.render("chat", { user: userInfo, history: data });
-    } else {
-      // send user profile
-      let history = [{
-        role: "user",
-        parts: [{
-          text: JSON.stringify({
-            type: 'profile',
-            profile: userInfo
-          })
-        }]
-      }]
-      
-      // send history
-      chat = model.startChat({ history });
-      res.render("chat", { user: userInfo, history: null });
-    }
-  } else {
-    // if user is not exist
-    
-    chat = model.startChat({ history: [] });
-    res.render("chat", { user: null, history: null });
-  }
-  
+  res.json(req.body)
 })
-
-// chat backend
-app.post("/chat", isAuth, async (req, res) => {
-  // get user 
-  let user = req.user;
-  
-  try {
-    
-    // get message from req
-    let { message } = req.body;
-    if (!message) return res.json({ response: "Please enter a message." });
-    
-    // send message as a user and get response
-    let result = await chat.sendMessage(message);
-    let user_mgs = [{
-      role: 'user',
-      parts: [{ text: message }],
-      user_id: user.id
-    }]
-    
-    // convsrt response into json
-    let response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
-    response = JSON.parse(response);
-    
-    // check the type of response and run functions based on type 
-    
-    while (true) {
-      
-      // if type is output
-      if (response.type === "output") {
-        
-        // save history 
-        await supabase
-          .from("chat_history")
-          .insert(user_mgs);
-        
-        await supabase
-          .from("chat_history")
-          .insert([{
-            role: 'model',
-            parts: [{ text: JSON.stringify(response) }],
-            user_id: user.id
-          }])
-        
-        // send responce 
-        return res.json({ response: String(response.output), file: response.file || [] });
-        
-        // break loop
-        break
-      } else if (response.type === "action") {
-        
-        // if type is action 
-        let fun = tools[response.function];
-        let agr = response.params;
-        
-        // if oauth functions
-        if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
-          // get user and token
-          
-          try {
-            
-            oauth2Client.setCredentials(JSON.parse(user.google_token));
-            
-            let fun_res = await fun(oauth2Client);
-            message = JSON.stringify({ type: 'observation', observation: fun_res });
-            
-          } catch (e) {
-            
-            let fun_res = 'please verfy your google account'
-          }
-          
-          // if non oauth functions
-        } else {
-          
-          let fun_res = await fun(agr);
-          message = JSON.stringify({ type: 'observation', observation: fun_res })
-        }
-        
-        result = await chat.sendMessage(message)
-        
-        response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
-        
-        response = JSON.parse(response);
-        
-      }
-      
-    }
-    
-  } catch (error) {
-    // log error 
-    console.error("Server Error:", error.message);
-    res.status(500).send('server having error pleace wait for fixing or inform developer  on spark2009971@gmail.com');
-  }
-});
-
-
-
 
 // Google OAuth Login
 app.get("/auth/google", async (req, res) => {
@@ -580,10 +450,148 @@ app.get('/auth/link/instagram', isAuth, async (req, res) => {
   }
 })
 
+
 // Logout Route
 app.get("/logout", (req, res) => {
   res.clearCookie("token");
   res.redirect("/");
+});
+
+// Chat frontend
+app.get('/chat', isAuth, async (req, res) => {
+  
+  // if user is login 
+  if (req.user) {
+    let userInfo = req.user
+    
+    // get history from supabase
+    let { data, error } = await supabase
+      .from("chat_history")
+      .select("role, parts")
+      .eq("user_id", userInfo.id)
+      .order("created_at", { ascending: true });
+    
+    // if history is exsit so send history on frontend ,else send user profile with ematy  history
+    if (!data.length == 0) {
+      chat = model.startChat({ history: data });
+      res.render("chat", { user: userInfo, history: data });
+    } else {
+      // send user profile
+      let history = [{
+        role: "user",
+        parts: [{
+          text: JSON.stringify({
+            type: 'profile',
+            profile: userInfo
+          })
+        }]
+      }]
+      
+      // send history
+      chat = model.startChat({ history });
+      res.render("chat", { user: userInfo, history: null });
+    }
+  } else {
+    // if user is not exist
+    
+    chat = model.startChat({ history: [] });
+    res.render("chat", { user: null, history: null });
+  }
+  
+})
+
+// chat backend
+app.post("/chat", isAuth, async (req, res) => {
+  // get user 
+  let user = req.user;
+  
+  try {
+    
+    // get message from req
+    let { message } = req.body;
+    if (!message) return res.json({ response: "Please enter a message." });
+    
+    // send message as a user and get response
+    let result = await chat.sendMessage(message);
+    let user_mgs = [{
+      role: 'user',
+      parts: [{ text: message }],
+      user_id: user.id
+    }]
+    
+    // convsrt response into json
+    let response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
+    response = JSON.parse(response);
+    
+    // check the type of response and run functions based on type 
+    
+    while (true) {
+      
+      // if type is output
+      if (response.type === "output") {
+        
+        // save history 
+        await supabase
+          .from("chat_history")
+          .insert(user_mgs);
+        
+        await supabase
+          .from("chat_history")
+          .insert([{
+            role: 'model',
+            parts: [{ text: JSON.stringify(response) }],
+            user_id: user.id
+          }])
+        
+        // send responce 
+        return res.json({ response: String(response.output), file: response.file || [] });
+        
+        // break loop
+        break
+      } else if (response.type === "action") {
+        
+        // if type is action 
+        let fun = tools[response.function];
+        let agr = response.params;
+        
+        // if oauth functions
+        if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
+          // get user and token
+          
+          try {
+            
+            oauth2Client.setCredentials(JSON.parse(user.google_token));
+            
+            let fun_res = await fun(oauth2Client);
+            message = JSON.stringify({ type: 'observation', observation: fun_res });
+            
+          } catch (e) {
+            
+            let fun_res = 'please verfy your google account'
+          }
+          
+          // if non oauth functions
+        } else {
+          
+          let fun_res = await fun(agr);
+          message = JSON.stringify({ type: 'observation', observation: fun_res })
+        }
+        
+        result = await chat.sendMessage(message)
+        
+        response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
+        
+        response = JSON.parse(response);
+        
+      }
+      
+    }
+    
+  } catch (error) {
+    // log error 
+    console.error("Server Error:", error.message);
+    res.status(500).send('server having error pleace wait for fixing or inform developer  on spark2009971@gmail.com');
+  }
 });
 
 //webhook
