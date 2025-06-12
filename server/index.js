@@ -127,7 +127,7 @@ RETURNING *`)
   user = user.rows[0];
   if (provider == 'manual') {
     let providers = await pool.query(`
- INSERT INTO auth.peoviders(id)
+ INSERT INTO auth.providers(id)
 VALUES(${user.id})`)
   } else {
     
