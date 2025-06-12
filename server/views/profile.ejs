@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JARVIS - Profile</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #0d0d0d;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: radial-gradient(#0ff 0.5px, transparent 0.5px),
+                        radial-gradient(#0ff 0.5px, transparent 0.5px);
+      background-size: 20px 20px;
+      background-position: 0 0, 10px 10px;
+    }
+
+    .glass-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: 0 8px 32px 0 rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      width: 380px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .avatar {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 2px solid #00ffff;
+      margin: 0 auto 1rem;
+      display: block;
+    }
+
+    h2, p {
+      text-align: center;
+      margin: 0.3rem 0;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 1rem;
+    }
+
+    input {
+      width: 90%;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border: none;
+      border-radius: 8px;
+      background: rgba(0, 255, 255, 0.1);
+      color: #fff;
+      outline: none;
+    }
+
+    .btn {
+      margin-top: 1rem;
+      padding: 0.7rem 2rem;
+      border: none;
+      border-radius: 10px;
+      background: #00ffff;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #0ff6;
+    }
+
+    .auth-section {
+      margin-top: 2rem;
+    }
+
+    .auth-section h3 {
+      margin-bottom: 0.5rem;
+      color: #00ffff;
+      text-align: center;
+    }
+
+    .auth-section p {
+      font-size: 0.9rem;
+      text-align: center;
+      color: #aaa;
+      margin-bottom: 1.5rem;
+    }
+
+    .auth-item {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .auth-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .auth-info img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .auth-info span {
+      font-size: 0.85rem;
+      color: #ccc;
+    }
+
+    .auth-info small {
+      font-size: 0.7rem;
+      color: #888;
+    }
+
+    .dots {
+      font-size: 1.5rem;
+      color: #999;
+      cursor: pointer;
+    }
+
+    .link-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="glass-card">
+    <img src="<%= user.profile_pic %>" alt="Avatar" class="avatar" />
+    <h2>Welcome, <%= user.name %></h2>
+    <p><%= user.email || 'No email found' %></p>
+
+    <form action="/profile/update" method="POST">
+      <input type="text" name="name" placeholder="Update Name" value="<%= user.name %>" />
+      <input type="email" name="email" placeholder="Update Email" value="<%= user.email %>" />
+      <input type="password" name="password" placeholder="Change Password" />
+      <button class="btn" type="submit">Save</button>
+    </form>
+
+    <!-- Auth Section -->
+    <div class="auth-section">
+      <h3>Authentication</h3>
+      <p>Link your account to third-party authentication providers.</p>
+
+      <% if (user.github) { %>
+        <div class="auth-item">
+          <div class="auth-info">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg" alt="GitHub" />
+            <div>
+              <strong>GitHub</strong><br/>
+            </div>
+          </div>
+          <span class="dots">...</span>
+        </div>
+      <% } %>
+
+      <% if (user.google) { %>
+        <div class="auth-item">
+          <div class="auth-info">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" />
+            <div>
+              <strong>Google</strong><br/>
+            </div>
+          </div>
+          <span class="dots">...</span>
+        </div>
+      <% } %>
+       <% if (user.facebook) { %>
+        <div class="auth-item">
+          <div class="auth-info">
+            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Google" />
+            <div>
+              <strong>Facebook</strong><br/>
+            </div>
+          </div>
+          <span class="dots">...</span>
+        </div>
+      <% } %>
+ <% if (user.instagram) { %>
+        <div class="auth-item">
+          <div class="auth-info">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Instagram_logo_2022.svg" alt="instagram" />
+            <div>
+              <strong>Instaram</strong><br/>
+            </div>
+          </div>
+          <span class="dots">...</span>
+        </div>
+      <% } %>
+      <div class="link-buttons">
+        <% if (!user.google) { %>
+        <a href="/auth/google?link=true" class="btn">Link Google</a>
+
+        <% } %>
+         <% if (!user.github) { %>
+         <a href="/auth/github?link=true" class="btn">Link GitHub</a>
+
+        <% } %>
+         <% if (!user.facebook) { %>
+         <a href="/auth/facebook?link=true" class="btn">Link Facebook</a>
+
+        <% } %>
+         <% if (!user.instagram) { %>
+         <a href="/auth/instagram?link=true" class="btn">Link Instagram</a>
+
+        <% } %>
+       
+       
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+                      

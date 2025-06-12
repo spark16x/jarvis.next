@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+AU+SA:wght@100..400&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-weight: 300;
+  
+}
+
+::selection {
+  background: #fff;
+  color: #000;
+}
+
+body {
+  background: #111;
+  color: white;
+  font-family: "Playwrite AU SA", system-ui;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-size: 18px;
+}
+
+#iframeContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 35vw;
+  height: 100vh;
+  background: #000;
+  border-right: 2px solid white;
+  display: none;
+  z-index: 999;
+}
+
+#musicPlayerContainer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 35vw;
+  height: 100vh;
+  background: #000;
+  border-left: 2px solid white;
+  display: none;
+  z-index: 999;
+}
+
+#iframeContainer iframe,
+#musicPlayerContainer iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+#iframeContainer button,
+#musicPlayerContainer button {
+  position: absolute;
+  top: 10px;
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+#iframeContainer button {
+  right: 10px;
+}
+
+#musicPlayerContainer button {
+  left: 10px;
+}
+
+.chat-box {
+  width: 95%;
+  max-width: 700px;
+  height: 80vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  transition: margin 0.3s ease;
+}
+
+.chat-input {
+  width: 95%;
+  max-width: 700px;
+  display: flex;
+  align-items: flex-end;
+  background: #222;
+  border: 1px solid white;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: 12px;
+  gap: 10px;
+  transition: margin 0.3s ease;
+}
+
+body.iframe-open .chat-box,
+body.iframe-open .chat-input {
+  margin-left: 35vw;
+}
+
+body.player-open .chat-box,
+body.player-open .chat-input {
+  margin-right: 35vw;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: 12px;
+  max-width: 80%;
+  word-wrap: break-word;
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Styling for img_div and img */
+.message .file_div {
+  margin-top: 8px;
+  max-width: 70%;
+  align-self: flex-end;
+}
+
+.message .file_div img,
+.message .file_div video {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 6px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.message .file_div img:hover,
+.message .file_div video:hover {
+  transform: scale(1.03);
+  border-color: #00ffea;
+}
+
+.message .file_div audio {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.message .file_div a {
+  display: inline-block;
+  padding: 10px 15px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 14px;
+  transition: background 0.3s;
+}
+
+.message .file_div a:hover {
+  background: #0056b3;
+}
+
+
+.user-message {
+  background: rgba(255, 255, 255, 0.2);
+  align-self: flex-end;
+}
+
+.bot-message {
+  align-self: flex-start;
+}
+
+.chat-input textarea {
+  flex-grow: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  padding: 10px;
+  font-size: 16px;
+  max-height: 200px;
+  width: 80%;
+  height: auto;
+  resize: none;
+  font-family: "Playwrite AU SA", system-ui;
+  scrollbar-width: 0px;
+}
+
+.chat-input button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.3em;
+  cursor: pointer;
+}
+
+.auth-buttons {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.auth-buttons button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid white;
+  color: white;
+  padding: 10px 14px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: "Playwrite AU SA", system-ui;
+}
+
+.auth-buttons .pfp {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.auth-buttons .pfp img {
+  width: 40px;
+  height: 40px;
+}
+
+.auth-buttons .pfp-nav {
+  width: 150px;
+  height: 90px;
+  background: #333;
+  display: flexbox;
+  position: absolute;
+  margin: 10px;
+  border-radius: 20px;
+  right: 10px;
+  overflow: hidden;
+}
+
+.auth-buttons .pfp-nav i {
+  padding: 8px;
+}
+
+.auth-buttons .pfp-nav .my-profile {
+  padding: 5px;
+  
+}
+
+.auth-buttons .pfp-nav .logout {
+  color: red;
+  padding: 5px;
+  
+  
+}
+
+.auth-buttons .pfp-nav .logout:hover,
+.auth-buttons .pfp-nav .my-profile:hover {
+  background: #222;
+}
+
+#toast {
+  max-width: 30%;
+  max-height: 100px;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background: #222;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 8px;
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(70px);
+  transition: opacity 0.4s ease, transform 0.8s ease;
+  z-index: 999;
+  font-size: 14px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+#toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.theme-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #222;
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  font-size: 1.2em;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.typing-indicator {
+  align-self: flex-start;
+  color: #999;
+  font-size: 14px;
+  font-style: italic;
+  margin: 5px 0 5px 10px;
+}
+
+body.light {
+  background: #f5f5f5;
+  color: #111;
+}
+
+body.light .chat-input,
+body.light .auth-buttons button,
+body.light .theme-toggle {
+  background: #ddd;
+  color: #111;
+  border-color: #222;
+}
+
+body.light .user-message {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#homeAnimation {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  font-size: 1.5rem;
+  animation: fadeOut 2.5s ease-out forwards;
+  animation-delay: 1.5s;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+audio {
+  width: auto;
+  min-width: 20%;
+  height: auto;
+  color: white;
+  background: white;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

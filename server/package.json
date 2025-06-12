@@ -1,0 +1,56 @@
+{
+  "name": "jarvis",
+  "version": "2.0.6",
+  "description": "My Jarvis server",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spark2009/jarvis.git"
+  },
+  "bugs": {
+    "url": "https://github.com/vercel/examples/issues"
+  },
+  "homepage": "https://github.com/vercel/examples#readme",
+  "author": "Pratham Vig",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "mongodb": "^5.7.0",
+    "@google/generative-ai": "^0.24.0",
+    "@vercel/node": "^2.9.6",
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.3",
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "cookie-parser": "^1.4.6",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^7.6.3",
+    "bcrypt": "^5.1.0",
+    "better-sse": "^0.14.1",
+    "express-rate-limit": "^7.1.0",
+    "url": "^0.11.0",
+    "google-auth-library": "^9.4.2",
+    "express-session": "^1.17.3",
+    "helmet": "^7.0.0",
+    "@supabase/supabase-js": "^2.39.3",
+    "googleapis": "^127.0.0",
+    "qs":"^6.14.0",
+    "@vercel/speed-insights":"^1.2.0",
+    "resend":"^4.5.0",
+    "form-data": "^4.0.0"
+    
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
