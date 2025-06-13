@@ -44,17 +44,7 @@ export default function Home() {
   
   return (
     <>
-      <Head>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Jarvis - Your AI Assistant</title>
-        {/* Tailwind CSS is typically configured in globals.css in Next.js */}
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-        {/* Google AdSense script - consider Next.js specific solutions for this */}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8250729221233027" crossOrigin="anonymous"></script>
-        {/* Font Awesome for icons */}
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossOrigin="anonymous" referrerPolicy="no-referrer" />
-      </Head>
+     
       <body className="bg-gray-900 text-white font-sans">
         {/* Navbar */}
         <header className="bg-gray-950 border-b border-gray-800">
