@@ -1,3 +1,5 @@
+import ChatInput from '@/client/components/chat_input.jsx';
+
 export default function Chat() {
-  return (<div className="bg-gray-700 w-screen h-screen" >chat tab</div>)
+  return (<div className="bg-gray-900 w-screen h-screen flex" ><ChatInput className="" /></div>)
 }
