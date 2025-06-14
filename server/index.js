@@ -137,7 +137,7 @@ VALUES($1)`, [user.id])
 // Login route
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  let user = await pool.query(`SELECT * FROM auth.users WHERE email=${email} AND password=$1`,[password])
+  let user = await pool.query(`SELECT * FROM auth.users WHERE email=${email} `)
   user = user.rows[0];
   res.send(user)
 })
