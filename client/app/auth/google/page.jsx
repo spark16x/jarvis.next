@@ -1,6 +1,6 @@
 export default function LoginPage() {
   let url;
-  fetch('https://jarvisnext.vercel.app/api/google')
+  fetch('https://jarvis-rose-zeta.vercel.app/auth/google')
     .then(async (v) => {
       url =await v.text()
     })
