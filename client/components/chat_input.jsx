@@ -6,6 +6,6 @@ export default function ChatInput({className}) {
    const [input, setInput] = useState('');
    
   return (<div className={className} > 
-  <textarea  placeholder="Type to chat" className=" w-full h-[50px] absolute bottom-[20px] bg-zinc-700"  onChange={(e) => setInput(e.target.value)} >{input}</textarea>
+  <textarea  placeholder="Type to chat" className=" w-full h-[50px] absolute bottom-[20px] bg-zinc-700"  onChange={(e) => setInput(e.target.innerHtml)} >{input}</textarea>
   </div>)
 }

@@ -139,7 +139,8 @@ app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
   let user = await pool.query(`SELECT * FROM auth.users WHERE email='${email}' AND password='${password}' `)
   user = user.rows[0];
-  res.send(user)
+    let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
+  res.json({token})
 })
 
 // Google OAuth Login
