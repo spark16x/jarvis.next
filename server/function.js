@@ -329,7 +329,7 @@ async function ig_auth(code,redirect_uri) {
     return user
 }
 
-function welcomeHtml(sbuser) {
+function welcomeHtml(user) {
   return `<!DOCTYPE html>
 <html lang="en" style="margin: 0; padding: 0;">
 <head>
@@ -342,7 +342,7 @@ function welcomeHtml(sbuser) {
   <div style="max-width: 600px; margin: auto; padding: 30px 20px; background: #1c1f2e; border-radius: 10px;">
     <h1 style="text-align: center; color: #00ffff;">Welcome to JARVIS</h1>
     <p style="font-size: 16px; line-height: 1.6; color: #d3d3d3;">
-      Hello 👋 ${sbuser.name}
+      Hello 👋 ${user.name}
     </p>
 
     <p style="font-size: 16px; line-height: 1.6; color: #d3d3d3;">

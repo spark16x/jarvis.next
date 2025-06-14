@@ -139,8 +139,8 @@ app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
   let user = await pool.query(`SELECT * FROM auth.users WHERE email='${email}' AND password='${password}' `)
   user = user.rows[0];
-    let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
-  res.json({token})
+  let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
+  res.json({ token })
 })
 
 // Google OAuth Login
@@ -155,12 +155,12 @@ app.get("/auth/google", async (req, res) => {
     ],
   });
   
-  res.json({url});
+  res.json({ url });
 });
 
 // Google OAuth Callback
 app.get("/auth/google/callback", async (req, res) => {
-  let { code } = req.query;
+  let { code } = req.body;
   
   try {
     let { tokens } = await oauth2Client.getToken({
@@ -174,47 +174,37 @@ app.get("/auth/google/callback", async (req, res) => {
     let userInfo = await oauth2.userinfo.get();
     userInfo = userInfo.data;
     
-    let supa_user = await supabase.from('id')
-      .select('users_profile ( id,name,email,verfied_email,profile_pic )').eq('Google', userInfo.id).single();
+    let user = await pool.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}' AND ' `);
     
-    supa_user = supa_user.data;
+    user = user.rows[0];
     
-    if (supa_user || !supa_user.length == 0) {
-      supa_user = supa_user.users_profile
+    
+    
+    
+    if (!user || user.length == 0) {
+      
+       user = await pool.query(`
+      INSERT INTO auth.users(id, name, email, password, avatar,provider)
+      VALUES(gen_random_uuid(), '${userInfo.name}', '${userInfo.email}', '${null}', '${userInfo.picture}','google')
+      RETURNING *`)
+      
+      user = user.rows[0];
+      let providers = await pool.query(`
+      INSERT INTO auth.providers(id,google)
+      VALUES($1,$2)`, [user.id,userInfo.id])
+      
+      
+      
+      
+      console.log(user)
+      
+      sendEmail(userInfo.email, 'Welcome to J.A.R..I.S', welcomeHtml(user))
     }
     
-    console.log(!supa_user || supa_user.length == 0)
+    let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
     
-    if (!supa_user || supa_user.length == 0) {
-      
-      supa_user = await supabase.from('users_profile')
-        .insert([{
-          name: userInfo.given_name + ' ' + userInfo.family_name,
-          email: userInfo.email,
-          verfied_email: 1,
-          profile_pic: userInfo.picture,
-          provider: 'google'
-        }])
-        .select();
-      
-      supa_user = supa_user.data[0];
-      
-      let id = await supabase.from('id')
-        .insert([{
-          id: supa_user.id,
-          Google: userInfo.id
-        }]);
-      
-      console.log(supa_user)
-      
-      sendEmail(userInfo.email, 'Welcome to J.A.R..I.S', welcomeHtml(supa_user))
-    }
     
-    let token = jwt.sign(supa_user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
-    
-    res.cookie("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
-    
-    res.redirect("/chat");
+    res.json({token});
     
   } catch (error) {
     
