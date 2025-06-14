@@ -1,3 +1,7 @@
+'use client'
+
+import { useState } from 'react';
+
 export default function ChatInput({className}) {
    const [input, setInput] = useState('');
    
