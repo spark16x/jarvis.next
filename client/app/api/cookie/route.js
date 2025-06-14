@@ -7,7 +7,8 @@ export async function GET(request) {
   const searchParams = request.nextUrl.searchParams
   const token = searchParams.get('token');
   let cookie = await cookies();
-  cookie.set("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
+  // cookie.set("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
   
-  return NextResponse.json('https://jarvisnext.vercel.app/chat');
+  
+  return NextResponse.json(cookie.get('token'));
 }
