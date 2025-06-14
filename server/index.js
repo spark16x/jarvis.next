@@ -113,7 +113,7 @@ async function isAuth(req, res, next) {
 
 
 app.get('/auth/signup',async (req, res) => {
-  res.json(await pool.query(`SELECT * FROM auth.users`))
+  res.json(await pool.query(`SELECT * FROM auth.providers`))
 })
 
 app.post('/auth/signup',async (req, res) => {
