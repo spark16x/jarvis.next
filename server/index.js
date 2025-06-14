@@ -33,7 +33,7 @@ let genAI = new GoogleGenerativeAI(apiKey);
 let oauth2Client = new OAuth2Client(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  process.env.BASE_URL +'/auth/google/callback'
+  'https://jarvisnext.vercel.app/auth/google/callback'
 );
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
@@ -155,7 +155,7 @@ app.get("/auth/google", async (req, res) => {
     ],
   });
   
-  res.send(url);
+  res.json({url});
 });
 
 // Google OAuth Callback

@@ -1,9 +1,9 @@
 export default function LoginPage() {
-  let url;
+  let result;
   fetch('https://jarvis-rose-zeta.vercel.app/auth/google')
     .then(async (v) => {
-      url =await v.text()
+      result =await v.json()
     })
   
-  return (<div>Redricting { url }</div>)
+  return (<div>Redricting { result.url }</div>)
 }
