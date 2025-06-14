@@ -121,14 +121,14 @@ app.post('/auth/signup',async (req, res) => {
   
   let user = await pool.query(`
  INSERT INTO auth.users(id, name, email, password, avatar,provider)
-VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${provider}')
-RETURNING *`)
+VALUES(gen_random_uuid(), '$1', '$2', '$3', '$4','$5')
+RETURNING *`,[name,email,password,avatar,provider])
 
   user = user.rows[0];
   if (provider == 'manual') {
     let providers = await pool.query(`
  INSERT INTO auth.providers(id)
-VALUES(${user.id})`)
+VALUES($1)`,[user.id])
   } else {
     
   }
