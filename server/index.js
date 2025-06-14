@@ -159,7 +159,7 @@ app.get("/auth/google", async (req, res) => {
 });
 
 // Google OAuth Callback
-app.get("/auth/google/callback", async (req, res) => {
+app.post("/auth/google/callback", async (req, res) => {
   let { code } = req.body;
   
   try {
