@@ -114,9 +114,7 @@ async function isAuth(req, res, next) {
 
 app.get('/auth/signup', async (req, res) => {
   let user = await pool.query(`SELECT * FROM auth.providers`)
-  user = user.rows[0];
-  res.cookie("user", user, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
-  res.send('cookie is seted')
+  res.send(user)
 })
 
 // Sign up route 
@@ -132,7 +130,6 @@ RETURNING *`)
   let providers = await pool.query(`
  INSERT INTO auth.providers(id)
 VALUES($1)`, [user.id])
-  res.cookie("user", user, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
   
   res.send(`registation is sussfull of ${user.name}`)
 })
@@ -140,7 +137,7 @@ VALUES($1)`, [user.id])
 // Login route
 app.post('/auth/login', async (req, res) => {
   const { email, password } = req.body;
-  let user = await pool.query(`SELECT * FROM auth.users WHERE email=${email} AND password=${password}`)
+  let user = await pool.query(`SELECT * FROM auth.users WHERE email=${email} AND password=$1`,[password])
   user = user.rows[0];
   res.send(user)
 })
