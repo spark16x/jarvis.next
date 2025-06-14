@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Suspense } from 'react';
  import Loading from '@/app/loading.jsx';
 import "./globals.css";
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} w-full h-full antialiased`}>
        {children}
         <Analytics/>
+        <SpeedInsights />
       </body>
     </html>
   );
