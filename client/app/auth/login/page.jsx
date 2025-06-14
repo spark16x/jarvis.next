@@ -13,7 +13,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   
   const handleSubmit =  () => {
-    fetch('https://jarvis-rose-zeta.vercel.app/api/auth/login', {
+    fetch('https://jarvis-rose-zeta.vercel.app/auth/login', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({email,password})
