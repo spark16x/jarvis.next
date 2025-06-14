@@ -33,7 +33,7 @@ let genAI = new GoogleGenerativeAI(apiKey);
 let oauth2Client = new OAuth2Client(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  process.env.REDIRECT_URI
+  process.env.BASE_URL +'/auth/google/callback'
 );
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
