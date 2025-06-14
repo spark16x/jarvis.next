@@ -1,5 +1,5 @@
-import ChatInput from '@/client/components/chat_input.js';
+import ChatInput from '@/components/chat_input.js';
 
 export default function Chat() {
-  return (<div className="bg-gray-900 w-screen h-screen flex" ><ChatInput className="" /></div>)
+  return (<div className="bg-gray-900 w-screen h-screen flex" > <ChatInput className="" /></div>)
 }
