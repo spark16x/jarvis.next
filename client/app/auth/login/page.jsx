@@ -58,7 +58,7 @@ const LoginPage = () => {
               Continue with Instagram
             </Link>
             
-            <div className="border-t border-gray-700 my-4"></div>
+            {/*<div className="border-t border-gray-700 my-4"></div>*/}
             <p className=" -translate-y-[28px] text-gray-400 mb-2">Or continue with</p>
             
             <form action={handleSubmit}  className="mt-4 space-y-3">
@@ -92,7 +92,9 @@ const LoginPage = () => {
               Login 
             </button>
           </form>
-            
+            <p className="mt-4 text-sm text-gray-500">
+            Create an account? <Link href="/auth/signup" className="text-blue-400 hover:underline">Sign up</Link>
+          </p>
           </div>
         </div>
       </body>
