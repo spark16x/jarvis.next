@@ -7,5 +7,5 @@ export async function GET(request) {
   let cookie = await cookies();
   cookie.set("token", token, { httpOnly: true, secure: true, maxAge: 30 * 24 * 60 * 60 * 1000 });
   
-  return NextResponse.redirect('https://jarvisnext.vercel.app/chat');
+  return NextResponse.json('https://jarvisnext.vercel.app/chat');
 }
