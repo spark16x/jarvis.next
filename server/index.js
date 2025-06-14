@@ -116,6 +116,7 @@ app.get('/auth/signup',async (req, res) => {
   res.json(await pool.query(`SELECT * FROM auth.providers`))
 })
 
+// Sign up route 
 app.post('/auth/signup',async (req, res) => {
   const { name, email, password, avatar, provider } = req.body;
   
@@ -125,14 +126,19 @@ VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${p
 RETURNING *`)
 
   user = user.rows[0];
-  if (provider == 'manual') {
     let providers = await pool.query(`
  INSERT INTO auth.providers(id)
 VALUES($1)`,[user.id])
-  } else {
     
-  }
   res.send(`registation is sussfull of ${user.name}`)
+})
+
+// Login route
+app.post('/auth/login',(req,res)=>{
+  const {  email, password } = req.body;
+  let user=await pool.query(`SELECT * FROM auth.users WHERE email=${email} && password=${password}`)
+  user = user.rows[0];
+  res.send(user)
 })
 
 // Google OAuth Login
