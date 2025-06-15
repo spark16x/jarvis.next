@@ -113,7 +113,7 @@ async function isAuth(req, res, next) {
 
 
 app.get('/auth/signup', async (req, res) => {
-  let user = await pool.query(`DROP TABLE auth.users`)
+  let user = await pool.query(`SELECT * FROM auth.users`)
   res.send(user)
 })
 
