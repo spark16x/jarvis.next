@@ -8,7 +8,7 @@ import { redirect } from 'next/navigation';
 export default function Chat() {
   return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     
-<ChatContainer className="w-1/3 h-[90%] absolute left-1/3"/>
+<ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md"/>
 
   <ChatInput  className="w-1/3 h-full relative "  />
   
