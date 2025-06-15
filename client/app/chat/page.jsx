@@ -5,20 +5,26 @@ import ProfileDropdown from '@/components/ProfileDropdown.jsx';
 import ChatContainer from '@/components/ChatContainer.jsx';
 import Message from '@/components/Message.jsx';
 import { redirect } from 'next/navigation';
+import { useState } from 'react';
 
 export default function Chat() {
-  return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
+  const [messages, setMessages] = useState(`
+        <Message message={text: 'hi how are you ', sender: 'jarvis' }/>
+        
+        <Message message =  { text: 'I am fine ', sender: 'user' } />
+        
+        <Message message =  { text: 'user is fine ', sender: 'system' } />`);
+        
+        // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
+        //   method: "POST",
+        //   headers: { "Content-Type": "application/json" },
+        //   body: JSON.stringify({ message })
+        // })
+        
+        return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     
 <ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md">
-  
-  <Message message={{text: 'hi how are you ', sender: 'jarvis' }}/>
-  
-  <Message message={{text: 'I am fine ', sender: 'user' }}/>
-  
-  <Message message={{text: 'user is fine ', sender: 'system' }}/>
-
-
-  
+{messages}
 </ChatContainer>
 
   <ChatInput  className="w-1/3 h-full relative "  />
@@ -27,4 +33,4 @@ export default function Chat() {
   className = 'absolute top-[10px] right-[10px] w-[30px] h-[30px]' />
   
   </div>)
-}
+      }
