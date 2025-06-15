@@ -8,12 +8,13 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Chat() {
-  const [messages, setMessages] = useState(`
-        <Message message={text: 'hi how are you ', sender: 'jarvis' }/>
+  const [messages, setMessages] = useState();
+  messages +=<Message message={text: 'hi how are you ', sender: 'jarvis' }/>
+
         
-        <Message message =  { text: 'I am fine ', sender: 'user' } />
+ messages +=<Message message ={ text: 'I am fine ', sender: 'user' } />
         
-        <Message message =  { text: 'user is fine ', sender: 'system' } />`);
+ messages +=<Message message ={ text: 'user is fine ', sender: 'system' } />
         
         // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
         //   method: "POST",
