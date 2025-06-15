@@ -13,28 +13,23 @@ import React, { useRef, useEffect } from 'react';
  * { text: string, sender: 'user' | 'jarvis' | 'system', id?: string }
  * @param {string} [props.className] - Additional Tailwind CSS classes for the main container div.
  */
-export default function ChatContainer({ messages = [], className = '' }) {
+export default function ChatContainer({ children, className = '' }) {
   const messagesEndRef = useRef(null);
   
   useEffect(() => {
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
     }
-  }, [messages]);
+  }, [children]);
   
   return (
     <div
       ref={messagesEndRef}
-      className={`flex-grow overflow-y-auto p-4 bg-zinc-900 text-white custom-scrollbar ${className}`}
+      className={`flex-grow overflow-y-auto p-4  text-white custom-scrollbar ${className}`}
     >
       <div className="flex flex-col space-y-4">
-        { /*messages.map((message) => (
-          // <--- Render the Message component for each message
-          <Message key={message.id || message.text + Math.random()} message={message} />
-          // Using message.id as key is preferred if available and unique.
-          // Fallback to text + random for demonstration, but use a real unique ID in production.
-        ))*/}
-        {messages.length === 0 && (
+        { children}
+        {children.length === 0 && (
           <div className="text-center text-zinc-400 mt-20">
             <p>Start chatting with Jarvis!</p>
             <p>Type your first message below.</p>
