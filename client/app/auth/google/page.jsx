@@ -5,5 +5,5 @@ export default function LoginPage() {
       result =await v.json()
     })
   
-  return (<div>Redricting { result.url }</div>)
+  return (<div>Redricting  </div>)
 }
