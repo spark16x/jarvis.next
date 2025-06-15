@@ -9,7 +9,7 @@ import React, { useState } from 'react'; // Import useState for the like functio
  * Expected structure: { text: string, sender: 'user' | 'jarvis' | 'system', id?: string }
  * @param {function} [props.onReply] - Callback function to invoke when the reply button is clicked, passes the message object.
  */
-export default function Message({ message, onReply }) {
+export default function Message({ message, onReply='' }) {
   const isUser = message.sender === 'user';
   const isJarvis = message.sender === 'jarvis';
   const isSystem = message.sender === 'system';
@@ -90,7 +90,7 @@ export default function Message({ message, onReply }) {
           >
             {/* Copy Button */}
             <button
-              onClick={handleCopy}
+              // onClick={handleCopy}
               className="text-zinc-400 hover:text-white p-1 rounded-full transition-colors duration-150"
               title="Copy message"
             >
@@ -100,7 +100,7 @@ export default function Message({ message, onReply }) {
 
             {/* Like Button */}
             <button
-              onClick={handleLike}
+              // onClick={handleLike}
               className={`p-1 rounded-full transition-colors duration-150 ${isLiked ? 'text-red-500' : 'text-zinc-400 hover:text-red-400'}`}
               title={isLiked ? "Unlike message" : "Like message"}
             >
@@ -110,7 +110,7 @@ export default function Message({ message, onReply }) {
 
             {/* Reply Button */}
             <button
-              onClick={handleReply}
+              // onClick={handleReply}
               className="text-zinc-400 hover:text-white p-1 rounded-full transition-colors duration-150"
               title="Reply to message"
             >
