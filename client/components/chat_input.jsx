@@ -2,9 +2,8 @@
 
 import { useState } from 'react';
 
-export default function ChatInput({ className ,input }) {
-  let setInput
-   [input, setInput] = useState('');
+export default function ChatInput({ className  }) {
+  const [input, setInput] = useState('');
   
   return (<div className={className} > 
   <form >
