@@ -3,14 +3,17 @@
 import ChatInput from '@/components/chat_input.jsx';
 import ProfileDropdown from '@/components/ProfileDropdown.jsx';
 import ChatContainer from '@/components/ChatContainer.jsx';
-
-
 import { redirect } from 'next/navigation';
 
 export default function Chat() {
   return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
-<ChatContainer className="w-1/3 h-[50px] absolute left-1/3"/>
+    
+<ChatContainer className="w-1/3 h-[90%] absolute left-1/3"/>
+
   <ChatInput  className="w-1/3 h-full relative "  />
+  
       <ProfileDropdown avatarSrc="https://lh3.googleusercontent.com/a/ACg8ocKcC-LWcKIo-UKyA3pQ93FSPJWCyyaroaLFetoEZ0OuSm6uL49b=s96-c" userName = "Pratham vig" 
-  className = 'absolute top-[10px] right-[10px] w-[30px] h-[30px]' /></div>)
+  className = 'absolute top-[10px] right-[10px] w-[30px] h-[30px]' />
+  
+  </div>)
 }

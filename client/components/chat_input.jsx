@@ -49,7 +49,7 @@ export default function ChatInput({ className, onSendMessage }) { // Re-added on
         <textarea
           ref={textareaRef} // Attach the ref to the textarea
           placeholder="Type to chat..."
-          className="w-full bg-zinc-700 text-white p-3 pr-12 rounded-full placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 overflow-y-auto" // Keep overflow-y-auto for when max height is hit
+          className="w-full bg-zinc-700 text-white p-3 pr-12 rounded placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 overflow-y-auto" // Keep overflow-y-auto for when max height is hit
           value={input} // Use value prop for controlled component
           onChange={(e) => setInput(e.target.value)} // Correctly use e.target.value
           onKeyDown={handleKeyDown} // Keydown handler for Enter to send, Shift+Enter for new line
