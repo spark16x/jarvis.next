@@ -8,24 +8,25 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Chat() {
-  const [messages, setMessages] = useState();
-  messages +=<Message message={text: 'hi how are you ', sender: 'jarvis' }/>
-
-        
- messages +=<Message message ={ text: 'I am fine ', sender: 'user' } />
-        
- messages +=<Message message ={ text: 'user is fine ', sender: 'system' } />
+    const [messages, setMessages] = useState([
+        { text: 'hi how are you ', sender: 'jarvis' },
+        { text: 'I am fine ', sender: 'user' },
+        { text: 'user is fine ', sender: 'system' }
+    ]);
+    
         
         // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
         //   method: "POST",
         //   headers: { "Content-Type": "application/json" },
         //   body: JSON.stringify({ message })
+        // setMessages(prevMessages => [...prevMessages, newMessage]);
+
         // })
         
         return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     
 <ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md">
-{messages}
+{messages.map((v)=>{  <Message text={v.text} sender={v.sender} /> })}
 </ChatContainer>
 
   <ChatInput  className="w-1/3 h-full relative "  />
@@ -34,4 +35,4 @@ export default function Chat() {
   className = 'absolute top-[10px] right-[10px] w-[30px] h-[30px]' />
   
   </div>)
-      }
+}
