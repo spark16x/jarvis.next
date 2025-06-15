@@ -2,10 +2,13 @@
 
 import { useState } from 'react';
 
-export default function ChatInput({className}) {
-   const [input, setInput] = useState('');
-   
+export default function ChatInput({ className ,input }) {
+  let setInput
+   [input, setInput] = useState('');
+  
   return (<div className={className} > 
+  <form >
   <textarea  placeholder="Type to chat" className=" w-full h-[50px] absolute bottom-[20px] bg-zinc-700 rounded-full"  onChange={(e) => setInput(e.target.innerHtml)} >{input}</textarea>
+  </form>
   </div>)
 }
