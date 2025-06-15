@@ -9,7 +9,7 @@ import React, { useState } from 'react'; // Import useState for the like functio
  * Expected structure: { text: string, sender: 'user' | 'jarvis' | 'system', id?: string }
  * @param {function} [props.onReply] - Callback function to invoke when the reply button is clicked, passes the message object.
  */
-export default function Message({ message, onReply='' }) {
+export default function Message({ message,  }) {
   const isUser = message.sender === 'user';
   const isJarvis = message.sender === 'jarvis';
   const isSystem = message.sender === 'system';
@@ -37,12 +37,12 @@ export default function Message({ message, onReply='' }) {
     // In a real app, you would dispatch an action or make an API call to record the like/unlike.
   };
 
-  const handleReply = () => {
-    if (onReply && message) {
-      onReply(message); // Call the parent's onReply function with the message object
-    }
-    console.log('Preparing to reply to message:', message.text);
-  };
+  // const handleReply = () => {
+  //   if (onReply && message) {
+  //     onReply(message); // Call the parent's onReply function with the message object
+  //   }
+  //   console.log('Preparing to reply to message:', message.text);
+  // };
 
   // --- Styling Classes ---
   const bubbleBgClass = isUser
