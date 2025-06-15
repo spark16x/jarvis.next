@@ -66,3 +66,14 @@ As Jarvis.next is currently under development, there are no official releases or
 npm run dev
 # or
 yarn dev
+```
+
+## Star History
+
+<a href="https://www.star-history.com/#spark16x/jarvis.next&Timeline">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=spark16x/jarvis.next&type=Timeline&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=spark16x/jarvis.next&type=Timeline" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=spark16x/jarvis.next&type=Timeline" />
+ </picture>
+</a>
