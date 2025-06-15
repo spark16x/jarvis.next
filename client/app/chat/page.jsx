@@ -10,7 +10,15 @@ export default function Chat() {
   return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     
 <ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md">
+  
   <Message message={{text: 'hi how are you ', sender: 'jarvis' }}/>
+  
+  <Message message={{text: 'I am fine ', sender: 'user' }}/>
+  
+  <Message message={{text: 'user is fine ', sender: 'system' }}/>
+
+
+  
 </ChatContainer>
 
   <ChatInput  className="w-1/3 h-full relative "  />
