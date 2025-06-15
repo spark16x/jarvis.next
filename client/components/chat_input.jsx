@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 
-export default function ChatInput({ className, onSendMessage }) { // <--- 1. onSendMessage is received as a prop
+export default function ChatInput({ className,  }) { // <--- 1. onSendMessage is received as a prop
   const [input, setInput] = useState('');
   
   const handleSendMessage = (e) => {
     e.preventDefault();
     if (input.trim()) {
-      onSendMessage(input); // <--- 2. When message is ready, call the prop function with the input value
+      // <--- 2. When message is ready, call the prop function with the input value
       setInput(''); // Clear the input
     }
   };
