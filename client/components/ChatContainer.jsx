@@ -29,7 +29,7 @@ export default function ChatContainer({ children, className = '' }) {
     >
       <div className="flex flex-col space-y-4">
         { children}
-        {children.length === 0 && (
+        {children && (
           <div className="text-center text-zinc-400 mt-20">
             <p>Start chatting with Jarvis!</p>
             <p>Type your first message below.</p>
