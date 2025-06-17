@@ -17,37 +17,35 @@ export default function Chat() {
   )
   
   function send(input) {
-    try {
-      let newMessage = {
-        role: "user",
-        parts: [{ text: input }],
-      }
-      setMessages(prevMessages => [...prevMessages, newMessage]);
-      mgs = messages.map((v) =>
-        (<Message message={v} />)
-      )
-      
-    } catch (e) {
-      throw e
-    } finally {
-      fetch('https://jarvis-rose-zeta.vercel.app/chat', {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages })
-        
-      }).then((v) => {
-        v.json().then((j) => {
-          
-          setMessages(prevMessages => [...prevMessages, {
-            role: "model",
-            parts: [{ text: j.response }],
-          }]);
-          mgs = messages.map((v) =>
-            (<Message message={v} />)
-          )
-        })
-      })
+    
+    let newMessage = {
+      role: "user",
+      parts: [{ text: input }],
     }
+    setMessages(prevMessages => [...prevMessages, newMessage]);
+    mgs = messages.map((v) =>
+      (<Message message={v} />)
+    )
+    
+    
+    fetch('https://jarvis-rose-zeta.vercel.app/chat', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages:[...messages,newMessage] })
+      
+    }).then((v) => {
+      v.json().then((j) => {
+        
+        setMessages(prevMessages => [...prevMessages, {
+          role: "model",
+          parts: [{ text: j.response }],
+        }]);
+        mgs = messages.map((v) =>
+          (<Message message={v} />)
+        )
+      })
+    })
+    
     
     
     
