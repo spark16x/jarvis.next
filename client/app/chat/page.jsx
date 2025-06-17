@@ -13,8 +13,8 @@ export default function Chat() {
         { text: 'I am fine ', sender: 'user' },
         { text: 'user is fine ', sender: 'system' }
     ]);
-    let mg=   messages.map((v)=>
-  (<Message message={{text=v.text,sender=v.sendre}} />)
+    let mgs=   messages.map((v)=>
+  (<Message message={v} />)
    )
         
         // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
@@ -29,7 +29,7 @@ export default function Chat() {
     
 <ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md">
 { 
-  
+  mgs
 }
 </ChatContainer>
 
