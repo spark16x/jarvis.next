@@ -8,13 +8,7 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Chat() {
-  const [messages, setMessages] = useState([
-    {
-      role: "model",
-      parts: [{ text: 'hi how are you ' }],
-    },
-    
-  ]);
+  const [messages, setMessages] = useState([]);
   let mgs = messages.map((v) =>
     (<Message message={v} />)
   )
@@ -37,7 +31,10 @@ export default function Chat() {
     }).then((v) => {
       v.json().then((j) => {
         
-        setMessages(prevMessages => [...prevMessages, { text: j.response, sender: 'jarvis' }]);
+        setMessages(prevMessages => [...prevMessages, {
+          role: "model",
+          parts: [{ text: j.response }],
+        }]);
         mgs = messages.map((v) =>
           (<Message message={v} />)
         )
