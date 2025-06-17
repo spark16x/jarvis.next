@@ -33,7 +33,7 @@ export default function Chat() {
 }
 </ChatContainer>
 
-  <ChatInput  className="w-1/3 h-full relative "  />
+  <ChatInput  className=" sm:w-1/3 w-[90%] h-full relative "  />
   
       <ProfileDropdown avatarSrc="https://lh3.googleusercontent.com/a/ACg8ocKcC-LWcKIo-UKyA3pQ93FSPJWCyyaroaLFetoEZ0OuSm6uL49b=s96-c" userName = "Pratham vig" 
   className = 'absolute top-[10px] right-[10px] w-[30px] h-[30px]' />
