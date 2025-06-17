@@ -45,7 +45,7 @@ export default function Chat() {
   
   return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     
-<ChatContainer className="sm:w-1/3 w-full h-[90%] absolute left-1/3 rounded-md">
+<ChatContainer className="sm:w-1/3 w-full h-[90%] absolute left-1/3 rounded-mdz-10">
 { 
   mgs
 }
