@@ -24,8 +24,8 @@ export default function Message({ message,  }) {
   // --- Action Handlers ---
 
   const handleCopy = () => {
-    if (message.parts[0].text) {
-      navigator.clipboard.writeText(message.parts[0].text)
+    if ( message.parts[0]?.text) {
+      navigator.clipboard.writeText( message.parts[0]?.text)
         .then(() => console.log('Message copied to clipboard!'))
         .catch(err => console.error('Failed to copy message:', err));
     }
@@ -33,7 +33,7 @@ export default function Message({ message,  }) {
 
   const handleLike = () => {
     setIsLiked(prev => !prev); // Toggle the liked state visually
-    console.log(`Message ${isLiked ? 'unliked' : 'liked'}:`, message.parts[0].text);
+    console.log(`Message ${isLiked ? 'unliked' : 'liked'}:`, message.parts[0]?.text);
     // In a real app, you would dispatch an action or make an API call to record the like/unlike.
   };
 
@@ -41,7 +41,7 @@ export default function Message({ message,  }) {
   //   if (onReply && message) {
   //     onReply(message); // Call the parent's onReply function with the message object
   //   }
-  //   console.log('Preparing to reply to message:', message.parts[0].text);
+  //   console.log('Preparing to reply to message:',  message.parts[0]?.text);
   // };
 
   // --- Styling Classes ---
@@ -74,7 +74,7 @@ export default function Message({ message,  }) {
             <span className="typing-dot w-2 h-2 bg-white rounded-full"></span>
           </div>
         ) : (
-          <p>{message.parts[0].text}</p>
+          <p>{ message.parts[0]?.text}</p>
         )}
 
         {/* Action buttons (Copy, Like, Reply) - appear on hover */}
