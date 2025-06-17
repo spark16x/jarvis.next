@@ -8,8 +8,13 @@ import { redirect } from 'next/navigation';
 import { useState } from 'react';
 
 export default function Chat() {
-  const [messages, setMessages] = useState([]);
- let mgs
+  const [messages, setMessages] = useState([{
+    role: "model",
+    parts: [{ text: "how I can help you?" }],
+  }]);
+  let mgs = messages.map((v) =>
+    (<Message message={v} />)
+  )
   
   function send(input) {
     let newMessage = {
