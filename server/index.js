@@ -535,7 +535,7 @@ app.post("/chat", async (req, res) => {
     
     // get message from req
     let { messages } = req.body;
-    if (!message) return res.json({ response: "Please enter a message." });
+    if (!messages) return res.json({ response: "Please enter a message." });
     
     // send message as a user and get response
      const response = await genAI.models.generateContent({
