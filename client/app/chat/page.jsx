@@ -23,13 +23,25 @@ export default function Chat() {
     mgs = messages.map((v) =>
       (<Message message={v} />)
     )
+    
+    fetch('https://jarvis-rose-zeta.vercel.app/chat', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+      
+    }).then((v) => {
+      v.json().then((j) => {
+        
+        setMessages(prevMessages => [...prevMessages, { text: j.response, sender: 'jarvis' }]);
+        mgs = messages.map((v) =>
+          (<Message message={v} />)
+        )
+      })
+    })
+    
+    
   }
-  // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ message })
   
-  // })
   
   return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     

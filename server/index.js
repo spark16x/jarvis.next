@@ -527,9 +527,9 @@ app.get('/chat', isAuth, async (req, res) => {
 })
 
 // chat backend
-app.post("/chat", isAuth, async (req, res) => {
+app.post("/chat", async (req, res) => {
   // get user 
-  let user = req.user;
+  // let user = req.user;
   
   try {
     
@@ -539,11 +539,11 @@ app.post("/chat", isAuth, async (req, res) => {
     
     // send message as a user and get response
     let result = await chat.sendMessage(message);
-    let user_mgs = [{
-      role: 'user',
-      parts: [{ text: message }],
-      user_id: user.id
-    }]
+    // let user_mgs = [{
+    //   role: 'user',
+    //   parts: [{ text: message }],
+    //   user_id: user.id
+    // }]
     
     // convsrt response into json
     let response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
@@ -557,59 +557,60 @@ app.post("/chat", isAuth, async (req, res) => {
       if (response.type === "output") {
         
         // save history 
-        await supabase
-          .from("chat_history")
-          .insert(user_mgs);
+        // await supabase
+        //   .from("chat_history")
+        //   .insert(user_mgs);
         
-        await supabase
-          .from("chat_history")
-          .insert([{
-            role: 'model',
-            parts: [{ text: JSON.stringify(response) }],
-            user_id: user.id
-          }])
+        // await supabase
+        //   .from("chat_history")
+        //   .insert([{
+        //     role: 'model',
+        //     parts: [{ text: JSON.stringify(response) }],
+        //     user_id: user.id
+        //   }])
         
         // send responce 
         return res.json({ response: String(response.output), file: response.file || [] });
         
         // break loop
         break
-      } else if (response.type === "action") {
+      } 
+      // else if (response.type === "action") {
         
-        // if type is action 
-        let fun = tools[response.function];
-        let agr = response.params;
+      //   // if type is action 
+      //   let fun = tools[response.function];
+      //   let agr = response.params;
         
-        // if oauth functions
-        if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
-          // get user and token
+      //   // if oauth functions
+      //   if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
+      //     // get user and token
           
-          try {
+      //     try {
             
-            oauth2Client.setCredentials(JSON.parse(user.google_token));
+      //       oauth2Client.setCredentials(JSON.parse(user.google_token));
             
-            let fun_res = await fun(oauth2Client);
-            message = JSON.stringify({ type: 'observation', observation: fun_res });
+      //       let fun_res = await fun(oauth2Client);
+      //       message = JSON.stringify({ type: 'observation', observation: fun_res });
             
-          } catch (e) {
+      //     } catch (e) {
             
-            let fun_res = 'please verfy your google account'
-          }
+      //       let fun_res = 'please verfy your google account'
+      //     }
           
-          // if non oauth functions
-        } else {
+      //     // if non oauth functions
+      //   } else {
           
-          let fun_res = await fun(agr);
-          message = JSON.stringify({ type: 'observation', observation: fun_res })
-        }
+      //     let fun_res = await fun(agr);
+      //     message = JSON.stringify({ type: 'observation', observation: fun_res })
+      //   }
         
-        result = await chat.sendMessage(message)
+      //   result = await chat.sendMessage(message)
         
-        response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
+      //   response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
         
-        response = JSON.parse(response);
+      //   response = JSON.parse(response);
         
-      }
+      // }
       
     }
     
