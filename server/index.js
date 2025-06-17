@@ -5,7 +5,7 @@ import path from "path";
 import axios from "axios";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import { GoogleGenAI } from "@google/genai";
 import { OAuth2Client } from "google-auth-library";
 import { google } from "googleapis";
 import fs from "fs";
@@ -29,7 +29,7 @@ dotenv.config();
 let app = express();
 let PORT = process.env.PORT || 3000;
 let apiKey = process.env.GEMINI_API_KEY;
-let genAI = new GoogleGenerativeAI(apiKey);
+let genAI = new GoogleGenAI(apiKey);
 let oauth2Client = new OAuth2Client(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
@@ -57,11 +57,11 @@ let generativeconfig = {
   
 };
 
-let model = genAI.getGenerativeModel({
-  model: "gemini-2.0-flash",
-  generativeconfig,
-  systemInstruction
-});
+// let model = genAI.getGenerativeModel({
+//   model: "gemini-2.0-flash",
+//   generativeconfig,
+//   systemInstruction
+// });
 
 let __filename = fileURLToPath(import.meta.url);
 let __dirname = dirname(__filename);
@@ -538,7 +538,11 @@ app.post("/chat", async (req, res) => {
     if (!message) return res.json({ response: "Please enter a message." });
     
     // send message as a user and get response
-    let result = await chat.sendMessage(message);
+     const response = await genAI.models.generateContent({
+   model: "gemini-2.0-flash",
+   contents: message,
+ });
+ console.log(response.text);
     // let user_mgs = [{
     //   role: 'user',
     //   parts: [{ text: message }],
@@ -546,11 +550,11 @@ app.post("/chat", async (req, res) => {
     // }]
     
     // convsrt response into json
-    let response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
+    // let response = tools["removeJson"](response.text)
     // response = JSON.parse(response);
     
     // check the type of response and run functions based on type 
-    return res.json({ response, file: response.file || [] });
+    return res.json({ response:response.text, file: response.file || [] });
         
     // while (true) {
       
