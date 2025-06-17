@@ -13,7 +13,9 @@ export default function Chat() {
         { text: 'I am fine ', sender: 'user' },
         { text: 'user is fine ', sender: 'system' }
     ]);
-    
+    let mg=   messages.map((v)=>
+  (<Message message={{text=v.text,sender=v.sendre}} />)
+   )
         
         // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
         //   method: "POST",
@@ -27,9 +29,7 @@ export default function Chat() {
     
 <ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md">
 { 
-    // messages.map((v)=>{
-       ( <Message message={text="v.text",sender="v.sendre"} />)
-    // })
+  
 }
 </ChatContainer>
 
