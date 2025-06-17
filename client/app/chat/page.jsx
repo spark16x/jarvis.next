@@ -27,7 +27,7 @@ export default function Chat() {
     fetch('https://jarvis-rose-zeta.vercel.app/chat', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ message:input })
       
     }).then((v) => {
       v.json().then((j) => {
