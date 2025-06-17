@@ -9,9 +9,7 @@ import { useState } from 'react';
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
-  let mgs = messages.map((v) =>
-    (<Message message={v} />)
-  )
+ 
   
   function send(input) {
     let newMessage = {
