@@ -534,13 +534,13 @@ app.post("/chat", async (req, res) => {
   try {
     
     // get message from req
-    let { message } = req.body;
+    let { messages } = req.body;
     if (!message) return res.json({ response: "Please enter a message." });
     
     // send message as a user and get response
      const response = await genAI.models.generateContent({
    model: "gemini-2.0-flash",
-   contents: message,
+   contents: messages,
  });
  console.log(response.text);
     // let user_mgs = [{

@@ -10,12 +10,12 @@ import React, { useState } from 'react'; // Import useState for the like functio
  * @param {function} [props.onReply] - Callback function to invoke when the reply button is clicked, passes the message object.
  */
 export default function Message({ message,  }) {
-  const isUser = message.sender === 'user';
-  const isJarvis = message.sender === 'jarvis';
-  const isSystem = message.sender === 'system';
+  const isUser = message.role === 'user';
+  const isJarvis = message.role === 'model';
+  const isSystem = message.role === 'system';
 
   // Check if it's a system message that should display a thinking animation
-  const isThinkingPrompt = isSystem && message.text === 'Thinking...';
+  const isThinkingPrompt = isSystem ;
 
   // Local state for the 'like' status of this message bubble
   // In a real application, this would typically come from global state or a backend.
@@ -24,8 +24,8 @@ export default function Message({ message,  }) {
   // --- Action Handlers ---
 
   const handleCopy = () => {
-    if (message.text) {
-      navigator.clipboard.writeText(message.text)
+    if (message.parts[0].text) {
+      navigator.clipboard.writeText(message.parts[0].text)
         .then(() => console.log('Message copied to clipboard!'))
         .catch(err => console.error('Failed to copy message:', err));
     }
@@ -33,7 +33,7 @@ export default function Message({ message,  }) {
 
   const handleLike = () => {
     setIsLiked(prev => !prev); // Toggle the liked state visually
-    console.log(`Message ${isLiked ? 'unliked' : 'liked'}:`, message.text);
+    console.log(`Message ${isLiked ? 'unliked' : 'liked'}:`, message.parts[0].text);
     // In a real app, you would dispatch an action or make an API call to record the like/unlike.
   };
 
@@ -41,7 +41,7 @@ export default function Message({ message,  }) {
   //   if (onReply && message) {
   //     onReply(message); // Call the parent's onReply function with the message object
   //   }
-  //   console.log('Preparing to reply to message:', message.text);
+  //   console.log('Preparing to reply to message:', message.parts[0].text);
   // };
 
   // --- Styling Classes ---
@@ -74,7 +74,7 @@ export default function Message({ message,  }) {
             <span className="typing-dot w-2 h-2 bg-white rounded-full"></span>
           </div>
         ) : (
-          <p>{message.text}</p>
+          <p>{message.parts[0].text}</p>
         )}
 
         {/* Action buttons (Copy, Like, Reply) - appear on hover */}
@@ -90,7 +90,7 @@ export default function Message({ message,  }) {
           >
             {/* Copy Button */}
             <button
-              // onClick={handleCopy}
+              onClick={handleCopy}
               className="text-zinc-400 hover:text-white p-1 rounded-full transition-colors duration-150"
               title="Copy message"
             >
@@ -100,7 +100,7 @@ export default function Message({ message,  }) {
 
             {/* Like Button */}
             <button
-              // onClick={handleLike}
+              onClick={handleLike}
               className={`p-1 rounded-full transition-colors duration-150 ${isLiked ? 'text-red-500' : 'text-zinc-400 hover:text-red-400'}`}
               title={isLiked ? "Unlike message" : "Like message"}
             >

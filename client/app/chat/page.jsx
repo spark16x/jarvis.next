@@ -9,16 +9,21 @@ import { useState } from 'react';
 
 export default function Chat() {
   const [messages, setMessages] = useState([
-    { text: 'hi how are you ', sender: 'jarvis' },
-    { text: 'I am fine ', sender: 'user' },
-    { text: 'user is fine ', sender: 'system' }
+    {
+      role: "model",
+      parts: [{ text: 'hi how are you ' }],
+    },
+    
   ]);
   let mgs = messages.map((v) =>
     (<Message message={v} />)
   )
   
   function send(input) {
-    let newMessage = { text: input, sender: 'user' }
+    let newMessage = {
+      role: "user",
+      parts: [{ text: input }],
+    }
     setMessages(prevMessages => [...prevMessages, newMessage]);
     mgs = messages.map((v) =>
       (<Message message={v} />)
@@ -27,7 +32,7 @@ export default function Chat() {
     fetch('https://jarvis-rose-zeta.vercel.app/chat', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message:input })
+      body: JSON.stringify({ messages })
       
     }).then((v) => {
       v.json().then((j) => {
