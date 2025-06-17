@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faXTwitter, faGithub, faThreads, faCoffee } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
+import Image from 'next/image'
 
 
 export default function Home() {
@@ -83,11 +84,11 @@ export default function Home() {
                 </button>
               </Link>
               <Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
-                <a href="https://www.buymeacoffee.com/spark16x"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me  coffee&emoji=☕&slug=spark16x&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
+                <a href="https://www.buymeacoffee.com/spark16x"><Image src="https://img.buymeacoffee.com/button-api/?text=Buy me  coffee&emoji=☕&slug=spark16x&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
               </Link>
             </div>
           </div>
-          <img src="/imgs/jarvsi.png" alt="Jarvis AI" className="rounded-2xl shadow-lg w-full max-w-md" />
+          <Image src="/imgs/jarvsi.png" alt="Jarvis AI" className="rounded-2xl shadow-lg w-full max-w-md" />
         </section>
 
         {/* Features */}
@@ -98,7 +99,7 @@ export default function Home() {
               <div onMouseEnter={handleMouseEnterv} onMouseLeave={handleMouseLeavev} >
                  {voiceHover ?
                  <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
-                 <img src="/imgs/voice-control.png" className="mx-auto mb-4 rounded" alt="voice control" />}
+                 <Image src="/imgs/voice-control.png" className="mx-auto mb-4 rounded" alt="voice control" />}
                  </div>
 
               <h3 className="text-2xl font-semibold mb-2">Voice Control</h3>
@@ -108,7 +109,7 @@ export default function Home() {
               <div onMouseEnter={handleMouseEnteri} onMouseLeave={handleMouseLeavei} >
                { integratedservices ?
                <video src="/videos/integrated-servicel.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
-              <img src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" /> 
+              <Image src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" /> 
                  
                }
               </div>
@@ -116,7 +117,7 @@ export default function Home() {
               <p className="text-gray-400">Email, Weather, News, Translate, Maps, Calendar, Drive, and more!</p>
             </div>
             <div>
-              <img src="https://cdn.pixabay.com/photo/2020/07/01/12/58/artificial-intelligence-5352181_960_720.jpg" className="mx-auto mb-4 rounded" alt="AI Personalization" />
+              <Image src="https://cdn.pixabay.com/photo/2020/07/01/12/58/artificial-intelligence-5352181_960_720.jpg" className="mx-auto mb-4 rounded" alt="AI Personalization" />
               <h3 className="text-2xl font-semibold mb-2">AI Personalization</h3>
               <p className="text-gray-400">Jarvis learns your habits, preferences, and tailors responses to you.</p>
             </div>
