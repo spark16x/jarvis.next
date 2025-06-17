@@ -18,11 +18,11 @@ export default function Chat() {
   
   function send(input) {
     
-    let newMessage = {
-      role: "user",
-      parts: [{ text: input }],
-    }
-    setMessages(prevMessages => [...prevMessages, newMessage]);
+      setMessages(prevMessages => [...prevMessages, {
+        role: "user",
+        parts: [{ text: input }],
+      }]);
+    
     mgs = messages.map((v) =>
       (<Message message={v} />)
     )
@@ -31,7 +31,7 @@ export default function Chat() {
     fetch('https://jarvis-rose-zeta.vercel.app/chat', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages:[...messages,newMessage] })
+      body: JSON.stringify({ messages })
       
     }).then((v) => {
       v.json().then((j) => {
@@ -40,6 +40,7 @@ export default function Chat() {
           role: "model",
           parts: [{ text: j.response }],
         }]);
+        
         mgs = messages.map((v) =>
           (<Message message={v} />)
         )
