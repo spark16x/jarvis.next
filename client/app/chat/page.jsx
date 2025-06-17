@@ -27,9 +27,9 @@ export default function Chat() {
     
 <ChatContainer className="w-1/3 h-[90%] absolute left-1/3 rounded-md">
 { 
-    messages.map((v)=>{
-       ( <Message message={{text=v.text,sender=v.sendre}} />)
-    })
+    // messages.map((v)=>{
+       ( <Message message={text="v.text",sender="v.sendre"} />)
+    // })
 }
 </ChatContainer>
 
