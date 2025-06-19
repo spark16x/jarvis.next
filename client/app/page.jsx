@@ -98,7 +98,7 @@ export default function Home() {
             <div>
               <div onMouseEnter={handleMouseEnterv} onMouseLeave={handleMouseLeavev} >
                  {voiceHover ?
-                 <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
+                 <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control"  preload="none"  autoPlay loop />:
                  <Image src="/imgs/voice-control.png" className="mx-auto mb-4 rounded" alt="voice control" />}
                  </div>
 
@@ -108,7 +108,7 @@ export default function Home() {
             <div>
               <div onMouseEnter={handleMouseEnteri} onMouseLeave={handleMouseLeavei} >
                { integratedservices ?
-               <video src="/videos/integrated-servicel.mp4" className="mx-auto mb-4 rounded" alt="Voice Control" controls preload="none"  autoPlay loop />:
+               <video src="/videos/integrated-servicel.mp4" className="mx-auto mb-4 rounded" alt="Voice Control"  preload="none"  autoPlay loop />:
               <Image src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" /> 
                  
                }
