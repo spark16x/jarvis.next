@@ -1,11 +1,14 @@
 'use server';
 
 import webpush from 'web-push';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 webpush.setVapidDetails(
   '<mailto:your-email@example.com>',
-  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!,
-  process.env.VAPID_PRIVATE_KEY!
+  process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY,
+  process.env.VAPID_PRIVATE_KEY
 );
 
 let subscription = null;
