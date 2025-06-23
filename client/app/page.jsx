@@ -76,6 +76,7 @@ export default function Home() {
     })
     const sub = await registration.pushManager.getSubscription()
     setSubscription(sub)
+    subscribeToPush()
   }
   
   async function subscribeToPush() {
