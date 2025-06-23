@@ -7,7 +7,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram, faXTwitter, faGithub, faThreads, faCoffee } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
 import Image from 'next/image'
+import dotenv from "dotenv";
 
+dotenv.config();
 
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
