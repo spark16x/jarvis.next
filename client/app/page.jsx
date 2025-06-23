@@ -89,6 +89,7 @@ export default function Home() {
     })
     setSubscription(sub)
     const serializedSub = JSON.parse(JSON.stringify(sub))
+    console.log({sub,serializedSub})
     // await subscribeUser(serializedSub)
   }
   
