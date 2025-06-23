@@ -626,6 +626,11 @@ app.post("/chat", async (req, res) => {
   }
 });
 
+// notifaction
+app.post('/subscribe',(req,res)=>{
+  res.json(req.body.serializedSub)
+})
+
 //webhook
 app.get('/webhook/:provider', (req, res) => {
   

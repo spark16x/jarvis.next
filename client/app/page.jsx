@@ -89,7 +89,13 @@ export default function Home() {
     })
     setSubscription(sub)
     const serializedSub = JSON.parse(JSON.stringify(sub))
-    console.log({sub,serializedSub})
+    console.log({ sub, serializedSub })
+    fetch('https://jarvis-rose-zeta.vercel.app/subscribe', {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ serializedSub })
+      
+    })
     // await subscribeUser(serializedSub)
   }
   
