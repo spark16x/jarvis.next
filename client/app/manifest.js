@@ -5,7 +5,7 @@ export default function manifest() {
     description: 'Jarvis is a ai aegant Developed by Pratham vig',
     start_url: '/chat',
     display: 'standalone',
-    background_color: '#ffffff',
+    background_color: '#444',
     theme_color: '#000000',
     icons: [
       {
