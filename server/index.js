@@ -689,6 +689,17 @@ RETURNING *`, [serializedSub, ip, userAgent]);
   
 })
 
+app.get('/subscribe', async (req, res) => {
+  
+  console.log('connecting client')
+  const client = await pool.connect()
+  console.log(' client connected')
+   let user = await client.query(`SELECT * FROM public.notification`);
+   
+    client.release();
+    console.log('Disconnected client');
+  res.json({users:user.rows})
+})
 
 //webhook
 app.get('/webhook/:provider', (req, res) => {
