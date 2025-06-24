@@ -10,7 +10,7 @@ import { useState } from 'react';
    let users
    fetch('https://jarvis-rose-zeta.vercel.app/subscribe').
    then((v)=>{
-     v.json().then((user) => {users=user})
+     v.json().then((user) => {users=user.users})
    })
    
    return (<div>
