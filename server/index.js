@@ -657,8 +657,8 @@ app.post('/subscribe',async (req, res) => {
   try {
     let user = await client.query(`
  INSERT INTO public.notification(id, sub, ip, "user agent")
-VALUES(gen_random_uuid(),'${serializedSub}','${ip}','${userAgent}')
-RETURNING *`);
+VALUES(gen_random_uuid(),$1,$2,$3)
+RETURNING *`,[serializedSub,ip,userAgent]);
 
     res.json({ user })
     
