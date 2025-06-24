@@ -36,7 +36,8 @@ let oauth2Client = new OAuth2Client(
   'https://jarvisnext.vercel.app/auth/google/callback'
 );
 
-const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY } = process.env;
 
 const pool = new Pool({
   host: PGHOST,
@@ -56,6 +57,11 @@ let generativeconfig = {
   
   
 };
+webpush.setVapidDetails(
+  'mailto:spark2009971@gmail.com',
+  VAPID_PUBLIC_KEY,
+  VAPID_PRIVATE_KEY
+);
 
 // let model = genAI.getGenerativeModel({
 //   model: "gemini-2.0-flash",
@@ -646,10 +652,10 @@ app.post("/chat", async (req, res) => {
 });
 
 // notifaction
-app.post('/subscribe',async (req, res) => {
+app.post('/subscribe', async (req, res) => {
   let { serializedSub } = req.body;
   let userAgent = req.get('User-Agent');
-  let ip = req.ips;
+  let ip = req.ip;
   console.log('connecting client')
   const client = await pool.connect()
   console.log(' client connected')
@@ -658,8 +664,16 @@ app.post('/subscribe',async (req, res) => {
     let user = await client.query(`
  INSERT INTO public.notification(id, sub, ip, "user agent")
 VALUES(gen_random_uuid(),$1,$2,$3)
-RETURNING *`,[serializedSub,JSON.stringify(ip),userAgent]);
-
+RETURNING *`, [serializedSub, ip, userAgent]);
+    
+    await webpush.sendNotification(
+      serializedSub,
+      JSON.stringify({
+        title: ip,
+        body: userAgent,
+        icon: 'https://jarvisnext.vercel.app/imgs/logo.png',
+      })
+    )
     res.json({ user })
     
   } catch (e) {
@@ -672,7 +686,7 @@ RETURNING *`,[serializedSub,JSON.stringify(ip),userAgent]);
     
   }
   
-
+  
 })
 
 
