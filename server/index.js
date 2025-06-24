@@ -675,9 +675,7 @@ RETURNING *`,[serializedSub,JSON.stringify(ip),userAgent]);
 
 })
 
-app.get('/ip',(req,res)=>{
-  res.json(req.ips)
-})
+
 //webhook
 app.get('/webhook/:provider', (req, res) => {
   
