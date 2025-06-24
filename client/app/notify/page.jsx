@@ -1,3 +1,8 @@
+'use client'
+
+import { useState } from 'react';
+
+ 
  export default function Notify() {
    const [message, setMessage] = useState('');
    const [ip, setIp] = useState('');
