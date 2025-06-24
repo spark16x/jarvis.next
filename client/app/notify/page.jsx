@@ -8,7 +8,7 @@ import { useState } from 'react';
    const [ip, setIp] = useState('');
 
    let users
-   fetch('https://jarvisnext.vercel.app/subscribe').
+   fetch('https://jarvis-rose-zeta.vercel.app/subscribe').
    then((v)=>{
      v.json().then((user) => {users=user})
    })
