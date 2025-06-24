@@ -649,7 +649,7 @@ app.post("/chat", async (req, res) => {
 app.post('/subscribe',async (req, res) => {
   let { serializedSub } = req.body;
   let userAgent = req.get('User-Agent');
-  let ip = req.ip;
+  let ip = req.ips;
   console.log('connecting client')
   const client = await pool.connect()
   console.log(' client connected')
@@ -658,7 +658,7 @@ app.post('/subscribe',async (req, res) => {
     let user = await client.query(`
  INSERT INTO public.notification(id, sub, ip, "user agent")
 VALUES(gen_random_uuid(),$1,$2,$3)
-RETURNING *`,[serializedSub,ip,userAgent]);
+RETURNING *`,[serializedSub,JSON.stringify(ip),userAgent]);
 
     res.json({ user })
     
@@ -675,6 +675,9 @@ RETURNING *`,[serializedSub,ip,userAgent]);
 
 })
 
+app.get('/ip',(req,res)=>{
+  res.json(req.ips)
+})
 //webhook
 app.get('/webhook/:provider', (req, res) => {
   
