@@ -19,7 +19,7 @@ import qs from 'qs';
 import FormData from 'form-data';
 import cors from 'cors';
 import { Pool } from 'pg'
-
+// import {} from 'web-push';
 
 
 // config dotenv
@@ -121,17 +121,36 @@ app.get('/auth/signup', async (req, res) => {
 app.post('/auth/signup', async (req, res) => {
   const { name, email, password, avatar, provider } = req.body;
   
-  let user = await pool.query(`
+  console.log('connecting client')
+  const client = await pool.connect()
+  console.log(' client connected')
+  
+  try {
+    console.log('Createing user');
+    
+    let user = await client.query(`
  INSERT INTO auth.users(id, name, email, password, avatar,provider)
 VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${provider}')
-RETURNING *`)
-  
-  user = user.rows[0];
-  let providers = await pool.query(`
+RETURNING *`);
+    
+    user = user.rows[0];
+    
+    let providers = await client.query(`
  INSERT INTO auth.providers(id)
-VALUES($1)`, [user.id])
+VALUES($1)`, [user.id]);
+    
+    console.log('Created user');
+    
+    res.send(`registation is sussfull of ${user.name}`);
+  } catch (e) {
+    throw e
+  } finally {
+    
+    client.release();
+    console.log('Disconnected client');
+    
+  }
   
-  res.send(`registation is sussfull of ${user.name}`)
 })
 
 // Login route
@@ -183,7 +202,7 @@ app.post("/auth/google/callback", async (req, res) => {
     
     if (!user || user.length == 0) {
       
-       user = await pool.query(`
+      user = await pool.query(`
       INSERT INTO auth.users(id, name, email, password, avatar,provider)
       VALUES(gen_random_uuid(), '${userInfo.name}', '${userInfo.email}', '${null}', '${userInfo.picture}','google')
       RETURNING *`)
@@ -191,7 +210,7 @@ app.post("/auth/google/callback", async (req, res) => {
       user = user.rows[0];
       let providers = await pool.query(`
       INSERT INTO auth.providers(id,google)
-      VALUES($1,$2)`, [user.id,userInfo.id])
+      VALUES($1,$2)`, [user.id, userInfo.id])
       
       
       
@@ -204,7 +223,7 @@ app.post("/auth/google/callback", async (req, res) => {
     let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
     
     
-    res.json({token});
+    res.json({ token });
     
   } catch (error) {
     
@@ -538,11 +557,11 @@ app.post("/chat", async (req, res) => {
     if (!messages) return res.json({ response: "Please enter a message." });
     
     // send message as a user and get response
-     const response = await genAI.models.generateContent({
-   model: "gemini-2.0-flash",
-   contents: messages,
- });
- console.log(response.text);
+    const response = await genAI.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: messages,
+    });
+    console.log(response.text);
     // let user_mgs = [{
     //   role: 'user',
     //   parts: [{ text: message }],
@@ -554,18 +573,18 @@ app.post("/chat", async (req, res) => {
     // response = JSON.parse(response);
     
     // check the type of response and run functions based on type 
-    return res.json({ response:response.text, file: response.file || [] });
-        
+    return res.json({ response: response.text, file: response.file || [] });
+    
     // while (true) {
-      
+    
     //   // if type is output
     //   if (response.type === "output") {
-        
+    
     //     // save history 
     //     // await supabase
     //     //   .from("chat_history")
     //     //   .insert(user_mgs);
-        
+    
     //     // await supabase
     //     //   .from("chat_history")
     //     //   .insert([{
@@ -573,50 +592,50 @@ app.post("/chat", async (req, res) => {
     //     //     parts: [{ text: JSON.stringify(response) }],
     //     //     user_id: user.id
     //     //   }])
-        
+    
     //     // send responce 
     //     return res.json({ response: String(response.output), file: response.file || [] });
-        
+    
     //     // break loop
     //     break
     //   } 
     //   // else if (response.type === "action") {
-        
+    
     //   //   // if type is action 
     //   //   let fun = tools[response.function];
     //   //   let agr = response.params;
-        
+    
     //   //   // if oauth functions
     //   //   if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
     //   //     // get user and token
-          
+    
     //   //     try {
-            
+    
     //   //       oauth2Client.setCredentials(JSON.parse(user.google_token));
-            
+    
     //   //       let fun_res = await fun(oauth2Client);
     //   //       message = JSON.stringify({ type: 'observation', observation: fun_res });
-            
+    
     //   //     } catch (e) {
-            
+    
     //   //       let fun_res = 'please verfy your google account'
     //   //     }
-          
+    
     //   //     // if non oauth functions
     //   //   } else {
-          
+    
     //   //     let fun_res = await fun(agr);
     //   //     message = JSON.stringify({ type: 'observation', observation: fun_res })
     //   //   }
-        
+    
     //   //   result = await chat.sendMessage(message)
-        
+    
     //   //   response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
-        
+    
     //   //   response = JSON.parse(response);
-        
+    
     //   // }
-      
+    
     // }
     
   } catch (error) {
@@ -627,8 +646,31 @@ app.post("/chat", async (req, res) => {
 });
 
 // notifaction
-app.post('/subscribe',(req,res)=>{
-  res.json(req.body.serializedSub)
+app.post('/subscribe', (req, res) => {
+  let { serializedSub } = req.body;
+  let userAgent = req.get('User-Agent');
+  let ip = req.ip;
+  console.log('connecting client')
+  const client = await pool.connect()
+  console.log(' client connected')
+  
+  try {
+    let user = await client.query(`
+ INSERT INTO auth.users(id, sub, ip, user agent)
+VALUES(gen_random_uuid(),'${serializedSub},'${ip}','${userAgent}')
+RETURNING *`);
+    
+    
+  } catch (e) {
+    throw e
+  } finally {
+    
+    client.release();
+    console.log('Disconnected client');
+    
+  }
+  
+  res.json({ serializedSub, ip,userAgent })
 })
 
 //webhook
