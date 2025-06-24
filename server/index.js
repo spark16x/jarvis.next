@@ -646,7 +646,7 @@ app.post("/chat", async (req, res) => {
 });
 
 // notifaction
-app.post('/subscribe', (req, res) => {
+app.post('/subscribe',async (req, res) => {
   let { serializedSub } = req.body;
   let userAgent = req.get('User-Agent');
   let ip = req.ip;
@@ -663,6 +663,7 @@ RETURNING *`);
     
   } catch (e) {
     throw e
+    res.send(e)
   } finally {
     
     client.release();
