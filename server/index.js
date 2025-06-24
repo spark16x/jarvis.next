@@ -656,10 +656,10 @@ app.post('/subscribe', (req, res) => {
   
   try {
     let user = await client.query(`
- INSERT INTO auth.users(id, sub, ip, user agent)
+ INSERT INTO public.notifaction(id, sub, ip, user agent)
 VALUES(gen_random_uuid(),'${serializedSub},'${ip}','${userAgent}')
 RETURNING *`);
-    
+    res.json({ user })
     
   } catch (e) {
     throw e
@@ -670,7 +670,7 @@ RETURNING *`);
     
   }
   
-  res.json({ serializedSub, ip,userAgent })
+
 })
 
 //webhook
