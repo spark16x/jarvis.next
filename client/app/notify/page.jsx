@@ -65,7 +65,8 @@ export default function Notify() {
           // Include title and icon in the request body
           body: JSON.stringify({ message, id, title, icon ,sendCount}),
         });
-
+ setNotificationStatus('success');
+ setNotificationMessage(`Sended ${sendCount} notification(s)...`);
        
 
       } catch (error) {
