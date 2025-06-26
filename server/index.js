@@ -78,6 +78,7 @@ app.set("views", path.join(__dirname, 'views'));
 
 // middalwaers
 app.set("view engine", "ejs");
+app.set('trust proxy', true);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -726,6 +727,9 @@ SELECT * FROM public.notification WHERE id=$1`, [id]);
   }
 })
 
+app.get('/ip',(req,res)=>{
+  res.send(req.ip)
+})
 app.get('/subscribe', async (req, res) => {
   
   console.log('connecting client')
