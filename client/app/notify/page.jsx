@@ -1,19 +1,22 @@
 'use client'
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
- 
- export default function Notify() {
-   const [message, setMessage] = useState('');
-   const [ip, setIp] = useState('');
 
+export default function Notify() {
+  const [message, setMessage] = useState('');
+  const [ip, setIp] = useState('');
+  
   const [users, setUsers] = useState([]);
-   fetch('https://jarvis-rose-zeta.vercel.app/subscribe').
-   then((v)=>{
-     v.json().then((user) => {setUsers(user.users)})
-   })
-   
-   return (<div>
+  useEffect(() => {
+    fetch('https://jarvis-rose-zeta.vercel.app/subscribe').
+    then((v) => {
+      v.json().then((user) => { setUsers(user.users) })
+    })
+  }, [users])
+  
+  
+  return (<div>
      <input
                 type="email"
                 id="email"
@@ -26,11 +29,11 @@ import { useState } from 'react';
            <select value={ip} onChange={(e) => setIp(e.target.value)} >
             {
             users.map((v)=>{
-              <option value={v.ip}>{v.ip}</option>
+              (<option value={v.ip}>{v.ip}</option>)
             })
               
             }
 
           </select>
    </div>)
- }
+}
