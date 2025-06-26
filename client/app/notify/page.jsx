@@ -13,7 +13,7 @@ export default function Notify() {
     then((v) => {
       v.json().then((user) => { setUsers(user.users) })
     })
-  }, [users])
+  }, [])
   
   
   return (<div>
