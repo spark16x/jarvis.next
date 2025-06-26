@@ -727,9 +727,7 @@ SELECT * FROM public.notification WHERE id=$1`, [id]);
   }
 })
 
-app.get('/ip',(req,res)=>{
-  res.send(req.ip)
-})
+
 app.get('/subscribe', async (req, res) => {
   
   console.log('connecting client')
