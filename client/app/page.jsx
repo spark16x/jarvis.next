@@ -77,8 +77,11 @@ export default function Home() {
     const sub = await registration.pushManager.getSubscription()
     setSubscription(sub);
     console.log(sub)
-    console.log(Notification.permission !== 'granted')
-    // subscribeToPush()
+  
+  if (Notification.permission !== 'granted') {
+    subscribeToPush()
+  }
+   
   }
   
   async function subscribeToPush() {
