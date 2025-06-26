@@ -7,10 +7,10 @@ import { useState } from 'react';
    const [message, setMessage] = useState('');
    const [ip, setIp] = useState('');
 
-   let users
+  const [users, setUsers] = useState([]);
    fetch('https://jarvis-rose-zeta.vercel.app/subscribe').
    then((v)=>{
-     v.json().then((user) => {users=user.users})
+     v.json().then((user) => {setUsers(user.users)})
    })
    
    return (<div>
