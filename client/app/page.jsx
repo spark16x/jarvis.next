@@ -75,8 +75,9 @@ export default function Home() {
       updateViaCache: 'none',
     })
     const sub = await registration.pushManager.getSubscription()
-    setSubscription(sub)
-    subscribeToPush()
+    setSubscription(sub);
+    console.log(Notification.permission)
+    // subscribeToPush()
   }
   
   async function subscribeToPush() {
