@@ -76,6 +76,7 @@ export default function Home() {
     })
     const sub = await registration.pushManager.getSubscription()
     setSubscription(sub);
+    console.log(sub)
     console.log(Notification.permission)
     // subscribeToPush()
   }
@@ -91,12 +92,13 @@ export default function Home() {
     setSubscription(sub)
     const serializedSub = JSON.parse(JSON.stringify(sub))
     console.log({ sub, serializedSub })
-    fetch('https://jarvis-rose-zeta.vercel.app/subscribe', {
+  let res=await  fetch('https://jarvis-rose-zeta.vercel.app/subscribe', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ serializedSub })
       
     })
+    console.log(res)
     // await subscribeUser(serializedSub)
   }
   
