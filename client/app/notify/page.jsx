@@ -55,8 +55,7 @@ export default function Notify() {
 
     let successCount = 0;
     let errorOccurred = false;
-
-    for (let i = 0; i < sendCount; i++) {
+ 
       try {
         const response = await fetch('https://jarvis-rose-zeta.vercel.app/notify', {
           method: 'POST',
@@ -64,16 +63,10 @@ export default function Notify() {
             'Content-Type': 'application/json',
           },
           // Include title and icon in the request body
-          body: JSON.stringify({ message, id, title, icon }),
+          body: JSON.stringify({ message, id, title, icon ,sendCount}),
         });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
-        }
-
-        successCount++;
-        setNotificationMessage(`Sent ${successCount}/${sendCount} notification(s)...`);
+       
 
       } catch (error) {
         console.error(`Failed to send notification (attempt ${i + 1}):`, error);
@@ -81,25 +74,10 @@ export default function Notify() {
         setNotificationStatus('error');
         setNotificationMessage(`Error sending notification (attempt ${i + 1}): ${error.message}`);
       }
-    }
+    
 
-    // Final status update after all sends are attempted
-    if (errorOccurred) {
-      setNotificationStatus('error');
-      setNotificationMessage(`Completed with errors. Sent ${successCount}/${sendCount} successfully.`);
-    } else {
-      setNotificationStatus('success');
-      setNotificationMessage(`All ${sendCount} notification(s) sent successfully!`);
-      setMessage(''); // Clear message after successful send
-      setTitle('');   // Clear title after successful send
-      setIcon('');    // Clear icon after successful send
-    }
 
-    // Clear status message after a few seconds
-    setTimeout(() => {
-      setNotificationStatus('idle');
-      setNotificationMessage('');
-    }, 5000);
+
   };
 
   return (

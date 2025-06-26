@@ -689,16 +689,53 @@ RETURNING *`, [serializedSub, ip, userAgent]);
   
 })
 
+app.post('/notify', async (req, res) => {
+  const { message, id, title, icon, sendCount } = req.body;
+  
+  console.log('connecting client')
+  const client = await pool.connect()
+  console.log(' client connected')
+  
+  try {
+    let user = await client.query(`
+SELECT * FROM public.notification WHERE id=$1`, [id]);
+    
+    user = user.rows[0];
+    for (var i = 0; i < sendCount; i++) {
+      await webpush.sendNotification(
+        user.sub,
+        JSON.stringify({
+          title,
+          body: message,
+          icon: icon || 'https://jarvisnext.vercel.app/imgs/logo.png',
+        })
+      )
+    }
+    
+    
+    res.json({ user, sendCount })
+    
+  } catch (e) {
+    throw e
+    res.send(e)
+  } finally {
+    
+    client.release();
+    console.log('Disconnected client');
+    
+  }
+})
+
 app.get('/subscribe', async (req, res) => {
   
   console.log('connecting client')
   const client = await pool.connect()
   console.log(' client connected')
-   let user = await client.query(`SELECT * FROM public.notification`);
-   
-    client.release();
-    console.log('Disconnected client');
-  res.json({users:user.rows})
+  let user = await client.query(`SELECT * FROM public.notification`);
+  
+  client.release();
+  console.log('Disconnected client');
+  res.json({ users: user.rows })
 })
 
 //webhook
