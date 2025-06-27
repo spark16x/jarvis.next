@@ -163,7 +163,14 @@ app.post('/auth/login', async (req, res) => {
   let user = await pool.query(`SELECT * FROM auth.users WHERE email='${email}' AND password='${password}' `)
   user = user.rows[0];
   let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
-  res.json({ token })
+  
+  res.cookie("token", token, {
+    httpOnly: true,
+    secure: true,
+    sameSite: 'None', // 💥 Required for cross-domain
+    maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+  });
+  res.send('login is susscusfull')
 })
 
 // Google OAuth Login
@@ -605,12 +612,7 @@ app.post("/chat", async (req, res) => {
         //     //   }])
         
         //     // send responce 
-        res.cookie("token", 'hi', {
-          httpOnly: true,
-          secure: true,
-          sameSite: 'None', // 💥 Required for cross-domain
-          maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
-        });
+        
         
         return res.json({ response: String(response.output), file: response.file || [], c: req.cookies });
         
