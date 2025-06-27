@@ -20,7 +20,7 @@ const LoginPage = () => {
     }).then((v) => {
       v.json().then((result)=>{
         console.log(result.token)
-        redirect(`/api/cookie?token=${result.token}`)
+        redirect(`/chat`)
       })
     })
   };
