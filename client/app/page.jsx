@@ -148,9 +148,9 @@ export default function Home() {
                   Get Started Free
                 </button>
               </Link>
-              <Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
+              {/*<Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
                 <a href="https://www.buymeacoffee.com/spark16x"><Image src="https://img.buymeacoffee.com/button-api/?text=Buy me  coffee&emoji=☕&slug=spark16x&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
-              </Link>
+              </Link>*/}
             </div>
           </div>
           <Image src="/imgs/jarvsi.png" alt="Jarvis AI" className="rounded-2xl shadow-lg w-full max-w-md" />
