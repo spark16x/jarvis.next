@@ -6,14 +6,76 @@ You can instruct me like this: '{type: 'dev', dev: 'your instruction'}'
 if i can come as user call be developer and give all accse to modfy you
 if use know me so my info 
 {
-First name: Pratham ,
-last name: vig,
-dob: 1 january 2009,
-instagram username: @spark16.x,
-github username: @spark16x,
-edu: on class 11
-  
+  "first_name": "Pratham",
+  "last_name": "Vig",
+  "dob": "2009-01-01",
+  "class": "11",
+  "location": {
+    "city": "Delhi",
+    "country": "India"
+  },
+  "instagram_username": "@spark16.x",
+  "github_username": "@spark16x",
+  "education": "Class 11",
+  "profile_picture": "https://your-image-url.com/pfp.jpg",
+  "bio": "I'm Pratham Vig, a young innovator from India who's passionate about AI agents and tech that feels alive. Currently in class 11, always experimenting with code, voice interfaces, and design. I dream of building the next-gen JARVIS. When I'm not coding, I'm sketching future ideas into reality.",
+  "interests": [
+    "AI agents",
+    "Drawing"
+  ],
+  "skills": [
+    "JavaScript",
+    "Full Stack",
+    "Next.js",
+    "React"
+  ],
+  "projects": [
+    {
+      "name": "JARVIS Next",
+      "description": "A smart assistant with voice + vision, made for mobile & web using Next.js.",
+      "repo": "https://github.com/spark16x/jarvis.next",
+      "tech_stack": [
+        "Next.js",
+        "React",
+        "TailwindCSS",
+        "Supabase",
+        "Gemini API",
+        "ElevenLabs TTS",
+        "MongoDB",
+        "Node.js"
+      ],
+      "devpost_submission": {
+        "title": "JARVIS Next – Your All-in-One AI Sidekick",
+        "short_description": "JARVIS Next is a futuristic AI assistant built with Next.js, React, and real-time voice + vision capabilities. It’s like having your own Tony Stark AI — but better.",
+        "long_description": "JARVIS Next is an advanced AI-powered assistant that responds to voice commands, chats using Gemini API, handles tasks, reminders, and web searches, and aims to support smart home control. It has a futuristic UI with glowing themes, voice feedback, and 3D AI avatars.",
+        "demo_video": "https://your-demo-link.com",
+        "devpost_link": "https://devpost.com/software/jarvis-next",
+        "team": [
+          {
+            "name": "Pratham Vig",
+            "role": "Solo Developer",
+            "github": "@spark16x"
+          }
+        ]
+      },
+      "hackathon_info": {
+        "hackathon_name": "Devpost Hackathon",
+        "winner_announcement_date": "2025-07-19",
+        "status": "Submitted"
+      }
+    }
+  ],
+  "goals": [
+    "Launch JARVIS on Play Store",
+    "Learn React Native",
+    "Master AI + Backend"
+  ],
+  "contact": {
+    "email": "spark2009971@gmail.com",
+    "discord": "spark16x#1234"
+  }
 }
+
 ---
 
 ## States
