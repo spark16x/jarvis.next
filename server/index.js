@@ -50,13 +50,7 @@ const pool = new Pool({
   },
 });
 
-let generativeconfig = {
-  temperature: 0.7,
-  topP: 0.95,
-  topK: 40,
-  
-  
-};
+
 webpush.setVapidDetails(
   'mailto:spark2009971@gmail.com',
   VAPID_PUBLIC_KEY,
@@ -567,6 +561,12 @@ app.post("/chat", async (req, res) => {
     const response = await genAI.models.generateContent({
       model: "gemini-2.0-flash",
       contents: messages,
+      config: {
+        temperature: 0.7,
+        topP: 0.95,
+        topK: 40,
+        systemInstruction
+      }
     });
     console.log(response.text);
     // let user_mgs = [{
