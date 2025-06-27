@@ -773,7 +773,7 @@ app.get('/webhook/:provider', (req, res) => {
 });
 
 app.get('/c',(req,res)=>{
-  res.send(req.cookies)
+  res.send(req.cookies,req)
   
 })
 app.post('/webhook', (req, res) => {
