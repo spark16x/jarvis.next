@@ -558,7 +558,7 @@ app.post("/chat", async (req, res) => {
     if (!messages) return res.json({ response: "Please enter a message." });
     
     // send message as a user and get response
-    const response = await genAI.models.generateContent({
+    let response = await genAI.models.generateContent({
       model: "gemini-2.0-flash",
       contents: messages,
       config: {
@@ -576,7 +576,7 @@ app.post("/chat", async (req, res) => {
     // }]
     
     // convsrt response into json
-    let response = tools["removeJson"](response.text)
+     response = tools["removeJson"](response.text)
     response = JSON.parse(response);
     
     // check the type of response and run functions based on type 
