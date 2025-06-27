@@ -73,7 +73,10 @@ app.set("views", path.join(__dirname, 'views'));
 // middalwaers
 app.set("view engine", "ejs");
 app.set('trust proxy', true);
-app.use(cors());
+app.use(cors({
+  origin: 'https://jarvisnext.vercel.app', // your frontend
+  credentials: true // allow cookies
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
