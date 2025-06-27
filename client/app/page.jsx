@@ -182,7 +182,7 @@ export default function Home() {
               <p className="text-gray-400">Email, Weather, News, Translate, Maps, Calendar, Drive, and more!</p>
             </div>
             <div>
-              <Image src="https://cdn.pixabay.com/photo/2020/07/01/12/58/artificial-intelligence-5352181_960_720.jpg" className="mx-auto mb-4 rounded" alt="AI Personalization" />
+              <Image src="/imgs/artificial-intelligence.jpg" className="mx-auto mb-4 rounded" alt="AI Personalization" />
               <h3 className="text-2xl font-semibold mb-2">AI Personalization</h3>
               <p className="text-gray-400">Jarvis learns your habits, preferences, and tailors responses to you.</p>
             </div>
