@@ -1,6 +1,6 @@
 // components/Message.jsx
 import React, { useState } from 'react'; // Import useState for the like functionality
-
+import Markdown from 'react-markdown'
 /**
  * Renders a single chat message bubble with interactive options on hover.
  *
@@ -74,7 +74,7 @@ export default function Message({ message,  }) {
             <span className="typing-dot w-2 h-2 bg-white rounded-full"></span>
           </div>
         ) : (
-          <p>{ message.parts[0]?.text}</p>
+          <p><Markdown>{ message.parts[0]?.text}</Markdown></p>
         )}
 
         {/* Action buttons (Copy, Like, Reply) - appear on hover */}
