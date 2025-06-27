@@ -576,74 +576,87 @@ app.post("/chat", async (req, res) => {
     // }]
     
     // convsrt response into json
-    // let response = tools["removeJson"](response.text)
-    // response = JSON.parse(response);
+    let response = tools["removeJson"](response.text)
+    response = JSON.parse(response);
     
     // check the type of response and run functions based on type 
-    return res.json({ response: response.text, file: response.file || [] });
+    // return res.json({ response, file: response.file || [] });
     
-    // while (true) {
-    
-    //   // if type is output
-    //   if (response.type === "output") {
-    
-    //     // save history 
-    //     // await supabase
-    //     //   .from("chat_history")
-    //     //   .insert(user_mgs);
-    
-    //     // await supabase
-    //     //   .from("chat_history")
-    //     //   .insert([{
-    //     //     role: 'model',
-    //     //     parts: [{ text: JSON.stringify(response) }],
-    //     //     user_id: user.id
-    //     //   }])
-    
-    //     // send responce 
-    //     return res.json({ response: String(response.output), file: response.file || [] });
-    
-    //     // break loop
-    //     break
-    //   } 
-    //   // else if (response.type === "action") {
-    
-    //   //   // if type is action 
-    //   //   let fun = tools[response.function];
-    //   //   let agr = response.params;
-    
-    //   //   // if oauth functions
-    //   //   if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
-    //   //     // get user and token
-    
-    //   //     try {
-    
-    //   //       oauth2Client.setCredentials(JSON.parse(user.google_token));
-    
-    //   //       let fun_res = await fun(oauth2Client);
-    //   //       message = JSON.stringify({ type: 'observation', observation: fun_res });
-    
-    //   //     } catch (e) {
-    
-    //   //       let fun_res = 'please verfy your google account'
-    //   //     }
-    
-    //   //     // if non oauth functions
-    //   //   } else {
-    
-    //   //     let fun_res = await fun(agr);
-    //   //     message = JSON.stringify({ type: 'observation', observation: fun_res })
-    //   //   }
-    
-    //   //   result = await chat.sendMessage(message)
-    
-    //   //   response = tools["removeJson"](result.response?.candidates?.[0]?.content?.parts?.[0]?.text)
-    
-    //   //   response = JSON.parse(response);
-    
-    //   // }
-    
-    // }
+    while (true) {
+      
+      //   // if type is output
+      if (response.type === "output") {
+        
+        //     // save history 
+        //     // await supabase
+        //     //   .from("chat_history")
+        //     //   .insert(user_mgs);
+        
+        //     // await supabase
+        //     //   .from("chat_history")
+        //     //   .insert([{
+        //     //     role: 'model',
+        //     //     parts: [{ text: JSON.stringify(response) }],
+        //     //     user_id: user.id
+        //     //   }])
+        
+        //     // send responce 
+        return res.json({ response: String(response.output), file: response.file || [] });
+        
+        //     // break loop
+        break
+      }
+      else if (response.type === "action") {
+        
+        //   //   // if type is action 
+        let fun = tools[response.function];
+        let agr = response.params;
+        
+        //   //   // if oauth functions
+        if (response.function === 'listEmails' || response.function === 'getUpcomingEvents') {
+          // get user and token
+          
+          try {
+            
+            oauth2Client.setCredentials(JSON.parse(user.google_token));
+            
+            let fun_res = await fun(oauth2Client);
+            message = JSON.stringify({ type: 'observation', observation: fun_res });
+            
+          } catch (e) {
+            
+            let fun_res = 'please verfy your google account'
+          }
+          
+          //   //     // if non oauth functions
+        } else {
+          
+          let fun_res = await fun(agr);
+          message = JSON.stringify({ type: 'observation', observation: fun_res })
+        }
+        
+        messages.push({
+          role: "user",
+          parts: [{ text: message }],
+        })
+        result = await genAI.models.generateContent({
+          model: "gemini-2.0-flash",
+          contents: messages,
+          config: {
+            temperature: 0.7,
+            topP: 0.95,
+            topK: 40,
+            systemInstruction
+          }
+        })
+        
+        response = tools["removeJson"](result.text)
+        
+        response = JSON.parse(response);
+        
+      }
+      
+    }
     
   } catch (error) {
     // log error 

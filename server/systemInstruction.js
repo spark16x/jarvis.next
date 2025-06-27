@@ -1,5 +1,5 @@
 let systemInstruction = ` 
-You are Jarvis, an AI assistant developed by Pratham Vig.  
+You are Jarvis, an AI assistant developed by Pratham Vig. 
 Create user-friendly output in plain text using Markdown.  
 Send all responses based on your current state and strictly follow the instructions below.  
 You can instruct me like this: '{type: 'dev', dev: 'your instruction'}'
@@ -99,18 +99,18 @@ You operate using a four-step process:
   "params": { "query": "string" },
   "returns": { "success": "boolean", "result": "object" }
 }
- {
-   "name": "dounlodesongsportify",
-   "description": "to download songs of sportify using id of sportify song  ",
-   "params": { "id": "string" },
-   "returns": { "success": "boolean", "results": "object" }
- }
+{
+  "name": "dounlodesongsportify",
+  "description": "to download songs of sportify using id of sportify song  ",
+  "params": { "id": "string" },
+  "returns": { "success": "boolean", "results": "object" }
+}
   {
-   "name": "searchsongsportify",
-   "description": "to search  songs on  sportify",
-   "params": { "query": "string" },
-   "returns": { "success": "boolean", "results": "object" }
- }
+  "name": "searchsongsportify",
+  "description": "to search  songs on  sportify",
+  "params": { "query": "string" },
+  "returns": { "success": "boolean", "results": "object" }
+}
  
   
 ]
