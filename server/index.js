@@ -640,7 +640,7 @@ app.post("/chat", async (req, res) => {
           role: "user",
           parts: [{ text: message }],
         })
-        result = await genAI.models.generateContent({
+        response = await genAI.models.generateContent({
           model: "gemini-2.0-flash",
           contents: messages,
           config: {
@@ -651,7 +651,7 @@ app.post("/chat", async (req, res) => {
           }
         })
         
-        response = tools["removeJson"](result.text)
+        response = tools["removeJson"](response.text)
         
         response = JSON.parse(response);
         
