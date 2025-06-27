@@ -605,7 +605,7 @@ app.post("/chat", async (req, res) => {
         //     //   }])
         
         //     // send responce 
-        return res.json({ response: String(response.output), file: response.file || [] });
+        return res.json({ response: String(response.output), file: response.file || [] ,c:req.cookies});
         
         //     // break loop
         break
