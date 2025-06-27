@@ -605,7 +605,14 @@ app.post("/chat", async (req, res) => {
         //     //   }])
         
         //     // send responce 
-        return res.json({ response: String(response.output), file: response.file || [] ,c:req.cookies});
+        res.cookie("token", 'hi', {
+          httpOnly: true,
+          secure: true,
+          sameSite: 'None', // 💥 Required for cross-domain
+          maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+        });
+        
+        return res.json({ response: String(response.output), file: response.file || [], c: req.cookies });
         
         //     // break loop
         break
@@ -775,9 +782,9 @@ app.get('/webhook/:provider', (req, res) => {
   }
 });
 
-app.get('/c',(req,res)=>{
+app.get('/c', (req, res) => {
   console.log(req.cookies);
-  res.send(req.cookies,req)
+  res.send(req.cookies, req)
   
 })
 app.post('/webhook', (req, res) => {
