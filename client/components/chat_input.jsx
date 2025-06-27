@@ -45,7 +45,7 @@ export default function ChatInput({ className, onSendMessage }) { // Re-added on
   
   return (
     <div className={className}>
-      <form onSubmit={handleSendMessage} className="absolute bottom-[20px] w-full">
+      <form onSubmit={handleSendMessage} className="absolute bottom-[20px] w-full z-20">
         <textarea
           ref={textareaRef} // Attach the ref to the textarea
           placeholder="Type to chat..."
