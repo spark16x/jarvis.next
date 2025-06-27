@@ -33,7 +33,7 @@ export default function Chat() {
     fetch('https://jarvis-rose-zeta.vercel.app/chat', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages })
+      body: JSON.stringify({ messages:updateMgs })
       
     }).then((v) => {
       v.json().then((j) => {
@@ -43,9 +43,9 @@ export default function Chat() {
           parts: [{ text: j.response }],
         }]);
         
-        mgs = messages.map((v) =>
-          (<Message message={v} />)
-        )
+        // messages.map((v) =>
+        //   (<Message message={v} />)
+        // )
       })
     })
     
