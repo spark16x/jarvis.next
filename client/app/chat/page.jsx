@@ -22,7 +22,7 @@ export default function Chat() {
       parts: [{ text: input }],
     }
     
-    let updateMgs=[...messages,userMgs];
+    let updateMgs = [...messages, userMgs];
     setMessages(updateMgs);
     
     // mgs = messages.map((v) =>
@@ -32,8 +32,9 @@ export default function Chat() {
     
     fetch('https://jarvis-rose-zeta.vercel.app/chat', {
       method: "POST",
+      credentials: 'include',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ messages:updateMgs })
+      body: JSON.stringify({ messages: updateMgs })
       
     }).then((v) => {
       v.json().then((j) => {
@@ -42,6 +43,15 @@ export default function Chat() {
           role: "model",
           parts: [{ text: j.response }],
         }]);
+        
+        // fetch('https://jarvis-rose-zeta.vercel.app/c', {
+        //     method: 'GET',
+        //     credentials: 'include' // 🔥 this is CRUCIAL
+        //   })
+        //   .then(res => res.json())
+        //   .then(data => {
+        //     console.log(data); // Cookie will be stored automatically if allowed
+        //   });
         
         // messages.map((v) =>
         //   (<Message message={v} />)

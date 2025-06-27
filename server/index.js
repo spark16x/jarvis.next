@@ -776,6 +776,7 @@ app.get('/webhook/:provider', (req, res) => {
 });
 
 app.get('/c',(req,res)=>{
+  console.log(req.cookies);
   res.send(req.cookies,req)
   
 })
