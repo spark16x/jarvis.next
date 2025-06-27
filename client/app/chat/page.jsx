@@ -12,20 +12,22 @@ export default function Chat() {
     role: "model",
     parts: [{ text: "how I can help you?" }],
   }]);
-  let mgs = messages.map((v) =>
-    (<Message message={v} />)
-  )
+  
+  // let mgs = 
   
   function send(input) {
     
-      setMessages(prevMessages => [...prevMessages, {
-        role: "user",
-        parts: [{ text: input }],
-      }]);
+    let userMgs = {
+      role: "user",
+      parts: [{ text: input }],
+    }
     
-    mgs = messages.map((v) =>
-      (<Message message={v} />)
-    )
+    let updateMgs=[...messages,userMgs];
+    setMessages(updateMgs);
+    
+    // mgs = messages.map((v) =>
+    //   (<Message message={v} />)
+    // )
     
     
     fetch('https://jarvis-rose-zeta.vercel.app/chat', {
@@ -58,7 +60,9 @@ export default function Chat() {
     
 <ChatContainer className="sm:w-1/3 w-full h-[90%] absolute left-1/3 rounded-mdz-10">
 { 
-  mgs
+  messages.map((mgs,i) =>
+  (<Message key={i} message={mgs} />)
+)
 }
 </ChatContainer>
 
