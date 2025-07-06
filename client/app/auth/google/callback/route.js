@@ -1,18 +1,18 @@
-import { NextResponse } from 'next/server';
+'use client'
 
+import { useEffect } from 'react';
 
-export async function GET(request) {
-  const searchParams = request.nextUrl.searchParams
-  const code = searchParams.get('code');
-  
-   fetch('https://jarvis-rose-zeta.vercel.app/auth/google/callback', {
-   method: "POST",
-   headers: { "Content-Type": "application/json" },
-   body: JSON.stringify({ code })
- }).then((v) => {
-   v.json().then((result) => {
-     console.log(result.token)
-     redirect(`/api/cookie?token=${result.token}`)
-   })
- })
+export default function GoogleCallbackPage() {
+  useEffect(() => {
+    fetch('https://jarvis-rose-zeta.vercel.app/auth/google/callback')
+      .then((res) => {
+        console.log(res);
+         
+          
+        
+      })
+      .catch((err) => console.error('Fetch error:', err));
+  }, []);
+
+  return <div className="w-full h-full flex items-center justify-center" >Oauth...</div>;
 }
