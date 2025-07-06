@@ -798,7 +798,12 @@ app.post('/webhook', (req, res) => {
   res.sendStatus(200);
 });
 
+// Error Fallback
+app.use('*', (_, res) => {
+  res.status(404).send('🚫 Route not found');
+});
+
 // Start Serve
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
