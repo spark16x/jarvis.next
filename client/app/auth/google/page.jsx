@@ -18,5 +18,5 @@ export default function GooglePage() {
       .catch((err) => console.error('Fetch error:', err));
   }, []);
 
-  return <div className="w-full h-full flex items-center justify-center" >Redirecting...</div>;
+  return <div  className="bg-[black]  w-full h-full flex items-center justify-center" >Redirecting...</div>;
 }
