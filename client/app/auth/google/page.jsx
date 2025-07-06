@@ -7,8 +7,8 @@ export default function GooglePage() {
     fetch('https://jarvis-rose-zeta.vercel.app/auth/google')
       .then((res) => {
         // If the backend returns a URL to redirect to
-          console.log('Response:', res);
           res.json().then((data)=>{
+            window.location.href =data?.url
             console.log(data?.url)
           })
          
