@@ -40,6 +40,7 @@ let oauth2Client = new OAuth2Client(
 
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY } = process.env;
+const REDIRECT_URI = 'https://jarvisnext.vercel.app/auth/google/callback';
 
 const pool = new Pool({
   host: PGHOST,
@@ -197,7 +198,7 @@ app.post("/auth/google/callback", async (req, res) => {
   try {
     let { tokens } = await oauth2Client.getToken({
       code,
-      redirect_uri: process.env.REDIRECT_URI
+      redirect_uri: REDIRECT_URI
     });
     
     oauth2Client.setCredentials(tokens);
@@ -206,7 +207,7 @@ app.post("/auth/google/callback", async (req, res) => {
     let userInfo = await oauth2.userinfo.get();
     userInfo = userInfo.data;
     
-    let user = await pool.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}' AND ' `);
+    let user = await pool.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}'  ' `);
     
     user = user.rows[0];
     
@@ -235,8 +236,13 @@ app.post("/auth/google/callback", async (req, res) => {
     
     let token = jwt.sign(user, process.env.SUPABASE_KEY, { expiresIn: '720h' });
     
-    
-    res.json({ token });
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None', // 💥 Required for cross-domain
+      maxAge: 30 * 24 * 60 * 60 * 1000 // 30 days
+    });
+    res.send(`Oauth is sussfull od ${userInfo.name}`);
     
   } catch (error) {
     
