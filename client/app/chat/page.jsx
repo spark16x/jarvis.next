@@ -68,7 +68,7 @@ export default function Chat() {
   
   return (<div className="bg-zinc-800 w-full h-full flex justify-center-safe" >
     
-<ChatContainer className="sm:w-1/3 w-full h-[90%] absolute sm:left-1/3 top-px rounded-md z-10">
+<ChatContainer className="sm:w-1/3 sm:left-1/3 w-full h-[90%] absolute  top-px rounded-md z-10">
 { 
   messages.map((mgs,i) =>
   (<Message key={i} message={mgs} />)
