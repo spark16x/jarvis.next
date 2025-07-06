@@ -1,9 +1,10 @@
-export default function LoginPage() {
-  // let result;
-  // fetch('https://jarvis-rose-zeta.vercel.app/auth/google')
-  //   .then(async (v) => {
-  //     result =await v.json()
-  //   })
+export default function GooglePage() {
+  let result;
+  fetch('https://jarvis-rose-zeta.vercel.app/auth/google')
+    .then( (v) => {
+      result = v
+      console.log(v)
+    })
   
   return (<div>Redricting  </div>)
 }
