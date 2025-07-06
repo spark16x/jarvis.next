@@ -1,6 +1,7 @@
 // import dependencies
 import dotenv from "dotenv";
 import express from "express";
+import http from 'http';
 import path from "path";
 import axios from "axios";
 import { fileURLToPath } from "url";
@@ -27,6 +28,7 @@ dotenv.config();
 
 // define most importent varables
 let app = express();
+const server = http.createServer(app);
 let PORT = process.env.PORT || 3000;
 let apiKey = process.env.GEMINI_API_KEY;
 let genAI = new GoogleGenAI(apiKey);
