@@ -185,7 +185,7 @@ app.get("/auth/google", async (req, res) => {
     ],
   });
   
-  res.json({ url });
+  res.redirect(url);
 });
 
 // Google OAuth Callback
