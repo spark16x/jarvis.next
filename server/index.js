@@ -801,9 +801,9 @@ app.post('/webhook', (req, res) => {
 });
 
 // Error Fallback
-app.use('*', (_, res) => {
-  res.status(404).send('🚫 Route not found');
-});
+// app.use('*', (_, res) => {
+//   res.status(404).send('🚫 Route not found');
+// });
 
 // Start Serve
 server.listen(PORT, () => {
