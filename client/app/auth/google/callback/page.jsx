@@ -4,11 +4,13 @@ import { useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 export default function GoogleCallbackPage() {
+  const searchParams = useSearchParams();
+      const code = searchParams.get('code');
   useEffect(() => {
     fetch('https://jarvis-rose-zeta.vercel.app/auth/google/callback',{
       method: 'POST',
       credentials: 'include',// 🔥 this is CRUCIAL
-      
+      body:JSON.stringify(code)
     })
       .then((res) => {
         console.log(res);
