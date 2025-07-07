@@ -5,8 +5,9 @@ import { useEffect } from 'react';
 export default function GoogleCallbackPage() {
   useEffect(() => {
     fetch('https://jarvis-rose-zeta.vercel.app/auth/google/callback',{
-      method: 'GET',
-      credentials: 'include' // 🔥 this is CRUCIAL
+      method: 'POST',
+      credentials: 'include',// 🔥 this is CRUCIAL
+      
     })
       .then((res) => {
         console.log(res);
