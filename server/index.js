@@ -195,6 +195,10 @@ app.get("/auth/google", async (req, res) => {
 app.post("/auth/google/callback", async (req, res) => {
   let { code } = req.body;
   
+  console.log('connecting client')
+  const client = await pool.connect()
+  console.log(' client connected')
+  
   try {
     let { tokens } = await oauth2Client.getToken({
       code,
@@ -207,7 +211,7 @@ app.post("/auth/google/callback", async (req, res) => {
     let userInfo = await oauth2.userinfo.get();
     userInfo = userInfo.data;
     
-    let user = await pool.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}'  ' `);
+    let user = await client.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}'  ' `);
     
     user = user.rows[0];
     
@@ -216,13 +220,13 @@ app.post("/auth/google/callback", async (req, res) => {
     
     if (!user || user.length == 0) {
       
-      user = await pool.query(`
+      user = await client.query(`
       INSERT INTO auth.users(id, name, email, password, avatar,provider)
-      VALUES(gen_random_uuid(), '${userInfo.name}', '${userInfo.email}', '${null}', '${userInfo.picture}','google')
-      RETURNING *`)
+      VALUES(gen_random_uuid(), '$1', '$2', '$3', '$4','google')
+      RETURNING *`, [userInfo.name, userInfo.email, null, userInfo.picture])
       
       user = user.rows[0];
-      let providers = await pool.query(`
+      let providers = await client.query(`
       INSERT INTO auth.providers(id,google)
       VALUES($1,$2)`, [user.id, userInfo.id])
       
