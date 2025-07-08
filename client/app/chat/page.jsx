@@ -8,45 +8,13 @@ import { redirect } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Chat() {
-  const socketRef = useRef(null);
-  const [connected, setConnected] = useState(false);
+
   const [messages, setMessages] = useState([{
     role: "model",
     parts: [{ text: "how I can help you?" }],
   }]);
   
-  useEffect(() => {
-    const socket = new WebSocket("ws://jarvisnext.vercel.app");
-    socketRef.current = socket;
-    
-    socket.onopen = () => {
-      console.log("🟢 Connected to MCP WebSocket server");
-      setConnected(true);
-    };
-    
-    socket.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      console.log("📨 Response from server:", data);
-      
-      setMessages(prevMessages => [...prevMessages, {
-        role: "model",
-        parts: [{ text: data.response }],
-      }]);
-    };
-    
-    socket.onclose = () => {
-      console.log("🔌 Disconnected from MCP WebSocket server");
-      setConnected(false);
-    };
-    
-    socket.onerror = (err) => {
-      console.error("❌ WebSocket error:", err);
-    };
-    
-    return () => {
-      socket.close();
-    };
-  }, []);
+ 
   
   
   
@@ -67,19 +35,19 @@ export default function Chat() {
     // )
     
     
-    // fetch('https://jarvis-rose-zeta.vercel.app/chat', {
-    //   method: "POST",
-    //   credentials: 'include',
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({ messages: updateMgs })
+    fetch('https://jarvis-rose-zeta.vercel.app/chat', {
+      method: "POST",
+      credentials: 'include',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ messages: updateMgs })
     
-    // }).then((v) => {
-    //   v.json().then((j) => {
+    }).then((v) => {
+      v.json().then((j) => {
     
-    //     setMessages(prevMessages => [...prevMessages, {
-    //       role: "model",
-    //       parts: [{ text: j.response }],
-    //     }]);
+        setMessages(prevMessages => [...prevMessages, {
+          role: "model",
+          parts: [{ text: j.response }],
+        }]);
     
     
     
@@ -95,14 +63,14 @@ export default function Chat() {
     // messages.map((v) =>
     //   (<Message message={v} />)
     // )
-    //   })
-    // })
+      })
+    })
     
-    if (socketRef.current?.readyState === WebSocket.OPEN) {
-      socketRef.current.send(JSON.stringify({
-        messages: updateMgs
-      }));
-    }
+    // if (socketRef.current?.readyState === WebSocket.OPEN) {
+    //   socketRef.current.send(JSON.stringify({
+    //     messages: updateMgs
+    //   }));
+    // }
     
     
     
