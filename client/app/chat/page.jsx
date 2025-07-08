@@ -16,7 +16,7 @@ export default function Chat() {
   }]);
   
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:3001");
+    const socket = new WebSocket("ws://jarvisnext.vercel.app");
     socketRef.current = socket;
     
     socket.onopen = () => {
