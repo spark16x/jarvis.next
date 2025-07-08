@@ -50,7 +50,8 @@
     "form-data": "^4.0.0",
     "pg": "^8.6.0",
     "@google/genai":"^1.5.1",
-    "web-push":"^3.6.7"
+    "web-push":"^3.6.7",
+    "ws":"^8.18.3"
     
   },
   "devDependencies": {

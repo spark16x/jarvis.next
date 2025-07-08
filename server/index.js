@@ -21,7 +21,7 @@ import FormData from 'form-data';
 import cors from 'cors';
 import { Pool } from 'pg'
 import webpush from 'web-push';
-
+import { WebSocketServer } from 'ws';
 
 // config dotenv
 dotenv.config();
@@ -29,6 +29,7 @@ dotenv.config();
 // define most importent varables
 let app = express();
 const server = http.createServer(app);
+const wss = new WebSocketServer({ server });
 let PORT = process.env.PORT || 3000;
 let apiKey = process.env.GEMINI_API_KEY;
 let genAI = new GoogleGenAI(apiKey);
@@ -59,6 +60,41 @@ webpush.setVapidDetails(
   VAPID_PUBLIC_KEY,
   VAPID_PRIVATE_KEY
 );
+
+
+// =======================
+// 🔌 WebSocket Setup
+// =======================
+wss.on('connection', (ws) => {
+  console.log("✅ WebSocket connected");
+  
+  ws.on('message', (msg) => {
+    const { message } = JSON.parse(msg);
+    console.log(`[📥] ${messages} `);
+    
+    // send message as a user and get response
+    let response = await genAI.models.generateContent({
+      model: "gemini-2.0-flash",
+      contents: messages,
+      config: {
+        temperature: 0.7,
+        topP: 0.95,
+        topK: 40,
+        systemInstruction
+      }
+    });
+    console.log(response.text);
+    
+    
+      ws.send(JSON.stringify({ responce:responce.text }));
+  });
+  
+  ws.on('close', () => {
+    console.log("🔌 WebSocket disconnected");
+    clients.delete(ws);
+  });
+});
+
 
 // let model = genAI.getGenerativeModel({
 //   model: "gemini-2.0-flash",
