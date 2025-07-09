@@ -76,7 +76,7 @@ const signupPage = () => {
             </Link>
           </div>
             {/*<div className="border-t border-gray-700 my-4"></div>*/}
-            <p className="  text-gray-400 mb-2">Or continue with</p>
+           <div className="divider">OR</div>
             
             <form action={ handleSubmit} className="mt-4 space-y-3">
             <div>
