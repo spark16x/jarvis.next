@@ -32,24 +32,20 @@ const signupPage = () => {
       redirect('/auth/login')
     })
   };
-  
+    
   return (
     <>
-
+        
       <body className="bg-[url(/imgs/bg-mobile.jpg)] md:bg-[url(/imgs/bg-desktop.jpg)] bg-cover bg-center bg-no-repeat text-gray-200 font-sans flex justify-center items-center h-full text-center ">
         
         <div className="auth-container border-1 border-gray-700 backdrop-blur-sm p-6 sm:p-8 rounded-xl shadow-lg animate-fade-in transition-all duration-300 hover:shadow-xl hover:scale-101 max-w-md w-full"> 
-        
+          
           
           <h2 className="text-blue-400 text-2xl font-bold mb-4 shadow-sm">Sign up to Jarvis</h2>
-
+          
           <div className="mt-4 space-y-3">
            
-           { /* Google */ }
-
-
-{ /* Facebook */ }
-
+           
            
             {/* Google OAuth */}
             <Link href="/auth/google" className="">
@@ -58,13 +54,13 @@ const signupPage = () => {
                      Login with Google
                 </button>
             </Link>
-
+    
             {/* GitHub OAuth */}
             <Link href="/auth/github" className="block btn oauth-btn github-btn w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md border border-gray-700 font-semibold text-white bg-gray-700 hover:bg-gray-600 transition-colors">
               <FontAwesomeIcon icon={faGithub} className="w-5 h-5" />
               Continue with GitHub
             </Link>
-
+    
             {/* Facebook OAuth */}
             <Link href="/auth/facebook" className="">
               <button className="btn bg-[#1A77F2] text-white border-[#005fd8]">
@@ -72,7 +68,7 @@ const signupPage = () => {
                   Login with Facebook
               </button>
             </Link>
-
+    
             {/* Instagram OAuth */}
             <Link href="/auth/instagram" className="block btn oauth-btn instagram-btn w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md border border-gray-700 font-semibold text-white bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 to-pink-600 transition-colors">
               <FontAwesomeIcon icon={faInstagram} className="w-5 h-5" />
