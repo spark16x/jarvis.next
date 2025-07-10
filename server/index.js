@@ -223,8 +223,8 @@ app.post("/auth/google/callback", async (req, res) => {
       
       user = await client.query(`
       INSERT INTO auth.users(id, name, email, password, avatar,provider)
-      VALUES(gen_random_uuid(), '$1', '$2', '$3', '$4','google')
-      RETURNING *`, [userInfo.name, userInfo.email, null, userInfo.picture])
+      VALUES(gen_random_uuid(), $1, $2, $3, $4,'google')
+      RETURNING *`, [userInfo.name, userInfo.email, '  j', userInfo.picture])
       
       user = user.rows[0];
       let providers = await client.query(`
