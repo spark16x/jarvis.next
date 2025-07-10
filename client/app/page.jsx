@@ -111,7 +111,7 @@ export default function Home() {
   return (
     <>
      
-      <body className="bg-gray-900 text-white font-sans">
+      <div className="bg-gray-900 text-white font-sans">
         {/* Navbar */}
         <header className="bg-gray-950 border-b border-gray-800">
           <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
@@ -259,7 +259,7 @@ export default function Home() {
             </button>
           </div>
         </div>
-      </body>
+      </div>
     </>
   );
 }

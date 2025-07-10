@@ -28,10 +28,10 @@ export default function GoogleCallbackPage() {
   return (
     <div className="bg-black w-full h-screen flex flex-col items-center justify-center text-white font-mono">
       {/* Spinner */}
-      <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+      <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
 
       {/* Text */}
-      <p className="text-blue-400 text-lg animate-pulse">
+      <p className="text-white text-lg animate-pulse">
         Connecting to Google...
       </p>
     </div>
