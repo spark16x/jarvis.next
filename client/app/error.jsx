@@ -1,3 +1,5 @@
+'use client'
+
 import Head from 'next/head';
 import Link from 'next/link';
 
@@ -101,11 +103,6 @@ const ErrorPage = ({ statusCode }) => {
   );
 };
 
-// This function is called by Next.js to get initial props for the error page.
-// It's crucial for server-side error handling to get the status code.
-ErrorPage.getInitialProps = ({ res, err }) => {
-  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-  return { statusCode };
-};
+
 
 export default ErrorPage;
