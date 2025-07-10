@@ -40,8 +40,7 @@
     "@vercel/speed-insights": "^1.2.0",
     "resend": "^4.5.0",
     "form-data": "^4.0.0",
-    "react-markdown":"^10.1.0",
-    "daisyui":"^5.0.46"
+    "react-markdown":"^10.1.0"
 
    
   },
@@ -51,6 +50,8 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "tailwindcss": "^4",
+    "daisyui":"^5.0.46"
+
   }
 }
