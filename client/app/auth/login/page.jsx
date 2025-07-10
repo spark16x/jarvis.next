@@ -12,13 +12,13 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   
-  const handleSubmit =  () => {
+  const handleSubmit = () => {
     fetch('https://jarvis-rose-zeta.vercel.app/auth/login', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({email,password})
+      body: JSON.stringify({ email, password })
     }).then((v) => {
-      v.json().then((result)=>{
+      v.json().then((result) => {
         console.log(result.token)
         redirect(`/chat`)
       })
@@ -49,7 +49,7 @@ const LoginPage = () => {
 
             {/* Facebook OAuth */}
             <Link href="/auth/facebook" className="block btn oauth-btn facebook-btn w-full flex items-center justify-center gap-2 py-2 px-3 rounded-md border border-gray-700 font-semibold text-white bg-blue-600 hover:bg-blue-500 transition-colors">
-              <FontAwesomeIcon icon={faFacebookF} className="w-5 h-5" />
+                <svg aria-label="Facebook logo" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><path fill="white" d="M8 12h5V8c0-6 4-7 11-6v5c-4 0-5 0-5 3v2h5l-1 6h-4v12h-6V18H8z"></path></svg>
               Continue with Facebook
             </Link>
 
