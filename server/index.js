@@ -137,15 +137,15 @@ app.post('/auth/signup', async (req, res) => {
     console.log('Createing user');
     
     let user = await client.query(`
- INSERT INTO auth.users(id, name, email, password, avatar,provider)
-VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${provider}')
-RETURNING *`);
+         INSERT INTO auth.users(id, name, email, password, avatar,provider)
+          VALUES(gen_random_uuid(), '${name}', '${email}', '${password}', '${avatar}','${provider}')
+            RETURNING *`);
     
     user = user.rows[0];
     
     let providers = await client.query(`
- INSERT INTO auth.providers(id)
-VALUES($1)`, [user.id]);
+           INSERT INTO auth.providers(id)
+            VALUES($1)`, [user.id]);
     
     console.log('Created user');
     
@@ -212,7 +212,7 @@ app.post("/auth/google/callback", async (req, res) => {
     let userInfo = await oauth2.userinfo.get();
     userInfo = userInfo.data;
     
-    let user = await client.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}'  ' `);
+    let user = await client.query(`SELECT * FROM auth.providers WHERE google='${userInfo.id}' `);
     
     user = user.rows[0];
     
