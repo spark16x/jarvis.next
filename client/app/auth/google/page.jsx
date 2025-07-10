@@ -18,5 +18,15 @@ export default function GooglePage() {
       .catch((err) => console.error('Fetch error:', err));
   }, []);
 
-  return <div  className="bg-[black]  w-full h-full flex items-center justify-center" >Redirecting...</div>;
+  return ( 
+  <div className="bg-black w-full h-screen flex flex-col items-center justify-center text-white font-mono">
+      {/* Spinner */}
+      <div className="w-16 h-16 border-4 border-white border-t-transparent rounded-full animate-spin mb-4"></div>
+
+      {/* Text */}
+      <p className="text-white text-lg animate-pulse">
+        Redirecting to Google...
+      </p>
+    </div>
+);
 }
