@@ -94,21 +94,7 @@ async function isAuth(req, res, next) {
     
     let userinfo = jwt.verify(req.cookies.token, process.env.SUPABASE_KEY)
     req.user = userinfo;
-    let prov = await supabase.from('id')
-      .select().eq('id', userinfo.id).single();
     
-    if (prov.data.Google) {
-      req.user.google = true;
-    }
-    if (prov.data.Github) {
-      req.user.github = true;
-    }
-    if (prov.data.Facebook) {
-      req.user.facebook = true;
-    }
-    if (prov.data.Instagram) {
-      req.user.instagram = true;
-    }
     return next();
   } else {
     return next();
@@ -570,9 +556,9 @@ app.get('/chat', isAuth, async (req, res) => {
 })
 
 // chat backend
-app.post("/chat", async (req, res) => {
+app.post("/chat",isAuth, async (req, res) => {
   // get user 
-  // let user = req.user;
+  let user = req.user;
   
   try {
     
@@ -627,7 +613,7 @@ app.post("/chat", async (req, res) => {
         //     // send responce 
         
         
-        return res.json({ response: String(response.output), file: response.file || [], c: req.cookies });
+        return res.json({ response: String(response.output), file: response.file || [], token: req.cookies, user });
         
         //     // break loop
         break
