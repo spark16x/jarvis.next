@@ -8,6 +8,11 @@ import { faInstagram, faXTwitter, faGithub, faThreads, faCoffee } from '@fortawe
 import { useState } from 'react';
 import Image from 'next/image'
 import dotenv from "dotenv";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+import { SplitText } from "gsap/SplitText";
+
+gsap.registerPlugin(useGSAP, SplitText);
 
 dotenv.config();
 
@@ -77,11 +82,11 @@ export default function Home() {
     const sub = await registration.pushManager.getSubscription()
     setSubscription(sub);
     console.log(sub)
-  
-  if (Notification.permission !== 'granted') {
-    subscribeToPush()
-  }
-   
+    
+    if (Notification.permission !== 'granted') {
+      subscribeToPush()
+    }
+    
   }
   
   async function subscribeToPush() {
@@ -95,7 +100,7 @@ export default function Home() {
     setSubscription(sub)
     const serializedSub = JSON.parse(JSON.stringify(sub))
     console.log({ sub, serializedSub })
-  let res=await  fetch('https://jarvis-rose-zeta.vercel.app/subscribe', {
+    let res = await fetch('https://jarvis-rose-zeta.vercel.app/subscribe', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ serializedSub })
@@ -105,7 +110,19 @@ export default function Home() {
     // await subscribeUser(serializedSub)
   }
   
+  // ===============================
+  // ===============================
+  // ========= Gsap animation ======
+  // ===============================
+  // ===============================
   
+  useGSAP(
+    () => {
+      let split = SplitText.create(".hero-header");
+      // use selectors...
+      gsap.from(split.chars, { y:-10, duration: 3 });
+    }
+  ); // <-- scope for selector text (optional)
   
   
   return (
@@ -132,7 +149,7 @@ export default function Home() {
         {/* Hero */}
         <section className="flex flex-col lg:flex-row items-center justify-center text-center lg:text-left py-20 px-6 gap-8" data-aos="fade-up">
           <div className="max-w-lg">
-            <h1 className="text-5xl font-bold mb-4">Meet Jarvis</h1>
+            <h1 className="hero-header text-5xl font-bold mb-4">Meet Jarvis</h1>
             <p className="text-xl text-gray-300 mb-6">
               Your intelligent, all-in-one virtual assistant for tasks, information, productivity, and automation.
             </p>
