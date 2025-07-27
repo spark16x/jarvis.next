@@ -121,8 +121,8 @@ export default function Home() {
       let split = SplitText.create(".hero-header");
       // use selectors...
       gsap.from(split.chars, { y:'-10', duration: 3 });
-    }
-  ); // <-- scope for selector text (optional)
+    },
+    []); // <-- scope for selector text (optional)
   
   
   return (
