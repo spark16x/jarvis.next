@@ -120,7 +120,7 @@ export default function Home() {
     () => {
       let split = SplitText.create(".hero-header");
       // use selectors...
-      gsap.from(split.chars, { y:'-10', duration: 0.5 });
+      gsap.from(split.chars, { y:'-50', duration: 0.5,stagger:0.5 });
     },
     []); // <-- scope for selector text (optional)
   
