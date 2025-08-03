@@ -19,6 +19,7 @@ gsap.registerPlugin(useGSAP, SplitText);
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
   const [integratedservices, setintegratedservices] = useState(false);
+  const [loading, setloading] = useState(true);
   
   const handleMouseEnterv = () => {
     setVoiceHover(true);
@@ -109,6 +110,7 @@ export default function Home() {
     console.log(res)
     // await subscribeUser(serializedSub)
   }
+  setloading(false)
   
   // ===============================
   // ===============================
@@ -127,7 +129,7 @@ export default function Home() {
   
   return (
     <>
-     
+     {loading?'loading':
       <div className="bg-gray-900 text-white font-sans">
         {/* Navbar */}
         <header className="bg-gray-950 border-b border-gray-800">
@@ -277,6 +279,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+     }
     </>
   );
 }
