@@ -123,7 +123,7 @@ export default function Home() {
       let p = SplitText.create(".hero-p",{mask:"chars"});
       // use selectors...
       timeline.from(hero.chars, { y:'50', duration: 0.3,stagger:0.1 });
-      timeline.from(p.chars, { opacity:'0', duration: 0.3,stagger:0.1 });
+      timeline.from(p.chars, { opacity:'0', duration: 0.2,stagger:0.05 });
     },
     []); // <-- scope for selector text (optional)
   
