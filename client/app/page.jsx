@@ -19,7 +19,6 @@ gsap.registerPlugin(useGSAP, SplitText);
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
   const [integratedservices, setintegratedservices] = useState(false);
-  const [loading, setloading] = useState(true);
   
   const handleMouseEnterv = () => {
     setVoiceHover(true);
@@ -110,7 +109,6 @@ export default function Home() {
     console.log(res)
     // await subscribeUser(serializedSub)
   }
-  setloading(false)
   
   // ===============================
   // ===============================
@@ -120,16 +118,19 @@ export default function Home() {
   
   useGSAP(
     () => {
-      let split = SplitText.create(".hero-header",{mask:"chars"});
+      let timeline=gsap.timeline();
+      let hero = SplitText.create(".hero-header",{mask:"chars"});
+      let p = SplitText.create(".hero-p",{mask:"chars"});
       // use selectors...
-      gsap.from(split.chars, { y:'50', duration: 0.3,stagger:0.1 });
+      timeline.from(split.chars, { y:'50', duration: 0.3,stagger:0.1 });
+      timeline.from(split.chars, { opacity:0, duration: 0.3,stagger:0.1 });
     },
     []); // <-- scope for selector text (optional)
   
   
   return (
     <>
-     {loading?'loading':
+     
       <div className="bg-gray-900 text-white font-sans">
         {/* Navbar */}
         <header className="bg-gray-950 border-b border-gray-800">
@@ -152,7 +153,7 @@ export default function Home() {
         <section className="flex flex-col lg:flex-row items-center justify-center text-center lg:text-left py-20 px-6 gap-8" data-aos="fade-up">
           <div className="max-w-lg">
             <h1 className="hero-header text-5xl font-bold mb-4 ">Meet Jarvis</h1>
-            <p className="text-xl text-gray-300 mb-6">
+            <p className="hero-p text-xl text-gray-300 mb-6">
               Your intelligent, all-in-one virtual assistant for tasks, information, productivity, and automation.
             </p>
             <ul className="text-left text-gray-400 mb-6 list-disc list-inside">
@@ -279,7 +280,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-     }
     </>
   );
 }
