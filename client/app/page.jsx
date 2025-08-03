@@ -149,7 +149,7 @@ export default function Home() {
         {/* Hero */}
         <section className="flex flex-col lg:flex-row items-center justify-center text-center lg:text-left py-20 px-6 gap-8" data-aos="fade-up">
           <div className="max-w-lg">
-            <h1 className="hero-header text-5xl font-bold mb-4">Meet Jarvis</h1>
+            <h1 className="hero-header text-5xl font-bold mb-4 overflow-hidden">Meet Jarvis</h1>
             <p className="text-xl text-gray-300 mb-6">
               Your intelligent, all-in-one virtual assistant for tasks, information, productivity, and automation.
             </p>
