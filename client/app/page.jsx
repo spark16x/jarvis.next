@@ -120,10 +120,10 @@ export default function Home() {
     () => {
       let timeline=gsap.timeline();
       let hero = SplitText.create(".hero-header",{mask:"chars"});
-      // let p = SplitText.create(".hero-p",{mask:"chars"});
+      let p = SplitText.create(".hero-p",{mask:"words"});
       // use selectors...
       timeline.from(hero.chars, { y:'50', duration: 0.3,stagger:0.1 });
-      // timeline.from(p.words, { y:'50', duration: 0.2,stagger:0.05 });
+      timeline.from(p.words, { y:'50', duration: 0.2,stagger:0.05 });
     },
     []); // <-- scope for selector text (optional)
   
