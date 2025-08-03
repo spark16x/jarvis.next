@@ -14,7 +14,7 @@ import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-dotenv.config();
+// dotenv.config();
 
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
