@@ -118,12 +118,13 @@ export default function Home() {
   
   useGSAP(
     () => {
-      let timeline=gsap.timeline();
-      let hero = SplitText.create(".hero-header",{mask:"chars"});
-      let p = SplitText.create(".hero-p",{mask:"words"});
+      let timeline = gsap.timeline();
+      let hero = SplitText.create(".hero-header", { mask: "chars" });
+      let p = SplitText.create(".hero-p", { mask: "words" });
       // use selectors...
-      timeline.from(hero.chars, { y:'50', duration: 0.3,stagger:0.1 });
-      timeline.from(p.words, { y:'50', duration: 0.2,stagger:0.05 });
+      timeline.from(hero.chars, { y: '50', duration: 0.3, stagger: 0.1 });
+      timeline.from(p.chars, { y: '50', duration: 0.2, stagger: 0.05 });
+      timeline.from('.hero-li', { width: 0, height: 0, duration: 0.5, stagger: 0.05 })
     },
     []); // <-- scope for selector text (optional)
   
@@ -157,10 +158,10 @@ export default function Home() {
               Your intelligent, all-in-one virtual assistant for tasks, information, productivity, and automation.
             </p>
             <ul className="text-left text-gray-400 mb-6 list-disc list-inside">
-              <li>Voice + Text Chat Interface</li>
-              <li>Real-Time Web & App Control</li>
-              <li>AI-Powered Scheduling, Email & Social Media</li>
-              <li>Smart Home & IoT Integration</li>
+              <li className="hero-li" >Voice + Text Chat Interface</li>
+              <li className="hero-li" >Real-Time Web & App Control</li>
+              <li className="hero-li" >AI-Powered Scheduling, Email & Social Media</li>
+              <li className="hero-li" >Smart Home & IoT Integration</li>
             </ul>
             <div className="flex items-center space-x-4 mb-6">
               <Link href="/auth/signup">
