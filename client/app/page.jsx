@@ -123,8 +123,8 @@ export default function Home() {
       let p = SplitText.create(".hero-p", { mask: "words" });
       // use selectors...
       timeline.from(hero.chars, { y: '50', duration: 0.3, stagger: 0.1 });
-      timeline.from(p.chars, { y: '50', duration: 0.2, stagger: 0.05 });
-      timeline.from('.hero-li', { width: 0, height: 0, duration: 0.5, stagger: 0.05 })
+      timeline.from(p.chars, { y: '50', duration: 0.05, stagger: 0.05 });
+      timeline.from('.hero-li', { scale: 0, duration: 0.5, stagger: 0.05 })
     },
     []); // <-- scope for selector text (optional)
   
