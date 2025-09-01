@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "J.A.R.V.I.S",
-  description: "Jarvis is a ai aegant Developed by Pratham vig"
+  title: "Jarvis next",
+  description: "Jarvis next is a ai aegant Developed by Pratham vig"
 }
 
 export default function RootLayout({ children }) {

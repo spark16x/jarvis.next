@@ -79,6 +79,6 @@ const CookiePolicyPage = () => {
   );
 };
 export const metadata = {
-  title: "J.A.R.V.I.S | Cookies",
+  title: "Jarvis next | Cookies",
 };
 export default CookiePolicyPage;

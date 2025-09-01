@@ -136,6 +136,6 @@ const signupPage = () => {
   );
 };
 // export const metadata = {
-//   title: "J.A.R.V.I.S | Sign up",
+//   title: "Jarvis next | Sign up",
 // };
 export default signupPage;

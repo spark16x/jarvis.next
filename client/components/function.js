@@ -268,7 +268,7 @@ async function searchsongsportify(props) {
 async function sendEmail(to, subject, html) {
   try {
     const response = await resend.emails.send({
-      from: 'J.A.R.V.I.S <onboarding@resend.dev>', // Free plan default sender
+      from: 'Jarvis next <onboarding@resend.dev>', // Free plan default sender
       to,
       subject,
       html,
