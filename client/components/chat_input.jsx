@@ -1,73 +1,66 @@
-'use client'
+'use client';
 
-import { useState, useRef, useEffect } from 'react'; // Import useRef and useEffect
+import { useState, useRef, useEffect } from 'react';
 
-export default function ChatInput({ className, onSendMessage }) { // Re-added onSendMessage prop
+export default function ChatInput({ className = '', onSendMessage }) {
   const [input, setInput] = useState('');
-  const textareaRef = useRef(null); // Create a ref to access the textarea DOM element
+  const textareaRef = useRef(null);
   
-  // Effect to adjust textarea height whenever the input value changes
+  // Adjust textarea height automatically based on content
   useEffect(() => {
     if (textareaRef.current) {
-      // Reset height to 'auto' first to correctly calculate scrollHeight
       textareaRef.current.style.height = 'auto';
-      // Set height to scrollHeight, ensuring it doesn't exceed max rows
       const scrollHeight = textareaRef.current.scrollHeight;
-      const lineHeight = parseFloat(getComputedStyle(textareaRef.current).lineHeight); // Get actual line height
-      const maxLines = 4;
-      const maxHeight = lineHeight * maxLines + parseFloat(getComputedStyle(textareaRef.current).paddingTop) + parseFloat(getComputedStyle(textareaRef.current).paddingBottom); // Calculate max height based on 4 lines + padding
+      const lineHeight = 20; // estimate line height in px
+      const maxLines = 5;
+      const maxHeight = lineHeight * maxLines + 16; // lines + padding
       
       textareaRef.current.style.height = `${Math.min(scrollHeight, maxHeight)}px`;
     }
-  }, [input]); // Dependency array: run this effect whenever 'input' state changes
-  
-  // Function to handle sending the message
+  }, [input]);
+
   const handleSendMessage = (e) => {
-    e.preventDefault(); // Prevent default form submission (page reload)
-    if (input.trim()) { // Check if input is not just whitespace
-      onSendMessage(input); // Call the prop function to send message to parent
-      setInput(''); // Clear the input field after sending
-      // Reset height explicitly after clearing input
+    if (e) e.preventDefault();
+    if (input.trim()) {
+      onSendMessage(input);
+      setInput('');
       if (textareaRef.current) {
         textareaRef.current.style.height = 'auto';
       }
     }
   };
-  
-  // Handle Enter key for sending, Shift+Enter for new line
+
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) { // If Enter is pressed without Shift
-      e.preventDefault(); // Prevent default new line on Enter
-      handleSendMessage(e); // Trigger send
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSendMessage(e);
     }
-    // If Shift+Enter, allow default behavior (new line in textarea)
   };
-  
+
   return (
     <div className={className}>
-      <form onSubmit={handleSendMessage} className="absolute bottom-[20px] w-full z-20">
+      <form onSubmit={handleSendMessage} className="relative w-full flex items-end bg-zinc-900/30 border border-zinc-850 focus-within:border-zinc-700/80 rounded-xl transition duration-300">
         <textarea
-          ref={textareaRef} // Attach the ref to the textarea
-          placeholder="Type to chat..."
-          className="w-full bg-zinc-700 text-white p-3 pr-12 rounded-md placeholder-zinc-400 focus:outline-none focus:ring-2 focus:ring-blue-500 overflow-y-auto resize-none" // Keep overflow-y-auto for when max height is hit
-          value={input} // Use value prop for controlled component
-          onChange={(e) => setInput(e.target.value)} // Correctly use e.target.value
-          onKeyDown={handleKeyDown} // Keydown handler for Enter to send, Shift+Enter for new line
-          rows={1} // Start with 1 row, height will be adjusted by JS
-          // Removed inline style for minHeight/maxHeight as they are now dynamically managed
-          // The initial H-[50px] might be slightly different from 1 line height + padding,
-          // so JS will adjust it based on content.
-          // You might want to adjust your initial Tailwind `h-[50px]` class
-          // to match the `minHeight` calculated based on one line height if needed for consistency.
+          ref={textareaRef}
+          placeholder="Ask Jarvis anything..."
+          className="w-full bg-transparent text-zinc-100 placeholder-zinc-650 text-sm py-3.5 pl-4 pr-12 resize-none focus:outline-none focus:ring-0 min-h-[48px] max-h-[120px] custom-scrollbar leading-5"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
+          rows={1}
         />
-        {/* Send button */}
-        <button
-          type="submit"
-          className="absolute right-3 top-1/2 -translate-y-1/2 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          aria-label="Send message"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send"><path d="m22 2-7 20-4-9-9-4 20-7Z"/><path d="M22 2 11 13"/></svg>
-        </button>
+        <div className="absolute right-2.5 bottom-2">
+          <button
+            type="submit"
+            className="p-1.5 rounded-lg bg-zinc-100 hover:bg-white text-zinc-950 hover:scale-105 transition-all cursor-pointer flex items-center justify-center"
+            aria-label="Send message"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send">
+              <path d="m22 2-7 20-4-9-9-4 20-7Z" />
+              <path d="M22 2 11 13" />
+            </svg>
+          </button>
+        </div>
       </form>
     </div>
   );

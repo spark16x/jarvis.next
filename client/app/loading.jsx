@@ -2,24 +2,16 @@ import React from 'react';
 
 const Loading = () => {
   return (
-    <div className="flex justify-center items-center h-screen bg-white">
-  <div className="relative w-16 h-16">
-  <div className="absolute top-0 left-0 w-full h-full rounded-full animate-spin">
-  <div className="absolute top-0 left-0 w-1/2 h-full overflow-hidden">
-  <div className="absolute top-0 left-0 w-full h-full bg-blue-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
-  </div>
-  <div className="absolute top-0 right-0 w-1/2 h-full overflow-hidden">
-  <div className="absolute top-0 right-0 w-full h-full bg-red-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
-  </div>
-  <div className="absolute bottom-0 left-0 w-1/2 h-full overflow-hidden">
-  <div className="absolute bottom-0 left-0 w-full h-full bg-yellow-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
-  </div>
-  <div className="absolute bottom-0 right-0 w-1/2 h-full overflow-hidden">
-  <div className="absolute bottom-0 right-0 w-full h-full bg-green-500 rounded-full" style={{ clip: 'rect(0, auto, auto, 0)' }}></div>
-  </div>
-  </div>
-  </div>
-  </div>
+    <div className="flex justify-center items-center h-screen bg-zinc-950">
+      <div className="relative flex items-center justify-center">
+        {/* Sleek pulsing core */}
+        <div className="w-12 h-12 rounded-full border border-zinc-800 flex items-center justify-center">
+          <span className="text-xs font-mono tracking-widest text-zinc-400 uppercase animate-pulse">J</span>
+        </div>
+        {/* Muted spinning accent ring */}
+        <div className="absolute w-16 h-16 rounded-full border-t border-r border-zinc-700 animate-spin"></div>
+      </div>
+    </div>
   );
 };
 

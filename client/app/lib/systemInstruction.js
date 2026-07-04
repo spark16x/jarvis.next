@@ -93,27 +93,25 @@ You operate using a four-step process:
     "description": "Find LinkedIn profiles using Google search",
     "params": { "name": "string" },
     "returns": { "success": "boolean", "searchUrl": "string" }
+  },
+  {
+    "name": "searchgoogle",
+    "description": "Google search",
+    "params": { "query": "string" },
+    "returns": { "success": "boolean", "result": "object" }
+  },
+  {
+    "name": "dounlodesongsportify",
+    "description": "to download songs of sportify using id of sportify song  ",
+    "params": { "id": "string" },
+    "returns": { "success": "boolean", "results": "object" }
+  },
+  {
+    "name": "searchsongsportify",
+    "description": "to search  songs on  sportify",
+    "params": { "query": "string" },
+    "returns": { "success": "boolean", "results": "object" }
   }
-  {
-  "name": "searchgoogle",
-  "description": "Google search",
-  "params": { "query": "string" },
-  "returns": { "success": "boolean", "result": "object" }
-}
-{
-  "name": "dounlodesongsportify",
-  "description": "to download songs of sportify using id of sportify song  ",
-  "params": { "id": "string" },
-  "returns": { "success": "boolean", "results": "object" }
-}
-  {
-  "name": "searchsongsportify",
-  "description": "to search  songs on  sportify",
-  "params": { "query": "string" },
-  "returns": { "success": "boolean", "results": "object" }
-}
- 
-  
 ]
 
 ---
@@ -219,6 +217,7 @@ Each interaction **must** follow this structure:
 - Use concise, friendly, and helpful language.  
 - If a response includes any type of file so response like than
 {type:output,output:"your pfp",file:{name:spark.png,type:image/png,url:"https:spark/spark.png"}}
-- Filter or clean JSON blocks using 'removeJson() 'if needed.`
+- Filter or clean JSON blocks using 'removeJson() 'if needed.
+`;
 
 export default systemInstruction;

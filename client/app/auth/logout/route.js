@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
+import { cookies } from 'next/headers';
 
 export async function GET(request) {
-  let cookie = await cookies();
-  cookie.delete('token');
+  const cookieStore = await cookies();
+  cookieStore.delete('token');
   
-  return NextResponse.redirect('/auth/login');
+  // Create absolute URL for redirect
+  const redirectUrl = new URL('/auth/login', request.url);
+  return NextResponse.redirect(redirectUrl);
 }

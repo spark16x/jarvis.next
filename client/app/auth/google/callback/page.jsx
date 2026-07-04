@@ -10,7 +10,7 @@ export default function GoogleCallbackPage() {
     const code = searchParams.get('code');
     if (!code) return;
 
-    fetch('https://jarvis-rose-zeta.vercel.app/auth/google/callback', {
+    fetch('/api/auth/google/callback', {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -20,7 +20,7 @@ export default function GoogleCallbackPage() {
     })
       .then((res) => {
         console.log(res);
-        window.location.href = 'https://jarvisnext.vercel.app/chat';
+        window.location.href = '/chat';
       })
       .catch((err) => console.error('Fetch error:', err));
   }, [searchParams]);

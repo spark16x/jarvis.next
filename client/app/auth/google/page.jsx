@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 export default function GooglePage() {
   useEffect(() => {
-    fetch('https://jarvis-rose-zeta.vercel.app/auth/google')
+    fetch('/api/auth/google')
       .then((res) => {
         // If the backend returns a URL to redirect to
           res.json().then((data)=>{

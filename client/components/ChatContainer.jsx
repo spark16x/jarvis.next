@@ -6,37 +6,28 @@ import React, { useRef, useEffect } from 'react';
 /**
  * A container component for displaying chat messages.
  * Automatically scrolls to the bottom when new messages are added.
- *
- * @param {object} props
- * @param {Array<Object>} props.messages - An array of message objects.
- * Each object should have at least:
- * { text: string, sender: 'user' | 'jarvis' | 'system', id?: string }
- * @param {string} [props.className] - Additional Tailwind CSS classes for the main container div.
  */
 export default function ChatContainer({ children, className = '' }) {
-  const messagesEndRef = useRef(null);
+  const containerRef = useRef(null);
   
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollTop = messagesEndRef.current.scrollHeight;
+    if (containerRef.current) {
+      containerRef.current.scrollTo({
+        top: containerRef.current.scrollHeight,
+        behavior: 'smooth'
+      });
     }
   }, [children]);
   
   return (
     <div
-      ref={messagesEndRef}
-      className={`flex-grow overflow-y-auto p-4  text-white custom-scrollbar ${className}`}
+      ref={containerRef}
+      className={`flex-grow overflow-y-auto px-1 py-4 text-zinc-200 custom-scrollbar ${className}`}
+      style={{ scrollBehavior: 'smooth' }}
     >
-      <div className="flex flex-col space-y-4">
-        { children}
-         {/*children && (
-          <div className="text-center text-zinc-400 mt-20">
-            <p>Start chatting with Jarvis!</p>
-            <p>Type your first message below.</p>
-          </div>
-         )*/}
+      <div className="flex flex-col space-y-6">
+        {children}
       </div>
-      <div className="h-2"></div>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function Notify() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('https://jarvis-rose-zeta.vercel.app/subscribe');
+        const response = await fetch('/api/subscribe');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -57,7 +57,7 @@ export default function Notify() {
     let errorOccurred = false;
  
       try {
-        const response = await fetch('https://jarvis-rose-zeta.vercel.app/notify', {
+        const response = await fetch('/api/notify', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

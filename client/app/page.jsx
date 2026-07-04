@@ -1,286 +1,338 @@
 "use client";
 
-import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faXTwitter, faGithub, faThreads, faCoffee } from '@fortawesome/free-brands-svg-icons';
-import { useState } from 'react';
-import Image from 'next/image'
-import dotenv from "dotenv";
+import { faInstagram, faXTwitter, faGithub, faThreads } from '@fortawesome/free-brands-svg-icons';
+import Image from 'next/image';
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SplitText } from "gsap/SplitText";
 
 gsap.registerPlugin(useGSAP, SplitText);
 
-// dotenv.config();
-
 export default function Home() {
   const [voiceHover, setVoiceHover] = useState(false);
   const [integratedservices, setintegratedservices] = useState(false);
-  
-  const handleMouseEnterv = () => {
-    setVoiceHover(true);
-  };
-  
-  const handleMouseLeavev = () => {
-    setVoiceHover(false);
-  };
-  const handleMouseEnteri = () => {
-    setintegratedservices(true);
-  };
-  
-  const handleMouseLeavei = () => {
-    setintegratedservices(false);
-  };
-  
+  const [isSupported, setIsSupported] = useState(false);
+  const [subscription, setSubscription] = useState(null);
+
+  const handleMouseEnterv = () => setVoiceHover(true);
+  const handleMouseLeavev = () => setVoiceHover(false);
+  const handleMouseEnteri = () => setintegratedservices(true);
+  const handleMouseLeavei = () => setintegratedservices(false);
+
   useEffect(() => {
     const banner = document.getElementById("consent-banner");
     const acceptBtn = document.getElementById("accept-consent");
     const consentGiven = localStorage.getItem("jarvis_consent");
     
-    if (!consentGiven) {
+    if (!consentGiven && banner) {
       banner.style.display = "block";
     }
     
     acceptBtn?.addEventListener("click", () => {
       localStorage.setItem("jarvis_consent", "true");
-      banner.style.display = "none";
+      if (banner) banner.style.display = "none";
     });
   }, []);
-  
+
   function urlBase64ToUint8Array(base64String) {
-    const padding = '='.repeat((4 - (base64String.length % 4)) % 4)
-    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/')
-    
-    const rawData = window.atob(base64)
-    const outputArray = new Uint8Array(rawData.length)
-    
+    if (!base64String) return new Uint8Array();
+    const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+    const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
     for (let i = 0; i < rawData.length; ++i) {
-      outputArray[i] = rawData.charCodeAt(i)
+      outputArray[i] = rawData.charCodeAt(i);
     }
-    return outputArray
+    return outputArray;
   }
-  
-  const [isSupported, setIsSupported] = useState(false)
-  const [subscription, setSubscription] = useState(null)
-  const [message, setMessage] = useState('')
-  
+
   useEffect(() => {
     if ('serviceWorker' in navigator && 'PushManager' in window) {
-      setIsSupported(true)
-      registerServiceWorker()
+      setIsSupported(true);
+      registerServiceWorker();
     }
-  }, [])
-  
-  async function registerServiceWorker() {
-    const registration = await navigator.serviceWorker.register('/sw.js', {
-      scope: '/',
-      updateViaCache: 'none',
-    })
-    const sub = await registration.pushManager.getSubscription()
-    setSubscription(sub);
-    console.log(sub)
-    
-    if (Notification.permission !== 'granted') {
-      subscribeToPush()
-    }
-    
-  }
-  
-  async function subscribeToPush() {
-    const registration = await navigator.serviceWorker.ready
-    const sub = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(
-        process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY
-      ),
-    })
-    setSubscription(sub)
-    const serializedSub = JSON.parse(JSON.stringify(sub))
-    console.log({ sub, serializedSub })
-    let res = await fetch('https://jarvis-rose-zeta.vercel.app/subscribe', {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ serializedSub })
-      
-    })
-    console.log(res)
-    // await subscribeUser(serializedSub)
-  }
-  
-  // ===============================
-  // ===============================
-  // ========= Gsap animation ======
-  // ===============================
-  // ===============================
-  
-  useGSAP(
-    () => {
-      let timeline = gsap.timeline();
-      let hero = SplitText.create(".hero-header", { mask: "chars" });
-      let p = SplitText.create(".hero-p", { mask: "words" });
-      // use selectors...
-      timeline.from(hero.chars, { y: '50', duration: 0.3, stagger: 0.1 });
-      timeline.from(p.words, { y: '50', opacity: 0, duration: 0.2, stagger: 0.05 });
-      timeline.from(".hero-li", { y: '50', duration: 0.5, stagger: 0.5 })
-    },
-    []); // <-- scope for selector text (optional)
-  
-  
-  return (
-    <>
-     
-      <div className="bg-gray-900 text-white font-sans">
-        {/* Navbar */}
-        <header className="bg-gray-950 border-b border-gray-800">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-            <h1 className="text-2xl font-bold text-blue-500">Jarvis</h1>
-            <nav className="hidden md:flex space-x-6 items-center">
-              <Link href="#features" className="text-gray-300 hover:text-white">Features</Link>
-              <Link href="#get-started" className="text-gray-300 hover:text-white">Get Started</Link>
-              <Link href="/auth/login" className="text-gray-300 hover:text-white">Login</Link>
-              <Link href="/chat">
-                <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl ml-2 transition">
-                  Launch
-                </button>
-              </Link>
-            </nav>
-          </div>
-        </header>
+  }, []);
 
-        {/* Hero */}
-        <section className="flex flex-col lg:flex-row items-center justify-center text-center lg:text-left py-20 px-6 gap-8" data-aos="fade-up">
-          <div className="max-w-lg">
-            <h1 className="hero-header text-5xl font-bold mb-4 ">Meet Jarvis</h1>
-            <p className="hero-p text-xl text-gray-300 mb-6">
-              Your intelligent, all-in-one virtual assistant for tasks, information, productivity, and automation.
+  async function registerServiceWorker() {
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js', {
+        scope: '/',
+        updateViaCache: 'none',
+      });
+      const sub = await registration.pushManager.getSubscription();
+      setSubscription(sub);
+      if (Notification.permission !== 'granted') {
+        subscribeToPush();
+      }
+    } catch (e) {
+      console.error("Service Worker registration failed:", e);
+    }
+  }
+
+  async function subscribeToPush() {
+    try {
+      const key = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+      if (!key) {
+        console.warn("Push subscription skipped: NEXT_PUBLIC_VAPID_PUBLIC_KEY is not configured.");
+        return;
+      }
+      const registration = await navigator.serviceWorker.ready;
+      const sub = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(key),
+      });
+      setSubscription(sub);
+      const serializedSub = JSON.parse(JSON.stringify(sub));
+      await fetch('/api/subscribe', {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ serializedSub })
+      });
+    } catch (e) {
+      console.error("Failed to subscribe to push notification:", e);
+    }
+  }
+
+  useGSAP(() => {
+    let timeline = gsap.timeline();
+    try {
+      let hero = SplitText.create(".hero-header", { type: "chars" });
+      let p = SplitText.create(".hero-p", { type: "words" });
+      timeline.from(hero.chars, { y: '30', opacity: 0, duration: 0.6, stagger: 0.05, ease: "power3.out" });
+      timeline.from(p.words, { y: '20', opacity: 0, duration: 0.4, stagger: 0.02, ease: "power3.out" }, "-=0.3");
+      timeline.from(".hero-cta", { opacity: 0, y: '20', duration: 0.5 }, "-=0.2");
+    } catch (e) {
+      // Fallback animations in case SplitText is unavailable or encounters errors
+      timeline.from(".hero-header", { y: '30', opacity: 0, duration: 0.8, ease: "power3.out" });
+      timeline.from(".hero-p", { y: '20', opacity: 0, duration: 0.8, ease: "power3.out" }, "-=0.4");
+      timeline.from(".hero-cta", { opacity: 0, y: '20', duration: 0.5 }, "-=0.4");
+    }
+  }, []);
+
+  return (
+    <div className="bg-zinc-950 text-zinc-200 min-h-screen flex flex-col font-sans selection:bg-zinc-800 selection:text-white">
+      {/* Radial ambient glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] radial-glow pointer-events-none -z-10"></div>
+
+      {/* Navbar */}
+      <header className="border-b border-zinc-900/80 sticky top-0 bg-zinc-950/70 backdrop-blur-md z-40">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+          <Link href="/" className="text-sm font-mono tracking-widest text-zinc-100 hover:text-white transition">
+            JARVIS <span className="text-xs text-zinc-500 font-normal">v0.0.7</span>
+          </Link>
+          <nav className="flex space-x-6 items-center">
+            <Link href="#features" className="text-xs font-mono text-zinc-400 hover:text-zinc-100 transition">Features</Link>
+            <Link href="/auth/login" className="text-xs font-mono text-zinc-400 hover:text-zinc-100 transition">Login</Link>
+            <Link href="/chat">
+              <button className="border border-zinc-800 hover:border-zinc-700 bg-zinc-900/50 hover:bg-zinc-900 text-zinc-100 px-4 py-1.5 rounded-lg text-xs font-mono transition-all duration-300">
+                Launch System
+              </button>
+            </Link>
+          </nav>
+        </div>
+      </header>
+
+      {/* Main content wrapper */}
+      <main className="flex-grow max-w-6xl mx-auto px-6 w-full">
+        {/* Hero Section */}
+        <section className="py-24 md:py-32 flex flex-col lg:flex-row items-center gap-12 border-b border-zinc-900/50">
+          <div className="flex-1 space-y-6 text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-zinc-900 bg-zinc-900/30 text-[10px] font-mono tracking-wider text-zinc-400 uppercase">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Core engine online
+            </div>
+            <h1 className="hero-header text-5xl md:text-6xl font-semibold text-white tracking-tight leading-tight">
+              Meet Jarvis
+            </h1>
+            <p className="hero-p text-lg text-zinc-400 max-w-lg leading-relaxed mx-auto lg:mx-0">
+              An intelligent, minimalist virtual assistant. Designed to orchestrate tasks, scheduling, automation, and information with clarity.
             </p>
-            <ul className="text-left text-gray-400 mb-6 list-disc list-inside">
-              <li className="hero-li" >Voice + Text Chat Interface</li>
-              <li className="hero-li" >Real-Time Web & App Control</li>
-              <li className="hero-li" >AI-Powered Scheduling, Email & Social Media</li>
-              <li className="hero-li" >Smart Home & IoT Integration</li>
-            </ul>
-            <div className="flex items-center space-x-4 mb-6">
+            <div className="hero-cta pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Link href="/auth/signup">
-                <button className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl text-lg transition">
+                <button className="w-full sm:w-auto px-6 py-3 bg-zinc-100 hover:bg-white text-zinc-950 font-medium rounded-lg text-sm transition duration-300">
                   Get Started Free
                 </button>
               </Link>
-              {/*<Link href="https://www.buymeacoffee.com/yourusername" target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-yellow-400 hover:text-yellow-300">
-                <a href="https://www.buymeacoffee.com/spark16x"><Image src="https://img.buymeacoffee.com/button-api/?text=Buy me  coffee&emoji=☕&slug=spark16x&button_colour=FFDD00&font_colour=000000&font_family=Cookie&outline_colour=000000&coffee_colour=ffffff" /></a>
-              </Link>*/}
+              <Link href="/chat">
+                <button className="w-full sm:w-auto px-6 py-3 border border-zinc-800 hover:border-zinc-700 bg-zinc-900/30 hover:bg-zinc-900/60 text-zinc-300 hover:text-white rounded-lg text-sm transition duration-300">
+                  Open Terminal
+                </button>
+              </Link>
             </div>
           </div>
-          <Image src="/imgs/jarvsi.png" alt="Jarvis AI" className="rounded-2xl shadow-lg w-full max-w-md" />
+          <div className="flex-1 w-full flex justify-center">
+            <div className="relative group max-w-md w-full border border-zinc-900 bg-zinc-900/20 p-2 rounded-2xl shadow-2xl backdrop-blur-sm">
+              <Image 
+                src="/imgs/jarvsi.png" 
+                alt="Jarvis AI System" 
+                width={500} 
+                height={500} 
+                className="rounded-xl grayscale group-hover:grayscale-0 transition-all duration-700 w-full object-cover border border-zinc-800/40" 
+              />
+            </div>
+          </div>
         </section>
 
-        {/* Features */}
-        <section id="features" className="bg-gray-800 py-16 px-6" data-aos="fade-up">
-          <h2 className="text-3xl font-bold text-center mb-10">Powerful Features</h2>
-          <div className="grid md:grid-cols-3 gap-8 text-center">
-            <div>
-              <div onMouseEnter={handleMouseEnterv} onMouseLeave={handleMouseLeavev} >
-                 {voiceHover ?
-                 <video src="/videos/voice-control.mp4" className="mx-auto mb-4 rounded" alt="Voice Control"  preload="none"  autoPlay loop />:
-                 <Image src="/imgs/voice-control.png" className="mx-auto mb-4 rounded" alt="voice control" />}
-                 </div>
-
-              <h3 className="text-2xl font-semibold mb-2">Voice Control</h3>
-              <p className="text-gray-400">Control your system using natural language in real-time.</p>
-            </div>
-            <div>
-              <div onMouseEnter={handleMouseEnteri} onMouseLeave={handleMouseLeavei} >
-               { integratedservices ?
-               <video src="/videos/integrated-servicel.mp4" className="mx-auto mb-4 rounded" alt="Voice Control"  preload="none"  autoPlay loop />:
-              <Image src="/imgs/integrated-services.png" className="mx-auto mb-4 rounded" alt="Integrated Services" /> 
-                 
-               }
+        {/* Features Section */}
+        <section id="features" className="py-24 space-y-12 border-b border-zinc-900/50">
+          <div className="text-center space-y-3">
+            <h2 className="text-xs font-mono tracking-widest text-zinc-500 uppercase">System Core</h2>
+            <p className="text-3xl font-semibold text-white tracking-tight">Powerful capabilities, clean execution</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Card 1: Voice Control */}
+            <div className="border border-zinc-900 bg-zinc-900/10 rounded-2xl p-6 hover:border-zinc-800 transition duration-300 flex flex-col justify-between">
+              <div 
+                className="relative h-44 w-full rounded-xl overflow-hidden mb-6 bg-zinc-950 border border-zinc-900/50 flex items-center justify-center"
+                onMouseEnter={handleMouseEnterv} 
+                onMouseLeave={handleMouseLeavev}
+              >
+                {voiceHover ? (
+                  <video src="/videos/voice-control.mp4" className="w-full h-full object-cover" preload="none" autoPlay loop muted />
+                ) : (
+                  <Image src="/imgs/voice-control.png" fill className="object-cover opacity-80" alt="Voice Control" />
+                )}
               </div>
-              <h3 className="text-2xl font-semibold mb-2">Integrated Services</h3>
-              <p className="text-gray-400">Email, Weather, News, Translate, Maps, Calendar, Drive, and more!</p>
+              <div>
+                <h3 className="text-base font-medium text-white mb-2 font-mono">01 / Voice System</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  Natural language comprehension. Interact with your files and services using speech.
+                </p>
+              </div>
             </div>
-            <div>
-              <Image src="/imgs/artificial-intelligence.jpg" className="mx-auto mb-4 rounded" alt="AI Personalization" />
-              <h3 className="text-2xl font-semibold mb-2">AI Personalization</h3>
-              <p className="text-gray-400">Jarvis learns your habits, preferences, and tailors responses to you.</p>
+
+            {/* Card 2: Integrated Services */}
+            <div className="border border-zinc-900 bg-zinc-900/10 rounded-2xl p-6 hover:border-zinc-800 transition duration-300 flex flex-col justify-between">
+              <div 
+                className="relative h-44 w-full rounded-xl overflow-hidden mb-6 bg-zinc-950 border border-zinc-900/50 flex items-center justify-center"
+                onMouseEnter={handleMouseEnteri} 
+                onMouseLeave={handleMouseLeavei}
+              >
+                {integratedservices ? (
+                  <video src="/videos/integrated-servicel.mp4" className="w-full h-full object-cover" preload="none" autoPlay loop muted />
+                ) : (
+                  <Image src="/imgs/integrated-services.png" fill className="object-cover opacity-80" alt="Integrated Services" />
+                )}
+              </div>
+              <div>
+                <h3 className="text-base font-medium text-white mb-2 font-mono">02 / Unified Integrations</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  Connect seamlessly with email, calendars, translation, maps, and document repositories.
+                </p>
+              </div>
+            </div>
+
+            {/* Card 3: AI Personalization */}
+            <div className="border border-zinc-900 bg-zinc-900/10 rounded-2xl p-6 hover:border-zinc-800 transition duration-300 flex flex-col justify-between">
+              <div className="relative h-44 w-full rounded-xl overflow-hidden mb-6 bg-zinc-950 border border-zinc-900/50 flex items-center justify-center">
+                <Image src="/imgs/artificial-intelligence.jpg" fill className="object-cover opacity-85 grayscale hover:grayscale-0 transition-all duration-500" alt="AI Personalization" />
+              </div>
+              <div>
+                <h3 className="text-base font-medium text-white mb-2 font-mono">03 / Personal Adaptability</h3>
+                <p className="text-sm text-zinc-400 leading-relaxed">
+                  Learns from workflows, preferences, and context to deliver tailored, precise responses.
+                </p>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Benefits */}
-        <section className="bg-gray-900 py-16 px-6" data-aos="fade-up">
-          <h2 className="text-3xl font-bold text-center mb-10">Why Choose Jarvis?</h2>
-          <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-            <div>
-              <h3 className="text-xl font-semibold mb-2">24/7 AI at Your Service</h3>
-              <p className="text-gray-400">Jarvis never sleeps. Get instant answers, updates, and actions anytime.</p>
+        {/* Benefits Section */}
+        <section className="py-24 space-y-16 border-b border-zinc-900/50">
+          <div className="text-center space-y-3">
+            <h2 className="text-xs font-mono tracking-widest text-zinc-500 uppercase">Architecture</h2>
+            <p className="text-3xl font-semibold text-white tracking-tight">Engineered for absolute speed</p>
+          </div>
+          <div className="grid md:grid-cols-4 gap-8 max-w-5xl mx-auto">
+            <div className="space-y-2 border-l border-zinc-900 pl-4">
+              <h3 className="text-sm font-semibold text-white font-mono">24/7 Autopilot</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">Continuous automation loop running schedules even while offline.</p>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Secure & Private</h3>
-              <p className="text-gray-400">Your data is encrypted, and you control your history and preferences.</p>
+            <div className="space-y-2 border-l border-zinc-900 pl-4">
+              <h3 className="text-sm font-semibold text-white font-mono">Privacy-First</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">Encrypted databases and explicit permission controls for integrations.</p>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Cross-Platform Access</h3>
-              <p className="text-gray-400">Use Jarvis on the web, Android, or smart devices with seamless sync.</p>
+            <div className="space-y-2 border-l border-zinc-900 pl-4">
+              <h3 className="text-sm font-semibold text-white font-mono">Omnipresent</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">Synchronized states across web browsers, Android clients, and API layers.</p>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Custom Dashboard</h3>
-              <p className="text-gray-400">Get widgets, themes, avatars, and integrations for a personal experience.</p>
+            <div className="space-y-2 border-l border-zinc-900 pl-4">
+              <h3 className="text-sm font-semibold text-white font-mono">Minimal Dashboard</h3>
+              <p className="text-xs text-zinc-400 leading-relaxed">Clean visual layout without clutter, tailored to fast text keyboard access.</p>
             </div>
           </div>
         </section>
 
-        {/* Get Started */}
-        <section id="get-started" className="text-center py-20 px-6" data-aos="fade-up">
-          <h2 className="text-3xl font-bold mb-4">Start using Jarvis today</h2>
-          <p className="text-gray-300 mb-6">No installation required. Sign up and get your assistant running in minutes.</p>
-          <Link href="/auth/signup">
-            <button className="bg-green-500 hover:bg-green-600 px-6 py-3 rounded-xl text-white text-lg transition">
-              Create Free Account
-            </button>
-          </Link>
+        {/* CTA section */}
+        <section className="py-28 text-center space-y-6">
+          <h2 className="text-4xl font-semibold text-white tracking-tight">Deploy your assistant today</h2>
+          <p className="text-zinc-400 max-w-md mx-auto text-sm leading-relaxed">
+            Zero configuration required. Authenticate and initialize your custom workspace in seconds.
+          </p>
+          <div className="pt-4">
+            <Link href="/auth/signup">
+              <button className="px-6 py-3 bg-zinc-100 hover:bg-white text-zinc-950 font-medium rounded-lg text-sm transition duration-300">
+                Create Free Account
+              </button>
+            </Link>
+          </div>
         </section>
+      </main>
 
-        {/* Footer */}
-        <footer className="bg-gray-950 text-center text-sm text-gray-500 py-6 border-t border-gray-800">
-          <p>&copy; 2025 Jarvis AI. All rights reserved.</p>
-          <div className="mt-2 space-x-4 flex justify-center items-center">
-            <Link href="/terms" className="hover:underline text-gray-400">Terms of Service</Link>
-            <Link href="/privacy" className="hover:underline text-gray-400">Privacy Policy</Link>
-            <Link href="/cookies" className="hover:underline text-gray-400">Cookie Policy</Link>
-            <a href="https://www.instagram.com/spark16.x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-              <FontAwesomeIcon icon={faInstagram} size="lg" />
+      {/* Footer */}
+      <footer className="border-t border-zinc-900/60 bg-zinc-950 text-zinc-500 py-12">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="space-y-1 text-center md:text-left">
+            <p className="text-xs font-mono text-zinc-400">JARVIS AI</p>
+            <p className="text-[10px] text-zinc-600">&copy; {new Date().getFullYear()} Jarvis AI. All rights reserved.</p>
+          </div>
+          <div className="flex flex-wrap justify-center gap-6 text-xs">
+            <Link href="/terms" className="hover:text-zinc-300 transition">Terms</Link>
+            <Link href="/privacy" className="hover:text-zinc-300 transition">Privacy</Link>
+            <Link href="/cookies" className="hover:text-zinc-300 transition">Cookies</Link>
+          </div>
+          <div className="flex space-x-4 items-center">
+            <a href="https://www.instagram.com/spark16.x" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition">
+              <FontAwesomeIcon icon={faInstagram} className="w-4 h-4" />
             </a>
-            <a href="https://twitter.com/spark2009" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-              <FontAwesomeIcon icon={faXTwitter} size="lg" />
+            <a href="https://twitter.com/spark2009" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition">
+              <FontAwesomeIcon icon={faXTwitter} className="w-4 h-4" />
             </a>
-            <a href="https://www.threads.net/@spark16.x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-              <FontAwesomeIcon icon={faThreads} size="lg" />
+            <a href="https://www.threads.net/@spark16.x" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition">
+              <FontAwesomeIcon icon={faThreads} className="w-4 h-4" />
             </a>
-            <a href="https://github.com/spark16x" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white">
-              <FontAwesomeIcon icon={faGithub} size="lg" />
+            <a href="https://github.com/spark16x" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-white transition">
+              <FontAwesomeIcon icon={faGithub} className="w-4 h-4" />
             </a>
           </div>
-        </footer>
+        </div>
+      </footer>
 
-        {/* Consent Banner */}
-        <div id="consent-banner" className="fixed bottom-0 left-0 right-0 bg-gray-800 text-white p-4 shadow-lg z-50 transition-all duration-300" style={{ display: 'none' }}>
-          <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm">
-              By using Jarvis AI, you agree to our
-              <Link href="/terms" className="text-blue-400 underline hover:text-blue-300">Terms</Link>,
-              <Link href="/privacy" className="text-blue-400 underline hover:text-blue-300">Privacy Policy</Link>, and
-              <Link href="/cookies" className="text-blue-400 underline hover:text-blue-300">Cookie Policy</Link>.
-            </p>
-            <button id="accept-consent" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 text-sm rounded-xl text-white transition">
+      {/* Floating Minimal Consent Banner */}
+      <div 
+        id="consent-banner" 
+        className="fixed bottom-6 right-6 max-w-sm glass-panel text-zinc-200 p-5 rounded-xl shadow-2xl z-50 transition-all duration-300"
+        style={{ display: 'none' }}
+      >
+        <div className="space-y-4">
+          <p className="text-xs leading-relaxed text-zinc-400">
+            We use cookies to maintain session states and personalize notifications. By using Jarvis, you agree to our{' '}
+            <Link href="/terms" className="text-zinc-200 underline hover:text-white">Terms</Link> and{' '}
+            <Link href="/privacy" className="text-zinc-200 underline hover:text-white">Privacy Policy</Link>.
+          </p>
+          <div className="flex justify-end">
+            <button 
+              id="accept-consent" 
+              className="bg-zinc-100 hover:bg-white text-zinc-950 text-xs px-3.5 py-1.5 rounded-md font-medium transition"
+            >
               Accept
             </button>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }
